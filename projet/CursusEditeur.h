@@ -1,0 +1,4 @@
+#ifndef CURSUSEDITEUR_H
+#define CURSUSEDITEUR_H
+
+#endif // CURSUSEDITEUR_H
