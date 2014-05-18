@@ -17,6 +17,13 @@
 #include <QVBoxLayout>
 #include <type_traits>
 #include <QFileDialog>
+
+#include <QtSql>
+#include <QtDebug>
+#include <QFileInfo>
+#include <QLabel>
+#include <QDebug>
+
 using namespace std;
 
 
@@ -49,8 +56,11 @@ class Manager{
         ~Handler(){ if (instance) delete instance; instance=0; }
     };
     static Handler handler;
+    QSqlDatabase mydb;
 
  public:
+    bool connect();
+    void disconnect();
     static void libererInstance();
     class Iterator {
         friend class Manager;

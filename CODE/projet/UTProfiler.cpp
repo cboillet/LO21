@@ -6,6 +6,8 @@
 #include <QtGui>
 #include <QMessageBox>
 
+const int MAXCREDIT=6;
+
 QTextStream& operator<<(QTextStream& f, const UV& uv){
 	return f<<uv.getCode()<<", "<<uv.getCategorie()<<", "<<uv.getNbCredits()<<" credits, "<<uv.getTitre();
 }
@@ -77,4 +79,60 @@ UV& UVManager::getUV(const QString& code){
     if (!uv) throw UTProfilerException("erreur, UVManager, UV inexistante");
     return *uv;
 }
+
+/******Base de donnée*******/
+
+bool StrategieUvSQL::connect(){
+    mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
+    mydb.setHostName("localhost");
+    mydb.setUserName("root");
+    mydb.setPassword("");
+    if(!mydb.open()){
+
+       qDebug()<<"failed";
+       return false;
+     }
+     else
+     {
+        qDebug()<<"succes";
+        return true;
+     }
+}
+
+void StrategieUvSQL::disconnect(){
+    QString connection;
+    connection=mydb.connectionName();
+    QSqlDatabase::removeDatabase(connection);
+}
+
+void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){
+    QString code, titre, categorie, saison;
+    int nbCredit;
+    code=  c;
+    titre= t;
+    categorie= cat;
+    saison= a; //saison à 1 si automne et 0 si printemps
+    nbCredit = nbc;
+    if(!connect() || code.isEmpty() || categorie.isEmpty() || saison.isEmpty()  ||(nbCredit<=-1 || nbCredit>MAXCREDIT ))
+    {
+            qDebug()<<"Insertion Failed";
+            return;
+    }
+    QSqlQuery *query = new QSqlQuery(mydb);
+
+    query->prepare("INSERT INTO UV (code,titre,uvCategorie,nbCredits,saison)"
+                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
+
+    query->bindValue(0,code);
+    query->bindValue(1,titre);
+    query->bindValue(2,categorie);
+    query->bindValue(3,nbCredit);
+    query->bindValue(4,saison);
+    query->exec();
+    disconnect();
+}
+
+
+
 

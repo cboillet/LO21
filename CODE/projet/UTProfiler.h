@@ -107,37 +107,38 @@ public:
 QTextStream& operator<<(QTextStream& f, const UV& uv);
 
 class StrategieUv{
-    public:
-    virtual void load(Manager<UV>& man, const QString& f) =0;
-    virtual void save(Manager<UV>& man, const QString& f) =0;
+ public:
     virtual void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p)=0;
+    virtual void deleteUV()=0;
 };
 
 class StrategieUvXML: public StrategieUv{
-    public:
+ public:
     void load(Manager<UV>& man, const QString& f){;}
     void save(Manager<UV>& man, const QString& f){;}
     void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
 };
 class StrategieUvSQL: public StrategieUv{
-    public:
-    void load(Manager<UV>& man){}
-    void save(Manager<UV>& man){}
-    void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){}
+    QSqlDatabase mydb;
+  public:
+    bool connect();
+    void disconnect();
+    void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
+    void deleteUV(){}
 };
 
 
 
 class UVManager: public Manager<UV>{
     private:
-        StrategieUv* stratUV;
+        StrategieUvSQL* stratUV;
         UV* trouver(const QString& c) const; //peut être mettre T en paramètre
         ~UVManager();
 
     public:
         UVManager():Manager<UV>(),stratUV(0){};
-        void load(const QString& f){stratUV->load(*this,f);} //downcasting
-        void save(const QString& f){stratUV->save(*this,f);}
+        //void load(const QString& f){stratUV->load(*this,f);} //downcasting
+        //void save(const QString& f){stratUV->save(*this,f);}
         void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
         UV& getUV(const QString& code);
         const UV& getUV(const QString& code) const;
@@ -190,6 +191,5 @@ class Dossier {
 
 class Formation{
 };
-
 
 #endif
