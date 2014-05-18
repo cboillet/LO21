@@ -64,17 +64,7 @@ UVManager::UVManager():uvs(0),nbUV(0),nbMaxUV(0),file(""),modification(false){
 
 
 /* construction fichier... à enlever */
-bool isInFile(QString code, QString file){
-    QFile fin(file);
-    if (!fin.open(QIODevice::ReadOnly | QIODevice::Text)) throw UTProfilerException(QString("erreur ouverture fichier ")+file);
-    QTextStream flux(&fin);
-     while (!flux.atEnd()){
-        QString codeuv=flux.readLine();
-        if (code==codeuv) return true;
-    }
-    fin.close();
-    return false;
-}
+
 
 void UVManager::load(const QString& f){
     if (file!=f) this->~UVManager();

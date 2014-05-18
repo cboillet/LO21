@@ -44,8 +44,8 @@ class Manager{
 
  public:
 
-    void load(const QString& f);
-    void save(const QString& f);
+    void load(const QString& f)=0;
+    void save(const QString& f)=0;
     static Manager& getInstance();
     static void libererInstance();
     //void ajouterUV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
