@@ -21,7 +21,7 @@
 
 using namespace std;
 
-
+enum Equival{FormationPrecedente,SejourEtranger};
 enum Categorie {
 	/* Connaissances Scientifiques */ CS,  /* Techniques et Mï¿½thodes */ TM, 
     /* Technologies et Sciences de l'Homme */ TSH, /* Stage et Projet */ SP, /* Projet */ TX
@@ -130,6 +130,7 @@ class StrategieUvXML: public StrategieUv{
     void save(Manager<UV>& man, const QString& f){;}
     void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
 };
+
 class StrategieUvSQL: public StrategieUv, public StrategieSQL{
   public:
     void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
@@ -153,15 +154,27 @@ class StrategieCreditsXML: public StrategieCredits{
 class StrategieCreditsSQL: public StrategieSQL, public StrategieCredits{
   public:
     void ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits);
-    void deleteUV(){;}
+    void deleteCredits(){;}
 };
 
+class StrategieAddUvToCursusSQL:public StrategieSQL{
+public:
+    void ajouterUvToCursus(Manager<UV>& man, const QString& c);
+    void deleteUvToCursus(){;}
+};
+
+class StrategieAddCreditsToCursusSQL:public StrategieSQL{
+public:
+    void ajouterCreditsToCursus(Manager<Credits>& man, const Credits& cursus);
+    void deleteCreditsToCursus(){;}
+};
 
 /*******UVManager*******/
 class UVManager: public Manager<UV>{
     private:
         StrategieUvSQL* stratUV;
         UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
+     protected:
         ~UVManager();
 
     public:
@@ -206,28 +219,59 @@ class UVManager: public Manager<UV>{
 /********CreditsManager**********/
 class CreditsManager: public Manager<Credits>{
 private:
-    //Credits* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
-    ~CreditsManager();
     StrategieCreditsSQL* stratCredits;
+
 public:
+    ~CreditsManager();
     CreditsManager():Manager<Credits>(),stratCredits(0){};
     void ajouterCredits(const Categorie& cat, unsigned int n) {stratCredits->ajouterCredits(*this,cat,n);}
+};
+
+/**********Equivalence*********/
+class Equivalence{
+    Equival equivalence;
+    CreditsManager creditsObtenus;
+public:
+    Equivalence(){}
+    Equivalence(const Equival& equi):equivalence(equi){}
+    Equival getEquivalence()const{return equivalence;}
+    ~Equivalence();
 };
 
 /**********Cursus*********/
 class Cursus{
     QString titre;
     unsigned int duree;
-    UVManager UvObligatoire;
-    CreditsManager Creditsbligatoire;
+    class UVObligatoire: public Manager<UV>{
+    private:
+        StrategieAddUvToCursusSQL* stratUV;
+        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
+     protected:
+        ~UVObligatoire();
+    public:
+        UVObligatoire():Manager<UV>(),stratUV(0){};
+        void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
+         };
+
+    class CreditsObligatoire: public Manager<Credits>{
+    private:
+        StrategieAddCreditsToCursusSQL* stratCredits;
+     protected:
+        ~CreditsObligatoire();
+    public:
+        CreditsObligatoire():Manager<Credits>(),stratCredits(0){};
+        void ajouter(const Credits& c) {stratCredits->ajouterCreditsToCursus(*this,c);} //utiliser l'itérateur sur les UV
+         };
+
     Cursus(const Cursus& cu);
-    //Cursus& operator=(const Cursus& cu);
-    //Cursus(const QString& t, unsigned int dur):titre(t),duree(dur){}
+    Cursus& operator=(const Cursus& cu);
+    Cursus(const QString& t, unsigned int dur):titre(t),duree(dur){}
     friend class CursusManager;
+    Equivalence equival;
+
  public:
     QString getTitre() const { return titre; }
     unsigned int getDuree() const { return duree; }
-
     void setTitre(const QString& t) { titre=t; }
     void setDuree(unsigned int n) { duree=n; }
 
@@ -235,13 +279,48 @@ class Cursus{
 
 /*******CursusManager*******/
 class CursusManager: public Manager<Cursus>{
-   /* private:
-        StrategieCursusSQL* stratUV;
-        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
-        ~UVManager();
+private:
+        //StrategieCursusSQL* stratCursus;
+        Cursus* trouver(const QString& t) const; //peut ï¿½tre mettre T en paramï¿½tre
+protected:
+   ~CursusManager();
 
+public:
+  // StrategieManager():Manager<Cursus>(),stratCursus(new StrategieCursusSQL){};
+   //void ajouter(const QString& t, unsigned int duree, ,const Categorie& cat, unsigned int n) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
+   Cursus& getCursus(const QString& t);
+   const Cursus& getCursus(const QString& t) const;
+/*
+   class FilterIterator {
+        friend class UVManager;
+        UV** currentUV;
+        unsigned int nbRemain;
+        Categorie categorie;
+        FilterIterator(UV** u, unsigned nb, Categorie c):currentUV(u),nbRemain(nb),categorie(c){
+            while(nbRemain>0 && (*currentUV)->getCategorie()!=categorie){
+                nbRemain--; currentUV++;
+            }
+        }
     public:
-    */
+        FilterIterator():nbRemain(0),currentUV(0){}
+        bool isDone() const { return nbRemain==0; }
+        void next() {
+            if (isDone())
+                throw UTProfilerException("error, next on an iterator which is done");
+            do {
+                nbRemain--; currentUV++;
+            }while(nbRemain>0 && (*currentUV)->getCategorie()!=categorie);
+        }
+        UV& current() const {
+            if (isDone())
+                throw UTProfilerException("error, indirection on an iterator which is done");
+            return **currentUV;
+        }
+    };
+    FilterIterator getFilterIterator(Categorie c) {
+        return FilterIterator(t,nb,c);
+    }
+*/
 };
 
 

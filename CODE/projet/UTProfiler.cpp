@@ -152,6 +152,37 @@ void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie&
     disconnect();
 }
 
+void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV>& man, const QString& c){
+    QString code=c;
+    if(!connect()||  code.isEmpty() )
+    {
+            qDebug()<<"Insertion Failed";
+            return;
+    }
 
+    /*****J'aimerais trouver l'uv correspondant au code uv fourni en paramètre et l'inserer dans la table des cursus *****/
+    /*
+    QString code, titre, categorie, saison;
+    int nbCredit;
+    QSqlQuery *query = new QSqlQuery(mydb);
+    query->prepare("SELECT INTO UV (code,titre,uvCategorie,nbCredits,saison)"
+                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
+    query->bindValue(0,code);
+    query->bindValue(1,titre);
+    query->bindValue(2,categorie);
+    query->bindValue(3,nbCredit);
+    query->bindValue(4,saison);
+    query->exec();
 
+    QSqlQuery *query = new QSqlQuery(mydb);
+
+    query->prepare("INSERT INTO Credits (categorie,nbCredits)"
+                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
+
+    query->bindValue(0,categorie);
+    query->bindValue(1,nbCredits);
+    query->exec();
+    */
+    disconnect();
+}
 
