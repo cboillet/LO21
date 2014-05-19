@@ -23,7 +23,7 @@ using namespace std;
 
 
 enum Categorie {
-	/* Connaissances Scientifiques */ CS,  /* Techniques et Méthodes */ TM, 
+	/* Connaissances Scientifiques */ CS,  /* Techniques et Mï¿½thodes */ TM, 
     /* Technologies et Sciences de l'Homme */ TSH, /* Stage et Projet */ SP, /* Projet */ TX
 };
 
@@ -76,7 +76,7 @@ public:
 };
 
 inline QTextStream& operator<<(QTextStream& f, const Semestre& s) { return f<<s.getSaison()<<s.getAnnee()%100; }
-
+/************UV*********/
 class UV {
     QString code;
     QString titre;
@@ -103,9 +103,21 @@ public:
     void setOuvertureAutomne(bool b) { automne=b; }
     void setOuverturePrintemps(bool b) { printemps=b; }
 };
+class Credits{
+    Categorie categorie;
+    unsigned int nbcredits;
+};
+
 
 QTextStream& operator<<(QTextStream& f, const UV& uv);
-
+ /*******Strategie*******/
+class StrategieSQL{
+protected:
+    QSqlDatabase mydb;
+public:
+    bool connect();
+    void disconnect();
+};
 class StrategieUv{
  public:
     virtual void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p)=0;
@@ -118,21 +130,38 @@ class StrategieUvXML: public StrategieUv{
     void save(Manager<UV>& man, const QString& f){;}
     void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
 };
-class StrategieUvSQL: public StrategieUv{
-    QSqlDatabase mydb;
+class StrategieUvSQL: public StrategieUv, public StrategieSQL{
   public:
-    bool connect();
-    void disconnect();
     void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
     void deleteUV(){}
 };
 
+class StrategieCredits{
+ public:
+    virtual void ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits)=0;
+    virtual void deleteUV()=0;
+};
+
+class StrategieCreditsXML: public StrategieCredits{
+ public:
+    void load(Manager<UV>& man, const QString& f){;}
+    void save(Manager<UV>& man, const QString& f){;}
+    virtual void ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){;}
+    virtual void deleteUV(){;}
+};
+
+class StrategieCreditsSQL: public StrategieSQL, public StrategieCredits{
+  public:
+    void ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits);
+    void deleteUV(){;}
+};
 
 
+/*******UVManager*******/
 class UVManager: public Manager<UV>{
     private:
         StrategieUvSQL* stratUV;
-        UV* trouver(const QString& c) const; //peut être mettre T en paramètre
+        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
         ~UVManager();
 
     public:
@@ -174,6 +203,49 @@ class UVManager: public Manager<UV>{
          }
 };
 
+/********CreditsManager**********/
+class CreditsManager: public Manager<Credits>{
+private:
+    //Credits* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
+    ~CreditsManager();
+    StrategieCreditsSQL* stratCredits;
+public:
+    CreditsManager():Manager<Credits>(),stratCredits(0){};
+    void ajouterCredits(const Categorie& cat, unsigned int n) {stratCredits->ajouterCredits(*this,cat,n);}
+};
+
+/**********Cursus*********/
+class Cursus{
+    QString titre;
+    unsigned int duree;
+    UVManager UvObligatoire;
+    CreditsManager Creditsbligatoire;
+    Cursus(const Cursus& cu);
+    //Cursus& operator=(const Cursus& cu);
+    //Cursus(const QString& t, unsigned int dur):titre(t),duree(dur){}
+    friend class CursusManager;
+ public:
+    QString getTitre() const { return titre; }
+    unsigned int getDuree() const { return duree; }
+
+    void setTitre(const QString& t) { titre=t; }
+    void setDuree(unsigned int n) { duree=n; }
+
+};
+
+/*******CursusManager*******/
+class CursusManager: public Manager<Cursus>{
+   /* private:
+        StrategieCursusSQL* stratUV;
+        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
+        ~UVManager();
+
+    public:
+    */
+};
+
+
+/*******INSCRIPTION*******/
 class Inscription {
 	const UV* uv;
 	Semestre semestre;

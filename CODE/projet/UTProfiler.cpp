@@ -82,7 +82,7 @@ UV& UVManager::getUV(const QString& code){
 
 /******Base de donnée*******/
 
-bool StrategieUvSQL::connect(){
+bool StrategieSQL::connect(){
     mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
     mydb.setHostName("localhost");
@@ -100,7 +100,7 @@ bool StrategieUvSQL::connect(){
      }
 }
 
-void StrategieUvSQL::disconnect(){
+void StrategieSQL::disconnect(){
     QString connection;
     connection=mydb.connectionName();
     QSqlDatabase::removeDatabase(connection);
@@ -129,6 +129,25 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
     query->bindValue(2,categorie);
     query->bindValue(3,nbCredit);
     query->bindValue(4,saison);
+    query->exec();
+    disconnect();
+}
+
+void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){
+    Categorie categorie=cat;
+    int nbCredits=nbcredits;
+    if(!connect()||  (nbCredits<=-1 || nbCredits>MAXCREDIT ))
+    {
+            qDebug()<<"Insertion Failed";
+            return;
+    }
+    QSqlQuery *query = new QSqlQuery(mydb);
+
+    query->prepare("INSERT INTO Credits (categorie,nbCredits)"
+                   "VALUES (:categorie,:nbCredits)");
+
+    query->bindValue(0,categorie);
+    query->bindValue(1,nbCredits);
     query->exec();
     disconnect();
 }
