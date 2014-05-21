@@ -80,6 +80,32 @@ UV& UVManager::getUV(const QString& code){
     return *uv;
 }
 
+UVManager::~UVManager(){
+    nb=nbMax=0;
+    delete [] stratUV;
+    delete [] t;
+}
+
+/**********CreditsManager*********/
+CreditsManager::~CreditsManager(){
+    nb=nbMax=0;
+    delete [] t;
+    delete [] stratCredits;};
+
+
+/*************Cursus*************/
+Cursus::UVObligatoire::~UVObligatoire(){
+    nb=nbMax=0;
+    delete [] stratUV;
+    delete [] t;
+}
+Cursus::CreditsObligatoire::~CreditsObligatoire(){
+    nb=nbMax=0;
+    delete [] stratCredits;
+    delete [] t;
+}
+
+
 /******Base de donnée*******/
 
 bool StrategieSQL::connect(){

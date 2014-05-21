@@ -41,7 +41,7 @@ class Manager{
     Manager(const Manager& m);
     Manager& operator=(const Manager& m);
     Manager():t(0),nb(0),nbMax(0),file(""),modification(false){}
-    virtual ~Manager();
+    virtual ~Manager(){}
     T** t;
     unsigned int nb;
     unsigned int nbMax;
