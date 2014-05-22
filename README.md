@@ -10,5 +10,6 @@ TO DO Camille:
 
 -changer les templates sans cpp
 -créer des tests unitaires
+- enum à debbuger: ok
 -CursusManager
 -CursusManager: Cursus
