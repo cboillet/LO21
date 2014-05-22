@@ -14,28 +14,28 @@ QTextStream& operator<<(QTextStream& f, const UV& uv){
 
 QTextStream& operator>>(QTextStream& f, Categorie& cat){
     QString str;
-	f>>str;
-    if (str=="CS") cat=CS;
-	else
-    if (str=="TM") cat=TM;
-	else
-    if (str=="SP") cat=SP;
-	else
-    if (str=="TSH") cat=TSH;
-	else {
+    f>>str;
+    if (str=="CS") cat=Categorie::CS;
+    else
+    if (str=="TM") cat=Categorie::TM;
+    else
+    if (str=="SP") cat=Categorie::SP;
+    else
+    if (str=="TSH") cat=Categorie::TSH;
+    else {
         throw UTProfilerException("erreur, lecture categorie");
-	}
-	return f;
+    }
+    return f;
 }
 
 Categorie StringToCategorie(const QString& str){
-    if (str=="CS") return CS;
+    if (str=="CS") return Categorie::CS;
     else
-    if (str=="TM") return TM;
+    if (str=="TM") return Categorie::TM;
     else
-    if (str=="SP") return SP;
+    if (str=="SP") return Categorie::SP;
     else
-    if (str=="TSH") return TSH;
+    if (str=="TSH") return Categorie::TSH;
     else {
         throw UTProfilerException(QString("erreur, StringToCategorie, categorie ")+str+" inexistante");
     }
@@ -43,23 +43,23 @@ Categorie StringToCategorie(const QString& str){
 
 QString CategorieToString(Categorie c){
     switch(c){
-    case CS: return "CS";
-    case TM: return "TM";
-    case SP: return "SP";
-    case TSH: return "TSH";
+    case Categorie::CS: return "CS";
+    case Categorie::TM: return "TM";
+    case Categorie::SP: return "SP";
+    case Categorie::TSH: return "TSH";
     default: throw UTProfilerException("erreur, categorie non traitee");
     }
 }
 
 QTextStream& operator<<(QTextStream& f, const Categorie& cat){
-	switch(cat){
-    case CS: f<<"CS"; break;
-    case TM: f<<"TM"; break;
-    case SP: f<<"SP"; break;
-    case TSH: f<<"TSH"; break;
-	default: throw UTProfilerException("erreur, categorie non traitee");
-	}
-	return f;
+    switch(cat){
+    case Categorie::CS: f<<"CS"; break;
+    case Categorie::TM: f<<"TM"; break;
+    case Categorie::SP: f<<"SP"; break;
+    case Categorie::TSH: f<<"TSH"; break;
+    default: throw UTProfilerException("erreur, categorie non traitee");
+    }
+    return f;
 }
 
 
@@ -137,7 +137,7 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
     int nbCredit;
     code=  c;
     titre= t;
-    categorie= cat;
+    categorie= CategorieToString(cat);
     saison= a; //saison à 1 si automne et 0 si printemps
     nbCredit = nbc;
     if(!connect() || code.isEmpty() || categorie.isEmpty() || saison.isEmpty()  ||(nbCredit<=-1 || nbCredit>MAXCREDIT ))
@@ -160,7 +160,7 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
 }
 
 void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){
-    Categorie categorie=cat;
+    QString categorie= CategorieToString(cat);
     int nbCredits=nbcredits;
     if(!connect()||  (nbCredits<=-1 || nbCredits>MAXCREDIT ))
     {

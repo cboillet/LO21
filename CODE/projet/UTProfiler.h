@@ -21,18 +21,20 @@
 
 using namespace std;
 
-enum Equival{FormationPrecedente,SejourEtranger};
-enum Categorie {
-	/* Connaissances Scientifiques */ CS,  /* Techniques et Mï¿½thodes */ TM, 
-    /* Technologies et Sciences de l'Homme */ TSH, /* Stage et Projet */ SP, /* Projet */ TX
+enum class Equival{FormationPrecedente, SejourEtranger, first=FormationPrecedente, last=SejourEtranger};
+enum class Categorie {
+    /* Connaissances Scientifiques */ CS,  /* Techniques et Méthodes */ TM,
+    /* Technologies et Sciences de l'Homme */ TSH, /* Stage et Projet */ SP,
+    first=CS, last=SP
 };
 
 QTextStream& operator<<(QTextStream& f, const Categorie& s);
+
 Categorie StringToCategorie(const QString& s);
 QString CategorieToString(Categorie c);
 QTextStream& operator>>(QTextStream& f, Categorie& cat);
 
-enum Note { A, B, C, D, E, F, FX, RES, ABS, /* en cours */ EC};
+enum class Note { A, B, C, D, E, F, FX, RES, ABS, EC /* en cours */ , first=A, last=EC };
 
 
 /*class NoteIterator {
@@ -45,17 +47,16 @@ public:
     void next() { std::underlying_type<Note>::type(value)++; }
 };*/
 
-enum Saison {Automne, Printemps};
-inline QTextStream& operator<<(QTextStream& f, const Saison& s) { if (s==Automne) f<<"A"; else f<<"P"; return f;}
+enum class Saison { Automne, Printemps, first=Automne, last=Printemps };
+inline QTextStream& operator<<(QTextStream& f, const Saison& s) { if (s==Saison::Automne) f<<"A"; else f<<"P"; return f;}
 
-/*
 template<typename EnumType>
 class EnumIterator {
-    static_assert(is_enum<EnumType>::value, "EnumType have to be an enum"); //affiche le message d'erreur si is_enum est false
+    static_assert(is_enum<EnumType>::value, "EnumType have to be an enum");
     EnumType value;
     EnumIterator(EnumType val):value(val){}
 public:
-    static EnumIterator getFirst() { return EnumIterator(EnumType::first); } //prblm first& last
+    static EnumIterator getFirst() { return EnumIterator(EnumType::first); }
     bool isDone() const { return value>EnumType::last; }
     EnumType operator*() const { return value; }
     void next() { value=(EnumType)(std::underlying_type<EnumType>::type(value)+1); }
@@ -64,7 +65,7 @@ public:
 typedef EnumIterator<Note> NoteIterator;
 typedef EnumIterator<Categorie> CategorieIterator;
 typedef EnumIterator<Saison> SaisonIterator;
-*/
+
 
 class Semestre {
 	Saison saison;
@@ -330,7 +331,7 @@ class Inscription {
 	Semestre semestre;
 	Note resultat;
 public:
-    Inscription(const UV& u, const Semestre& s, Note res=EC):uv(&u),semestre(s),resultat(res){}
+    Inscription(const UV& u, const Semestre& s, Note res=Note::EC):uv(&u),semestre(s),resultat(res){}
 	const UV& getUV() const { return *uv; }
 	Semestre getSemestre() const { return semestre; }
 	Note getResultat() const { return resultat; }
