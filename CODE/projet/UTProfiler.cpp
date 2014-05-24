@@ -167,8 +167,9 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
     query->bindValue(3,nbCredit);
     query->bindValue(4,saison);
     query->exec();
-    disconnect();
+
     }
+    disconnect();
 }
 
 void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){
