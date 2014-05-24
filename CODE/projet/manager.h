@@ -1,6 +1,6 @@
 #ifndef MANAGER_H
 #define MANAGER_H
-#include "UTProfiler.h"
+
 #include <QString>
 #include <QTextStream>
 #include <QWidget>
@@ -18,21 +18,36 @@
 #include <type_traits>
 #include <QFileDialog>
 
+#include <QtSql>
+#include <QtDebug>
+#include <QFileInfo>
+#include <QLabel>
+#include <QDebug>
+
 using namespace std;
+
+
+class UTProfilerException{
+public:
+    UTProfilerException(const QString& message):info(message){}
+    QString getInfo() const { return info; }
+private:
+    QString info;
+};
 
 template<typename T>
 class Manager{
- private:
+   protected: //    ttribut accessible uniquement par les classes filles
+    Manager(const Manager& m);
+    Manager& operator=(const Manager& m);
+    Manager():t(0),nb(0),nbMax(0),file(""),modification(false){}
+    virtual ~Manager(){}
     T** t;
     unsigned int nb;
     unsigned int nbMax;
     void addItem(T* t);
     bool modification;
-    T* trouver<T>(const QString& c) const=0;
-    Manager(const Manager& m);
-    Manager& operator=(const Manager& m);
-    Manager():t(0),nb(0),nbMax(0),file(""),modification(false){}
-    virtual ~Manager();
+   // T* trouver(const QString& c) const=0;
     QString file;
     friend struct Handler;
     struct Handler{
@@ -41,8 +56,11 @@ class Manager{
         ~Handler(){ if (instance) delete instance; instance=0; }
     };
     static Handler handler;
+    QSqlDatabase mydb;
 
  public:
+    bool connect();
+    void disconnect();
     static void libererInstance();
     class Iterator {
         friend class Manager;
@@ -50,6 +68,11 @@ class Manager{
         unsigned int nbRemain;
         Iterator(T** t, unsigned nb):currentT(t),nbRemain(nb){}
     public:
+        static Manager<T>& getInstance(){if (!handler.instance) handler.instance = new Manager<T>; /* instance créée une seule fois lors de la première utilisation*/
+            return *handler.instance;}
+        static void libererInstance();
+
+
         Iterator():nbRemain(0),currentT(0){}
         bool isDone() const { return nbRemain==0; }
         void next() {
@@ -82,70 +105,55 @@ class Manager{
     iterator end() { return iterator(t+nb); }
 };
 
-template <typename T> class StrategieUv<T>{
-    public:
-    void load(Manager<T>& man, const QString& f)=0;
-    void save(Manager<T>& man, const QString& f)=0;
-    void ajouterUV(Manager<T>&, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
-};
 
-template <typename T> class StrategieUvXML<T>: public StrategieUv{
-    public:
-    void load(Manager<T>& man, const QString& f){}
-    void save(Manager<T>& man, const QString& f){}
-    void ajouterUV(Manager<T>&, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){}
-};
-template <typename T> class StrategieUvSQL<T>: public StrategieUv{
-    public:
-    void load(Manager<T>& man, const QString& f){=0;}
-    void save(Manager<T>& man, const QString& f){=0;}
-    void ajouterUV(Manager<T>&, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){}
-};
+template <class T>
+bool Manager<T>::connect(){
+    mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
+    mydb.setHostName("localhost");
+    mydb.setUserName("root");
+    mydb.setPassword("");
+    if(!mydb.open()){
 
-template <typename T>
-class UVManager: public Manager<T>{
-    private:
-        StrategieUV stratUV;
-        UVManager():Manager<T>(),stratUV(StrategieXML){}
-        UV* trouver<T>(const QString& c) const; //peut être mettre T en paramètre
-        ~Manager();
+       qDebug()<<"failed";
+       return false;
+     }
+     else
+     {
+        qDebug()<<"succes";
+        return true;
+     }
+}
 
-    public:
-        void load(const StrategieUv& stategie, const QString& f){strat.load(*this,const QString& f);}
-        void save(const StrategieUv& strategieSave, const QString& f){strat.save(*this,const QString& f);}
-        void ajouter<T>(const Strategie& strat,const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {strat.ajouterUV(*this,const QString& f);}
-        UV& get<T>(const Strategie& strat, const QString& code);
-        const UV& get<T>(const QString& code) const;
+template <class T>
+void Manager<T>::disconnect(){
+    QString connection;
+    connection=mydb.connectionName();
+    QSqlDatabase::removeDatabase(connection);
+}
 
-        class FilterIterator {
-             friend class UVManager;
-             UV** currentUV;
-             unsigned int nbRemain;
-             Categorie categorie;
-             FilterIterator(UV** u, unsigned nb, Categorie c):currentUV(u),nbRemain(nb),categorie(c){
-                 while(nbRemain>0 && (*currentUV)->getCategorie()!=categorie){
-                     nbRemain--; currentUV++;
-                 }
-             }
-         public:
-             FilterIterator():nbRemain(0),currentUV(0){}
-             bool isDone() const { return nbRemain==0; }
-             void next() {
-                 if (isDone())
-                     throw UTProfilerException("error, next on an iterator which is done");
-                 do {
-                     nbRemain--; currentUV++;
-                 }while(nbRemain>0 && (*currentUV)->getCategorie()!=categorie);
-             }
-             UV& current() const {
-                 if (isDone())
-                     throw UTProfilerException("error, indirection on an iterator which is done");
-                 return **currentUV;
-             }
-         };
-         FilterIterator getFilterIterator(Categorie c) {
-             return FilterIterator(uvs,nbUV,c);
-         }
-};
+
+template <class T>
+void Manager<T>::addItem(T* tem){
+    if (nb==nbMax){
+        T** newtab=new T*[nbMax+10];
+        for(unsigned int i=0; i<nb; i++) newtab[i]=t[i];
+        nbMax+=10;
+        T** old=t;
+        t=newtab;
+        delete[] old;
+    }
+    t[nb++]=tem;
+}
+
+template <class T>
+typename Manager<T>::Handler Manager<T>::handler=Handler();
+
+
+template <class T>
+void Manager<T>::libererInstance(){
+    if (handler.instance) { delete handler.instance; handler.instance=0; }
+}
+
 
 #endif // MANAGER_H

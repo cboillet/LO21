@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+//#include "mainwindow.h"
 #include "UTProfiler.h"
 #include "CursusProfiler.h"
 #include "manager.h"
@@ -10,9 +10,7 @@ int main(int argc, char *argv[])
 {
 
 
-    QApplication a(argc, argv);
-
-
+   QApplication app(argc, argv); return app.exec();
 
     /****partie UVMANAGER
     QWidget fenetre;
@@ -45,8 +43,4 @@ int main(int argc, char *argv[])
 
     ************/
 
-    MainWindow w;
-    w.show();
-
-    return a.exec();
 }

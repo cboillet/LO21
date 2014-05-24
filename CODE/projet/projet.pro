@@ -11,17 +11,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = projet
 QT += widgets
 QT += xml
+QT += sql
 CONFIG += c++11
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     UTProfiler.cpp \
-    UVEditeur.cpp \
-    manager.cpp
+    UVEditeur.cpp
 
-HEADERS  += mainwindow.h \
-    UTProfiler.h \
+HEADERS  +=UTProfiler.h \
     UVEditeur.h \
     manager.h
 
-FORMS    += mainwindow.ui
