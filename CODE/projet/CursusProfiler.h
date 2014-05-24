@@ -1,7 +1,23 @@
 #ifndef CURSUSPROFILER_H
 #define CURSUSPROFILER_H
 
+#include "manager.h"
+#include <QString>
+#include <QTextStream>
 #include <QWidget>
+#include <QtGui>
+#include <QLabel>
+#include <QLineEdit>
+#include <QCombobox>
+#include <QSpinBox>
+#include <QHBoxLayout>
+#include <QTextEdit>
+#include <QHBoxLayout>
+#include <QCheckBox>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <type_traits>
+#include <QFileDialog>
 
 namespace Ui {
     class CatalogueCursus;
