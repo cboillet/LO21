@@ -12,6 +12,16 @@ int main(int argc, char *argv[])
 
    QApplication app(argc, argv); return app.exec();
 
+   /*****Tests*****/
+   /***Credits Manager***/
+   //CreditsManager creditsman;
+
+   /*****Equivalence*****/
+
+   /********Cursus*******/
+
+   /*********************/
+
     /****partie UVMANAGER
     QWidget fenetre;
     fenetre.setFixedSize(200, 400);
