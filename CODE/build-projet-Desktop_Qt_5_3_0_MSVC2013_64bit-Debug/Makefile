@@ -170,8 +170,11 @@ Makefile: ..\projet\projet.pro C:\Qt\5.3\msvc2013_64\mkspecs\win32-msvc2013\qmak
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\resolve_config.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\exclusive_builds_post.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\default_post.prf \
+<<<<<<< HEAD
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\resolve_target.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\testcase.prf \
+=======
+>>>>>>> master
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\c++11.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\rtti.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\precompile_header.prf \
@@ -180,16 +183,24 @@ Makefile: ..\projet\projet.pro C:\Qt\5.3\msvc2013_64\mkspecs\win32-msvc2013\qmak
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\resources.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\moc.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\opengl.prf \
+<<<<<<< HEAD
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\testlib_defines.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\console.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\uic.prf \
+=======
+		C:\Qt\5.3\msvc2013_64\mkspecs\features\uic.prf \
+		C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\windows.prf \
+>>>>>>> master
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\testcase_targets.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\exceptions.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\yacc.prf \
 		C:\Qt\5.3\msvc2013_64\mkspecs\features\lex.prf \
 		..\projet\projet.pro \
 		C:/Qt/5.3/msvc2013_64/lib/Qt5Widgets.prl \
+<<<<<<< HEAD
 		C:/Qt/5.3/msvc2013_64/lib/Qt5Test.prl \
+=======
+>>>>>>> master
 		C:/Qt/5.3/msvc2013_64/lib/Qt5Sql.prl \
 		C:/Qt/5.3/msvc2013_64/lib/Qt5Xml.prl \
 		C:/Qt/5.3/msvc2013_64/lib/Qt5Gui.prl \
@@ -294,8 +305,11 @@ C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\default_pre.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\resolve_config.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\exclusive_builds_post.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\default_post.prf:
+<<<<<<< HEAD
 C:\Qt\5.3\msvc2013_64\mkspecs\features\resolve_target.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\testcase.prf:
+=======
+>>>>>>> master
 C:\Qt\5.3\msvc2013_64\mkspecs\features\c++11.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\rtti.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\precompile_header.prf:
@@ -304,16 +318,24 @@ C:\Qt\5.3\msvc2013_64\mkspecs\features\qt.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\resources.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\moc.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\opengl.prf:
+<<<<<<< HEAD
 C:\Qt\5.3\msvc2013_64\mkspecs\features\testlib_defines.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\console.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\uic.prf:
+=======
+C:\Qt\5.3\msvc2013_64\mkspecs\features\uic.prf:
+C:\Qt\5.3\msvc2013_64\mkspecs\features\win32\windows.prf:
+>>>>>>> master
 C:\Qt\5.3\msvc2013_64\mkspecs\features\testcase_targets.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\exceptions.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\yacc.prf:
 C:\Qt\5.3\msvc2013_64\mkspecs\features\lex.prf:
 ..\projet\projet.pro:
 C:/Qt/5.3/msvc2013_64/lib/Qt5Widgets.prl:
+<<<<<<< HEAD
 C:/Qt/5.3/msvc2013_64/lib/Qt5Test.prl:
+=======
+>>>>>>> master
 C:/Qt/5.3/msvc2013_64/lib/Qt5Sql.prl:
 C:/Qt/5.3/msvc2013_64/lib/Qt5Xml.prl:
 C:/Qt/5.3/msvc2013_64/lib/Qt5Gui.prl:
@@ -335,6 +357,7 @@ distclean: debug-distclean release-distclean FORCE
 	-$(DEL_FILE) Makefile
 	-$(DEL_FILE) projet.pdb
 
+<<<<<<< HEAD
 debug-check:
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	$(MAKE) -f $(MAKEFILE).Debug check
@@ -346,6 +369,8 @@ dummy_check: debug-check release-check
 
 check: debug-check
 
+=======
+>>>>>>> master
 debug-mocclean:
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	$(MAKE) -f $(MAKEFILE).Debug mocclean
@@ -361,6 +386,11 @@ release-mocables:
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	$(MAKE) -f $(MAKEFILE).Release mocables
 mocables: debug-mocables release-mocables
+<<<<<<< HEAD
+=======
+
+check: first
+>>>>>>> master
 FORCE:
 
 $(MAKEFILE).Debug: Makefile

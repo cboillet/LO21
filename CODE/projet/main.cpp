@@ -12,7 +12,21 @@ int main(int argc, char *argv[])
 
    QApplication app(argc, argv); return app.exec();
 
+<<<<<<< HEAD
     /****partie UVMANAGER*/
+=======
+   /*****Tests*****/
+   /***Credits Manager***/
+   //CreditsManager creditsman;
+
+   /*****Equivalence*****/
+
+   /********Cursus*******/
+
+   /*********************/
+
+    /****partie UVMANAGER
+>>>>>>> master
     QWidget fenetre;
     fenetre.setFixedSize(200, 400);
     QLineEdit code(&fenetre);

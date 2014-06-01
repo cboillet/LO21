@@ -1,0 +1,150 @@
+[33mcommit 91a1ea1825c6382b1f9bed4e36dd0227b2ab7f03[m
+Merge: 6ed49f3 e4ba846
+Author: stephysim <stephysim@users.noreply.github.com>
+Date:   Sat May 24 21:55:59 2014 +0200
+
+    Merge pull request #2 from stephysim/deve
+    
+    Merge https://github.com/stephysim/LO21 into deve
+
+[33mcommit 6ed49f341f22afd0e82de4a5cde0ca0d68ed8201[m
+Merge: 15f704a 5314977
+Author: stephysim <stephysim@users.noreply.github.com>
+Date:   Sat May 24 15:41:19 2014 +0200
+
+    Merge pull request #1 from stephysim/master
+    
+    test
+
+[33mcommit 5314977b803210726737942186e998e50e054f72[m
+Merge: 9fea181 15f704a
+Author: stephysim <stephysim@users.noreply.github.com>
+Date:   Sat May 24 15:38:50 2014 +0200
+
+    Merge pull request #4 from stephysim/deve
+    
+    Deve
+
+[33mcommit e4ba8468a721a4a1fa6e50a59b091d0cd78ac9eb[m
+Merge: 15f704a 9fea181
+Author: stephysim <stephanie.simeu@gmail.com>
+Date:   Sat May 24 14:18:19 2014 +0200
+
+    Merge https://github.com/stephysim/LO21 into deve
+
+[33mcommit 15f704a76d418edcbc1d35f55417fee7264e7374[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Thu May 22 18:30:26 2014 +0200
+
+    Méthode des classes templates dans .h
+
+[33mcommit db1566200a77ae5e198c1b5ef511cbc200a6cd71[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Thu May 22 17:27:51 2014 +0200
+
+    Enume Last&first debuggé
+    
+    Du coup l'UVEditeur doit fonctionner go les classe Editeur et regarde le
+    design pattern adaptateur :)
+
+[33mcommit 84c6df4bf8ef4c1801a0f742ff118332040e2e0a[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Thu May 22 13:57:00 2014 +0200
+
+    Update README.md
+
+[33mcommit 88f5be7b902f2fbcd63572a43a1de1140f537746[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Wed May 21 19:05:03 2014 +0200
+
+    Credits Cursus ...
+
+[33mcommit a7009ed7e3818ea17bae36e1ce5bc4e4c0e7711c[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Tue May 20 01:59:32 2014 +0200
+
+    Cursus avec nouvelle architecture
+
+[33mcommit 2b466ab4af9541fd567f91ddb34adbef91a91970[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Tue May 20 18:03:31 2014 +0200
+
+    Create README.md
+
+[33mcommit 6d9944670c4914dc7d033d48489d17cbd38aac41[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Mon May 19 23:25:01 2014 +0200
+
+    Cursus-CreditsManager-Credits-StrategieCreditsSQL
+    
+    Le cursus compose un creditsmanager et uvmanager pour gérer la liste
+    d'UVObligatoire et les Credits obligatoire
+
+[33mcommit fcb140e3c130ef29d5d2d81e97480d5b771cd9e9[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Sun May 18 19:45:04 2014 +0200
+
+    StrategySQL
+
+[33mcommit 9fea18183aeb34fc5dcc5f93ada6c0aae17b4c46[m
+Merge: e8faf76 5135e45
+Author: stephysim <stephysim@users.noreply.github.com>
+Date:   Sun May 18 19:17:24 2014 +0200
+
+    Merge pull request #3 from stephysim/test
+    
+    Merge pull request #2 from stephysim/master
+
+[33mcommit 04e9f568043c527407aaef318597dbbfd3f9f1f6[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Sun May 18 18:05:53 2014 +0200
+
+    Manager-UVManager
+
+[33mcommit 5135e45e3596e7818bf651488e2831b816c19f7b[m
+Merge: 6a11429 e8faf76
+Author: stephysim <stephysim@users.noreply.github.com>
+Date:   Sun May 18 15:22:39 2014 +0200
+
+    Merge pull request #2 from stephysim/master
+    
+    test1
+
+[33mcommit e8faf76157caed9047dcc988acebb2761622e7f1[m
+Merge: 6a11429 daed0e8
+Author: stephysim <stephysim@users.noreply.github.com>
+Date:   Sun May 18 15:15:22 2014 +0200
+
+    Merge pull request #1 from cboillet/master
+    
+    test
+
+[33mcommit daed0e8645cbde7e3734f1fe89c425aa6ddffa40[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Sun May 18 15:05:18 2014 +0200
+
+    qt creator
+
+[33mcommit 4d098167affb1597bf1e8b42520fc02b75276c3c[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Sun May 18 14:32:13 2014 +0200
+
+    Dernière modif typename
+
+[33mcommit 6a114299ca6e05d635027244a59b581f27207c21[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Sun May 18 10:36:32 2014 +0200
+
+    Code correct
+
+[33mcommit 6a3f4925ce145911269afd76993b254dba459420[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Sun May 18 10:19:54 2014 +0200
+
+    Manager debug
+
+[33mcommit 5e4523227210c4af8c2badf759abebb11859f16c[m
+Author: cboillet <camille.boillet@gmail.com>
+Date:   Sat May 17 16:32:18 2014 +0200
+
+    Code de jeudi 15
