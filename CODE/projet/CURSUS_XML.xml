@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cursus>
+    <cursus >
+        <nom>Tonc Commun </nom>
+        <duree>04</duree>
+        <uvs>
+
+	</uvs>
+	<equivalence>
+		<sejour>nom</sejour>
+		<formpre>nom</formpre>
+	</equivalence>
+		
+    </cursus>
+    <cursus >
+        <nom>Génie Biologique </nom>
+        <duree>04</duree>
+        <uvs>
+
+	</uvs>
+	<equivalence>
+		<sejour>nom</sejour>
+		<formpre>nom</formpre>
+	</equivalence>
+        <filieres>
+	     <filiere>
+		<code>BB</code> 
+		<nom>Biomatériaux et biomécanique</nom>
+	     </filiere>
+		<code>BM</code> 	
+		<nom>Biomédicale</nom>
+ 
+	     <filiere>
+		<code>CIB</code>
+		<nom> Conception et innovation de bioproduits</nom>
+ 	     </filiere>
+			
+ 	     <filiere>
+		<code>IAA</code>
+		<nom>Innovation	aliments et agro-ressources</nom>
+ 	     </filiere>
+			 
+ 	     <filiere>
+		<code>MPI</code>
+		<nom>Management	de projets innovants</nom>
+ 	     </filiere>				 
+	</filieres>	
+    </cursus>
+
+    <cursus >
+        <nom>Génie Informatique </nom>
+        <duree>04</duree>
+        <uvs>
+
+	</uvs>
+	<equivalence>
+		<sejour>
+	</equivalence>	
+	<filieres>
+             <filiere>
+		<code></code>
+		<nom></nom>
+	     </filiere>
+ADEL	 Aide	à	la	décision	en	logistique
+	     <filiere>
+		<code></code>
+		<nom></nom>
+	     </filiere>
+FDD Fouille de données et décisionnel
+	     <filiere>
+		<code></code>
+		<nom></nom>
+	     </filiere>
+ICSI	 Ingénierie	des	connaissances	et	des supports d'information
+             <filiere>
+		<code></code>
+		<nom></nom>
+	     </filiere>
+SRI	 Systèmes	et	réseaux	informatiques
+             <filiere>
+		<code></code>
+		<nom></nom>
+	     </filiere>
+STRIE	 Systèmes	temps-réel	et	informatique	 enfouie
+	     <filiere>
+		<code></code>
+		<nom></nom>
+	     </filiere>
+MPI	 Management	de	projets	innovants
+	     <filiere>
+		<code></code>
+		<nom></nom>
+	     </filiere>
+ 	</filieres>
+    </cursus>
+    <cursus >
+        <nom>Génie Mécanique </nom>
+        <duree>04</duree>
+        <uvs>
+
+	</uvs>
+	<equivalence>
+		<sejour>
+	</equivalence>
+    </cursus>
+    <cursus >
+        <nom>Génie des Procédés </nom>
+        <duree>04</duree>
+        <uvs>
+
+	</uvs>
+    </cursus>
+    <cursus >
+        <nom>Génie des Systèmes Mécaniques </nom>
+        <duree>04</duree>
+        <uvs>
+
+	</uvs>
+
+    </cursus>
+    <cursus >
+        <nom>Génie des Systèmes Urbains </nom>
+        <duree>04</duree>
+        <uvs>
+
+	</uvs>
+    </cursus>
+
+</cursus>

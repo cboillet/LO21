@@ -5,6 +5,15 @@
 #include <QTextCodec>
 #include <QtGui>
 #include <QMessageBox>
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QDebug>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QCoreApplication>
+#include <QString>
+
 
 const int MAXCREDIT=6;
 
@@ -90,7 +99,7 @@ UVManager::~UVManager(){
 CreditsManager::~CreditsManager(){
     nb=nbMax=0;
     delete [] t;
-    delete [] stratCredits;};
+    delete [] stratCredits;}
 
 
 /*************Cursus*************/
@@ -110,18 +119,21 @@ Cursus::CreditsObligatoire::~CreditsObligatoire(){
 
 bool StrategieSQL::connect(){
     mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
+    QString dbPath = QCoreApplication::applicationDirPath()+"UTProfiler.db";
+    mydb.setDatabaseName(dbPath);
+   // mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
     mydb.setHostName("localhost");
     mydb.setUserName("root");
     mydb.setPassword("");
     if(!mydb.open()){
 
-       qDebug()<<"failed";
+        qDebug()<<mydb.lastError();
+        qFatal("Failed to connect");
        return false;
      }
      else
      {
-        qDebug()<<"succes";
+        qDebug()<<"connected";
         return true;
      }
 }
@@ -140,11 +152,14 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
     categorie= CategorieToString(cat);
     saison= a; //saison à 1 si automne et 0 si printemps
     nbCredit = nbc;
+
     if(!connect() || code.isEmpty() || categorie.isEmpty() || saison.isEmpty()  ||(nbCredit<=-1 || nbCredit>MAXCREDIT ))
     {
             qDebug()<<"Insertion Failed";
-            return;
+
     }
+
+   {
     QSqlQuery *query = new QSqlQuery(mydb);
 
     query->prepare("INSERT INTO UV (code,titre,uvCategorie,nbCredits,saison)"
@@ -156,17 +171,22 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
     query->bindValue(3,nbCredit);
     query->bindValue(4,saison);
     query->exec();
+
+    }
     disconnect();
 }
 
 void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){
     QString categorie= CategorieToString(cat);
     int nbCredits=nbcredits;
+
     if(!connect()||  (nbCredits<=-1 || nbCredits>MAXCREDIT ))
     {
             qDebug()<<"Insertion Failed";
             return;
     }
+
+   {
     QSqlQuery *query = new QSqlQuery(mydb);
 
     query->prepare("INSERT INTO Credits (categorie,nbCredits)"
@@ -176,39 +196,61 @@ void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie&
     query->bindValue(1,nbCredits);
     query->exec();
     disconnect();
+    }
 }
 
 void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV>& man, const QString& c){
-    QString code=c;
+    QString code=c, titre, duree;
+    Categorie cat;
+    int creditsObligatoire;
+    int nbCredits;
     if(!connect()||  code.isEmpty() )
     {
             qDebug()<<"Insertion Failed";
             return;
     }
 
-    /*****J'aimerais trouver l'uv correspondant au code uv fourni en paramètre et l'inserer dans la table des cursus *****/
-    /*
-    QString code, titre, categorie, saison;
-    int nbCredit;
+
+ {
+    QSqlDatabase::database().transaction();
     QSqlQuery *query = new QSqlQuery(mydb);
-    query->prepare("SELECT INTO UV (code,titre,uvCategorie,nbCredits,saison)"
-                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
-    query->bindValue(0,code);
-    query->bindValue(1,titre);
-    query->bindValue(2,categorie);
-    query->bindValue(3,nbCredit);
-    query->bindValue(4,saison);
-    query->exec();
+    query->exec("SELECT code FROM UV WHERE code ='c'");
+                 if (query->next()) {
+                     QString  code = query->value(0).toString();
+                     query->exec("INSERT INTO Cursus (titre, duree,creditsObligatoire, uvObligatoire) "
+                                "VALUES (:titre,:duree,:creditsObligatoire, "
+                                + code + ')');
+                     query->bindValue(0,titre);
+                     query->bindValue(1,duree);                  
+                     query->bindValue(2,creditsObligatoire);
+                     query->bindValue(3,code);
+                     query->exec();
+                 }
+    QSqlDatabase::database().commit();
+  }
+    disconnect();
 
+}
+
+    void ajouterCreditsToCursus(Manager<Credits>& man, const Credits& cursus){
+
+  {
+    QSqlDatabase::database().transaction();
     QSqlQuery *query = new QSqlQuery(mydb);
 
-    query->prepare("INSERT INTO Credits (categorie,nbCredits)"
-                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
+    query->exec("SELECT categorie FROM Credits WHERE categorie ='cat'");
+                 if (query->next()) {
+                     QString cat = query->value(0).toString();
+                     query->exec("INSERT INTO Credits (categorie,nbCredits) "
+                                "VALUES (:nbCredits, "
+                                + cat + ')');
+                     query->bindValue(0,cat);
+                     query->bindValue(1,nbCredits);
+                     query->exec();
 
-    query->bindValue(0,categorie);
-    query->bindValue(1,nbCredits);
-    query->exec();
-    */
+    QSqlDatabase::database().commit();
+    }
     disconnect();
 }
 
+}

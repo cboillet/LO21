@@ -12,13 +12,29 @@ TARGET = projet
 QT += widgets
 QT += xml
 QT += sql
+QT += testlib
 CONFIG += c++11
+CONFIG += testcase
 
 SOURCES += main.cpp\
     UTProfiler.cpp \
-    UVEditeur.cpp
+    UVEditeur.cpp \
+    CursusEditeur.cpp \
+    CursusProfiler.cpp \
+    mainwindow.cpp
 
 HEADERS  +=UTProfiler.h \
     UVEditeur.h \
-    manager.h
+    manager.h \
+    CursusEditeur.h \
+    CursusProfiler.h \
+    mainwindow.h \
+    ui_mainwindow.h \
+    TestUV.h
+
+FORMS += \
+    CursusEditeur.ui \
+    CatalogueUV.ui \
+    mainwindow.ui \
+    CatalogueCursus.ui
 

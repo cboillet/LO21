@@ -23,6 +23,8 @@
 #include <QFileInfo>
 #include <QLabel>
 #include <QDebug>
+#include <QErrorMessage>
+
 
 using namespace std;
 
@@ -96,7 +98,7 @@ class Manager{
         iterator(T** t):current(t){}
         friend class Manager;
     public:
-        iterator():current(0){};
+        iterator():current(0){}
         T& operator*() const { return **current; }
         bool operator!=(iterator it) const { return current!=it.current; }
         iterator& operator++(){ ++current; return *this; }
