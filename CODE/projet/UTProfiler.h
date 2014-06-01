@@ -244,21 +244,22 @@ class Filiere{
     QString code;
     QString titre;
     bool apprentissage;
+    QString codecursus;
 public:
     QString getCode() const {return code;}
     QString getTitre() const {return titre;}
+    QString getCodeCursus() const {return codecursus;}
     bool ouvertureApprentissage(){return apprentissage;}
     void setCode(const QString& c) { code=c; }
     void setTitre(const QString& t) { titre=t; }
     void setOuvertureApprentissage(bool a) { apprentissage=a; }
-    Filiere(const QString& c, const QString& t, bool a):code(c),titre(t),apprentissage(a){}
+    Filiere(const QString& c, const QString& t, bool a, const QString& cu):code(c),titre(t),apprentissage(a), codecursus(cu){}
 };
 
 /**********Cursus*********/
 class Cursus{
     QString titre;
     unsigned int duree;
-    Filiere* filiere;
     class UVObligatoire: public Manager<UV>{
     private:
         StrategieAddUvToCursusSQL* stratUV;
@@ -284,14 +285,13 @@ class Cursus{
 
     Cursus(const Cursus& cu);
     Cursus& operator=(const Cursus& cu);
-    Cursus(const QString& t, unsigned int dur, Filiere& code):titre(t),duree(dur), filiere(code){}
+    Cursus(const QString& t, unsigned int dur):titre(t),duree(dur){}
     friend class CursusManager;
     Equivalence equival;
 
  public:
     QString getTitre() const { return titre; }
     unsigned int getDuree() const { return duree; }
-    QString getFiliere() const {return filere;}
     void setTitre(const QString& t) { titre=t; }
     void setDuree(unsigned int n) { duree=n; }
 };
@@ -365,34 +365,37 @@ class Etudiant {
 
 };
 
-/************ Dossier ***********/
+/************ Dossier **********
 class Dossier {
-    Formation formation;
+    Formation* formation;
     Etudiant etudiant;
 
 public:
-    getFormation(){ return formation;}
-    getEtudiant(){ return etudiant;}
-    Dossier(Formation f, Etudiant e):formation(f), etudiant(e){}
-};
+    const Formation& getFormation()const { return *formation;}
+    const Etudiant getEtudiant(){ return etudiant;}
+    Dossier(const Formation& f, const Etudiant e):formation(f), etudiant(e){}
+};*/
 
-/*********** Formation**********/
+/*********** Formation*********
 class Formation{
     QString titre;
-    Cursus** cursus;
+    Cursus* cursus;
     Inscription* insc;
-    Credits** creditsObtenus;
-    Formation(const Qstring& t, Cursus& c, Inscription& i, Credits& cre):titre(t), cursus(c), insc(i), creditsObtenus(cre){}
+    Credits* creditsObtenus;
+    Formation(const QString& t, Cursus& c, Inscription& i, Credits& cre):titre(t), cursus(c), insc(i), creditsObtenus(cre){}
     Formation (const Formation& f);
     Formation& operator=(const Formation& f);
     friend class FormationManager;
 public:
-    Qstring getNom(){ return nom;}
+    QString getTitre(){ return titre;}
+    Inscription& getInscription(){return *insc;}
+    Credits& getCreditsObtenus(){return *creditsObtenus;}
+    Cursus& getCursus(){return *cursus;}
     void setCreditsObtenus(Credits& cre);
-};
-QTextStream& operator<<(QTextStream& f, const Formation& formation);
+};*/
+//QTextStream& operator<<(QTextStream& f, const Formation& formation);
 
-/************ FormationManager ********/
+/************ FormationManager ********
 class FormationManager: public Manager<Formation>{
 private:
         StrategieFormationSQL* stratFormation;
@@ -405,7 +408,7 @@ public:
    void ajouter(const QString& n, Cursus& c , Inscription& i, Credits cre) {stratFormation->ajouterFormation(*this,n,c,i,cre);}
    Formation& getFormation(const QString& f);
    const Formation& getFormation(const QString& f) const;
-};
+};*/
 
 
 #endif

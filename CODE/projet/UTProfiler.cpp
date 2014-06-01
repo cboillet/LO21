@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QCoreApplication>
+#include <QString>
 
 
 const int MAXCREDIT=6;
@@ -117,7 +119,9 @@ Cursus::CreditsObligatoire::~CreditsObligatoire(){
 
 bool StrategieSQL::connect(){
     mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
+    QString dbPath = QCoreApplication::applicationDirPath()+"UTProfiler.db";
+    mydb.setDatabaseName(dbPath);
+   // mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
     mydb.setHostName("localhost");
     mydb.setUserName("root");
     mydb.setPassword("");
@@ -175,6 +179,7 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
 void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){
     QString categorie= CategorieToString(cat);
     int nbCredits=nbcredits;
+
     if(!connect()||  (nbCredits<=-1 || nbCredits>MAXCREDIT ))
     {
             qDebug()<<"Insertion Failed";
@@ -195,32 +200,39 @@ void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie&
 }
 
 void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV>& man, const QString& c){
-    QString code=c;
+    QString code=c, titre, duree;
+    Categorie cat;
+    int creditsObligatoire;
+    int nbCredits;
     if(!connect()||  code.isEmpty() )
     {
             qDebug()<<"Insertion Failed";
             return;
     }
 
-    /*****J'aimerais trouver l'uv correspondant au code uv fourni en paramètre et l'inserer dans la table des cursus *****/
+
  {
     QSqlDatabase::database().transaction();
     QSqlQuery *query = new QSqlQuery(mydb);
     query->exec("SELECT code FROM UV WHERE code ='c'");
                  if (query->next()) {
-                     QString code = query->value(0).toString;
-                     query.exec("INSERT INTO Cursus (titre, duree, filere, creditsObligatoire, uvObligatoire) "
-                                "VALUES (:titre,:duree,creditsObligatoire, "
-                                + QString::data(code) + ')');
+                     QString  code = query->value(0).toString();
+                     query->exec("INSERT INTO Cursus (titre, duree,creditsObligatoire, uvObligatoire) "
+                                "VALUES (:titre,:duree,:creditsObligatoire, "
+                                + code + ')');
                      query->bindValue(0,titre);
-                     query->bindValue(1,duree);
-                     query->bindValue(2,filiere);
-                     query->bindValue(3,creditsObligatoire);
-                     query->bindValue(4,uvObligatoire);
+                     query->bindValue(1,duree);                  
+                     query->bindValue(2,creditsObligatoire);
+                     query->bindValue(3,code);
                      query->exec();
                  }
     QSqlDatabase::database().commit();
   }
+    disconnect();
+
+}
+
+    void ajouterCreditsToCursus(Manager<Credits>& man, const Credits& cursus){
 
   {
     QSqlDatabase::database().transaction();
@@ -228,11 +240,11 @@ void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV>& man, const QStrin
 
     query->exec("SELECT categorie FROM Credits WHERE categorie ='cat'");
                  if (query->next()) {
-                     QString categorie = query->value(0).toString;
-                     query.exec("INSERT INTO Credits (categorie,nbCredits) "
+                     QString cat = query->value(0).toString();
+                     query->exec("INSERT INTO Credits (categorie,nbCredits) "
                                 "VALUES (:nbCredits, "
-                                + QString::data(categorie) + ')');
-                     query->bindValue(0,categorie);
+                                + cat + ')');
+                     query->bindValue(0,cat);
                      query->bindValue(1,nbCredits);
                      query->exec();
 
@@ -241,3 +253,4 @@ void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV>& man, const QStrin
     disconnect();
 }
 
+}

@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
    QApplication app(argc, argv); return app.exec();
 
-    /****partie UVMANAGER
+    /****partie UVMANAGER*/
     QWidget fenetre;
     fenetre.setFixedSize(200, 400);
     QLineEdit code(&fenetre);
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     couche.addWidget(&save);
     fenetre.setLayout(&couche);
 
-    try {
+    /*try {
     QString path="../Ressources/";
     UVManager& m=UVManager::getInstance();
     QString chemin = QFileDialog::getOpenFileName();
@@ -41,6 +41,6 @@ int main(int argc, char *argv[])
     msgBox.exec();
     }
 
-    ************/
+    /************/
 
 }
