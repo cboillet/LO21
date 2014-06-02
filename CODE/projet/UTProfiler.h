@@ -170,6 +170,66 @@ public:
     void deleteCreditsToCursus(){;}
 };
 
+/********CreditsManager**********/
+class CreditsManager: public Manager<Credits>{
+private:
+    StrategieCreditsSQL* stratCredits;
+
+public:
+    ~CreditsManager();
+    CreditsManager():Manager<Credits>(),stratCredits(0){};
+    void ajouterCredits(const Categorie& cat, unsigned int n) {stratCredits->ajouterCredits(*this,cat,n);}
+};
+
+/**********Equivalence*********/
+class Equivalence{
+    Equival equivalence;
+    CreditsManager creditsObtenus;
+public:
+    Equivalence(){}
+    Equivalence(const Equival& equi):equivalence(equi){}
+    Equival getEquivalence()const{return equivalence;}
+    ~Equivalence();
+};
+
+/**********Cursus*********/
+class Cursus{
+    QString titre;
+    unsigned int duree;
+    class UVObligatoire: public Manager<UV>{
+    private:
+        StrategieAddUvToCursusSQL* stratUV;
+        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
+     protected:
+        ~UVObligatoire();
+    public:
+        UVObligatoire():Manager<UV>(){stratUV=new StrategieAddUvToCursusSQL;};
+        void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
+         };
+
+    class CreditsObligatoire: public Manager<Credits>{
+    private:
+        StrategieAddCreditsToCursusSQL* stratCredits;
+     protected:
+        ~CreditsObligatoire();
+    public:
+        CreditsObligatoire():Manager<Credits>(),stratCredits(0){};
+        void ajouter(const Credits& c) {stratCredits->ajouterCreditsToCursus(*this,c);} //utiliser l'itérateur sur les UV
+         };
+
+    Cursus(const Cursus& cu);
+    Cursus& operator=(const Cursus& cu);
+    Cursus(const QString& t, unsigned int dur):titre(t),duree(dur){}
+    friend class CursusManager;
+    Equivalence equival;
+
+ public:
+    QString getTitre() const { return titre; }
+    unsigned int getDuree() const { return duree; }
+    void setTitre(const QString& t) { titre=t; }
+    void setDuree(unsigned int n) { duree=n; }
+
+};
 /*******UVManager*******/
 class UVManager: public Manager<UV>{
     private:
@@ -179,7 +239,7 @@ class UVManager: public Manager<UV>{
         ~UVManager();
 
     public:
-        UVManager():Manager<UV>(),stratUV(0){};
+        UVManager():Manager<UV>(){stratUV=new StrategieUvSQL;};
         //void load(const QString& f){stratUV->load(*this,f);} //downcasting
         //void save(const QString& f){stratUV->save(*this,f);}
         void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
@@ -217,78 +277,28 @@ class UVManager: public Manager<UV>{
          }
 };
 
-/********CreditsManager**********/
-class CreditsManager: public Manager<Credits>{
-private:
-    StrategieCreditsSQL* stratCredits;
 
+
+
+class StrategieCursusSQL: public StrategieSQL{
 public:
-    ~CreditsManager();
-    CreditsManager():Manager<Credits>(),stratCredits(0){};
-    void ajouterCredits(const Categorie& cat, unsigned int n) {stratCredits->ajouterCredits(*this,cat,n);}
+    void addCursus(Manager<Cursus>& man,const QString& t, unsigned int d){;}
+    void deleteCursus(){;}
 };
 
-/**********Equivalence*********/
-class Equivalence{
-    Equival equivalence;
-    CreditsManager creditsObtenus;
-public:
-    Equivalence(){}
-    Equivalence(const Equival& equi):equivalence(equi){}
-    Equival getEquivalence()const{return equivalence;}
-    ~Equivalence();
-};
 
-/**********Cursus*********/
-class Cursus{
-    QString titre;
-    unsigned int duree;
-    class UVObligatoire: public Manager<UV>{
-    private:
-        StrategieAddUvToCursusSQL* stratUV;
-        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
-     protected:
-        ~UVObligatoire();
-    public:
-        UVObligatoire():Manager<UV>(),stratUV(0){};
-        void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
-         };
-
-    class CreditsObligatoire: public Manager<Credits>{
-    private:
-        StrategieAddCreditsToCursusSQL* stratCredits;
-     protected:
-        ~CreditsObligatoire();
-    public:
-        CreditsObligatoire():Manager<Credits>(),stratCredits(0){};
-        void ajouter(const Credits& c) {stratCredits->ajouterCreditsToCursus(*this,c);} //utiliser l'itérateur sur les UV
-         };
-
-    Cursus(const Cursus& cu);
-    Cursus& operator=(const Cursus& cu);
-    Cursus(const QString& t, unsigned int dur):titre(t),duree(dur){}
-    friend class CursusManager;
-    Equivalence equival;
-
- public:
-    QString getTitre() const { return titre; }
-    unsigned int getDuree() const { return duree; }
-    void setTitre(const QString& t) { titre=t; }
-    void setDuree(unsigned int n) { duree=n; }
-
-};
 
 /*******CursusManager*******/
 class CursusManager: public Manager<Cursus>{
 private:
-        //StrategieCursusSQL* stratCursus;
-        Cursus* trouver(const QString& t) const; //peut ï¿½tre mettre T en paramï¿½tre
+        StrategieCursusSQL* stratCursus;
+        Cursus* trouver(const QString& titre) const; //peut ï¿½tre mettre T en paramï¿½tre
 protected:
    ~CursusManager();
 
 public:
-  // StrategieManager():Manager<Cursus>(),stratCursus(new StrategieCursusSQL){};
-   //void ajouter(const QString& t, unsigned int duree, ,const Categorie& cat, unsigned int n) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
+   CursusManager():Manager<Cursus>(){stratCursus=new StrategieCursusSQL;};
+   void ajouter(const QString& t, unsigned int duree) {stratCursus->addCursus(*this,t,duree);}
    Cursus& getCursus(const QString& t);
    const Cursus& getCursus(const QString& t) const;
 /*

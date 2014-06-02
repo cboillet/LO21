@@ -89,7 +89,7 @@ UVManager::~UVManager(){
 /**********CreditsManager*********/
 CreditsManager::~CreditsManager(){
     nb=nbMax=0;
-    delete [] t;
+    delete [] t; //liste de Credits**
     delete [] stratCredits;};
 
 
@@ -212,3 +212,24 @@ void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV>& man, const QStrin
     disconnect();
 }
 
+Cursus* CursusManager::trouver(const QString& titre)const{
+    for(unsigned int i=0; i<nb; i++)
+        if (titre==t[i]->getTitre()) return t[i];
+    return 0;
+}
+
+Cursus& CursusManager::getCursus(const QString& t){
+    Cursus* cursus=trouver(t);
+    if (!cursus) throw UTProfilerException("erreur, CursusManager, Cursus inexistante");
+    return *cursus;
+}
+
+const Cursus& CursusManager::getCursus(const QString& t)const{
+    return const_cast<CursusManager*>(this)->getCursus(t);
+}
+
+CursusManager::~CursusManager(){
+    nb=nbMax=0;
+    delete [] stratCursus;
+    delete [] t;
+};
