@@ -68,9 +68,9 @@ class Manager{
         unsigned int nbRemain;
         Iterator(T** t, unsigned nb):currentT(t),nbRemain(nb){}
     public:
-        static Manager<T>& getInstance(){if (!handler.instance) handler.instance = new Manager<T>; /* instance créée une seule fois lors de la première utilisation*/
+       static Manager<T>& getInstance(){if (!handler.instance) handler.instance = new Manager<T>; /* instance créée une seule fois lors de la première utilisation*/
             return *handler.instance;}
-        static void libererInstance();
+       static void libererInstance();
 
 
         Iterator():nbRemain(0),currentT(0){}

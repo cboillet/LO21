@@ -197,26 +197,27 @@ class Cursus{
     QString titre;
     unsigned int duree;
     class UVObligatoire: public Manager<UV>{
-    private:
-        StrategieAddUvToCursusSQL* stratUV;
-        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
-     protected:
-        ~UVObligatoire();
-    public:
-        UVObligatoire():Manager<UV>(){stratUV=new StrategieAddUvToCursusSQL;};
-        void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
+        private:
+            StrategieAddUvToCursusSQL* stratUV;
+            UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
+        protected:
+            ~UVObligatoire();
+        public:
+            UVObligatoire():Manager<UV>(){stratUV=new StrategieAddUvToCursusSQL;};
+            void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
          };
 
     class CreditsObligatoire: public Manager<Credits>{
-    private:
-        StrategieAddCreditsToCursusSQL* stratCredits;
-     protected:
-        ~CreditsObligatoire();
-    public:
-        CreditsObligatoire():Manager<Credits>(),stratCredits(0){};
-        void ajouter(const Credits& c) {stratCredits->ajouterCreditsToCursus(*this,c);} //utiliser l'itérateur sur les UV
-         };
-
+        private:
+            StrategieAddCreditsToCursusSQL* stratCredits;
+         protected:
+            ~CreditsObligatoire();
+        public:
+            CreditsObligatoire():Manager<Credits>(),stratCredits(0){};
+            void ajouter(const Credits& c) {stratCredits->ajouterCreditsToCursus(*this,c);} //utiliser l'itérateur sur les UV
+    };
+protected:
+    Cursus(){}
     Cursus(const Cursus& cu);
     Cursus& operator=(const Cursus& cu);
     Cursus(const QString& t, unsigned int dur):titre(t),duree(dur){}
@@ -239,6 +240,10 @@ class UVManager: public Manager<UV>{
         ~UVManager();
 
     public:
+        //static UVManager& getInstance(){if (!handler.instance) handler.instance = new Manager<UV>; /* instance créée une seule fois lors de la première utilisation*/
+        //           return *handler.instance;}
+        //static void libererInstance();
+
         UVManager():Manager<UV>(){stratUV=new StrategieUvSQL;};
         //void load(const QString& f){stratUV->load(*this,f);} //downcasting
         //void save(const QString& f){stratUV->save(*this,f);}
