@@ -2,14 +2,10 @@ LO21
 ====
 
 TO DO Stephanie:
--StrategieSqlAddUvToCursus
--Créer tests: UV
--Editeur EditeurManageur
+-Migration Base 
+-methode ajouter Cursus SQL 
+-methode delete (UV, UV to Cursus, Cursus, CreditstoCursus) // attention création de base de donnée->2 clés primaires pour cursus 
 
 TO DO Camille:
-
--changer les templates sans cpp
--créer des tests unitaires
-- enum à debbuger: ok
--CursusManager
--CursusManager: Cursus
+-tests Cam
+-go les interfaces graphiques Cam
