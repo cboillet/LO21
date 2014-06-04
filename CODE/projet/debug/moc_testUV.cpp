@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_TestUV_t {
-    QByteArrayData data[3];
-    char stringdata[25];
+    QByteArrayData data[7];
+    char stringdata[100];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -31,9 +31,15 @@ static const qt_meta_stringdata_TestUV_t qt_meta_stringdata_TestUV = {
     {
 QT_MOC_LITERAL(0, 0, 6),
 QT_MOC_LITERAL(1, 7, 16),
-QT_MOC_LITERAL(2, 24, 0)
+QT_MOC_LITERAL(2, 24, 0),
+QT_MOC_LITERAL(3, 25, 12),
+QT_MOC_LITERAL(4, 38, 11),
+QT_MOC_LITERAL(5, 50, 23),
+QT_MOC_LITERAL(6, 74, 25)
     },
-    "TestUV\0TestsetNbCredits\0"
+    "TestUV\0TestsetNbCredits\0\0TestsetTitre\0"
+    "TestsetCode\0TestsetOuvertureAutomne\0"
+    "TestsetOuverturePrintemps"
 };
 #undef QT_MOC_LITERAL
 
@@ -43,7 +49,7 @@ static const uint qt_meta_data_TestUV[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -51,9 +57,17 @@ static const uint qt_meta_data_TestUV[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x08 /* Private */,
+       1,    0,   39,    2, 0x08 /* Private */,
+       3,    0,   40,    2, 0x08 /* Private */,
+       4,    0,   41,    2, 0x08 /* Private */,
+       5,    0,   42,    2, 0x08 /* Private */,
+       6,    0,   43,    2, 0x08 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -65,6 +79,10 @@ void TestUV::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         TestUV *_t = static_cast<TestUV *>(_o);
         switch (_id) {
         case 0: _t->TestsetNbCredits(); break;
+        case 1: _t->TestsetTitre(); break;
+        case 2: _t->TestsetCode(); break;
+        case 3: _t->TestsetOuvertureAutomne(); break;
+        case 4: _t->TestsetOuverturePrintemps(); break;
         default: ;
         }
     }
@@ -96,13 +114,13 @@ int TestUV::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
 }

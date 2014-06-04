@@ -132,7 +132,7 @@ void StrategieSQL::disconnect(){
     QSqlDatabase::removeDatabase(connection);
 }
 
-void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){
+void StrategieUvSQL::ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){
     QString code, titre, categorie, saison;
     int nbCredit;
     code=  c;
@@ -159,7 +159,7 @@ void StrategieUvSQL::ajouterUV(Manager<UV>& man, const QString& c, const QString
     disconnect();
 }
 
-void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){
+void StrategieCreditsSQL::ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits){
     QString categorie= CategorieToString(cat);
     int nbCredits=nbcredits;
     if(!connect()||  (nbCredits<=-1 || nbCredits>MAXCREDIT ))
@@ -178,7 +178,7 @@ void StrategieCreditsSQL::ajouterCredits(Manager<Credits>& man, const Categorie&
     disconnect();
 }
 
-void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV>& man, const QString& c){
+void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV,UVManager>& man, const QString& c){
     QString code=c;
     if(!connect()||  code.isEmpty() )
     {

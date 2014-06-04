@@ -111,7 +111,12 @@ class Credits{
 
 
 QTextStream& operator<<(QTextStream& f, const UV& uv);
- /*******Strategie*******/
+/******Class declaration used in Manager template*******/
+class UVManager;
+class CreditsManager;
+class CursusManager;
+
+/*******Strategie*******/
 class StrategieSQL{
 protected:
     QSqlDatabase mydb;
@@ -119,65 +124,67 @@ public:
     bool connect();
     void disconnect();
 };
+
 class StrategieUv{
  public:
-    virtual void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p)=0;
+    //template<class type>
+    virtual void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p)=0;
     virtual void deleteUV()=0;
 };
 
 class StrategieUvXML: public StrategieUv{
  public:
-    void load(Manager<UV>& man, const QString& f){;}
-    void save(Manager<UV>& man, const QString& f){;}
-    void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
+    void load(Manager<UV,UVManager>& man, const QString& f){;}
+    void save(Manager<UV,UVManager>& man, const QString& f){;}
+    void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
 };
 
 class StrategieUvSQL: public StrategieUv, public StrategieSQL{
   public:
-    void ajouterUV(Manager<UV>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
+    void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
     void deleteUV(){}
 };
 
 class StrategieCredits{
  public:
-    virtual void ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits)=0;
+    virtual void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits)=0;
     virtual void deleteUV()=0;
 };
 
 class StrategieCreditsXML: public StrategieCredits{
  public:
-    void load(Manager<UV>& man, const QString& f){;}
-    void save(Manager<UV>& man, const QString& f){;}
-    virtual void ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits){;}
+    void load(Manager<UV,UVManager>& man, const QString& f){;}
+    void save(Manager<UV,UVManager>& man, const QString& f){;}
+    virtual void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits){;}
     virtual void deleteUV(){;}
 };
 
 class StrategieCreditsSQL: public StrategieSQL, public StrategieCredits{
   public:
-    void ajouterCredits(Manager<Credits>& man, const Categorie& cat, unsigned int nbcredits);
+    void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits);
     void deleteCredits(){;}
 };
 
 class StrategieAddUvToCursusSQL:public StrategieSQL{
 public:
-    void ajouterUvToCursus(Manager<UV>& man, const QString& c);
+    void ajouterUvToCursus(Manager<UV,UVManager>& man, const QString& c);
     void deleteUvToCursus(){;}
 };
 
 class StrategieAddCreditsToCursusSQL:public StrategieSQL{
 public:
-    void ajouterCreditsToCursus(Manager<Credits>& man, const Credits& cursus);
+    void ajouterCreditsToCursus(Manager<Credits,CreditsManager>& man, const Credits& cursus);
     void deleteCreditsToCursus(){;}
 };
 
 /********CreditsManager**********/
-class CreditsManager: public Manager<Credits>{
+class CreditsManager: public Manager<Credits,CreditsManager>{
 private:
     StrategieCreditsSQL* stratCredits;
 
 public:
     ~CreditsManager();
-    CreditsManager():Manager<Credits>(),stratCredits(0){};
+    CreditsManager():Manager<Credits,CreditsManager>(),stratCredits(0){};
     void ajouterCredits(const Categorie& cat, unsigned int n) {stratCredits->ajouterCredits(*this,cat,n);}
 };
 
@@ -196,24 +203,24 @@ public:
 class Cursus{
     QString titre;
     unsigned int duree;
-    class UVObligatoire: public Manager<UV>{
+    class UVObligatoire: public Manager<UV,UVManager>{
         private:
             StrategieAddUvToCursusSQL* stratUV;
             UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
         protected:
             ~UVObligatoire();
         public:
-            UVObligatoire():Manager<UV>(){stratUV=new StrategieAddUvToCursusSQL;};
+            UVObligatoire():Manager<UV,UVManager>(){stratUV=new StrategieAddUvToCursusSQL;};
             void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
          };
 
-    class CreditsObligatoire: public Manager<Credits>{
+    class CreditsObligatoire: public Manager<Credits,CreditsManager>{
         private:
             StrategieAddCreditsToCursusSQL* stratCredits;
          protected:
             ~CreditsObligatoire();
         public:
-            CreditsObligatoire():Manager<Credits>(),stratCredits(0){};
+            CreditsObligatoire():Manager<Credits,CreditsManager>(),stratCredits(0){};
             void ajouter(const Credits& c) {stratCredits->ajouterCreditsToCursus(*this,c);} //utiliser l'itérateur sur les UV
     };
 protected:
@@ -232,7 +239,7 @@ protected:
 
 };
 /*******UVManager*******/
-class UVManager: public Manager<UV>{
+class UVManager: public Manager<UV,UVManager>{
     private:
         StrategieUvSQL* stratUV;
         UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
@@ -240,11 +247,13 @@ class UVManager: public Manager<UV>{
         ~UVManager();
 
     public:
-        //static UVManager& getInstance(){if (!handler.instance) handler.instance = new Manager<UV>; /* instance créée une seule fois lors de la première utilisation*/
+        //static UVManager& getInstance(){if (!handler.instance) handler.instance = new UVManager; /* instance créée une seule fois lors de la première utilisation*/
         //           return *handler.instance;}
-        //static void libererInstance();
+        //static void libererInstance(){
+        //        if (handler.instance) { delete handler.instance; handler.instance=0; }
+        //    }
 
-        UVManager():Manager<UV>(){stratUV=new StrategieUvSQL;};
+        UVManager():Manager<UV,UVManager>(){stratUV=new StrategieUvSQL;};
         //void load(const QString& f){stratUV->load(*this,f);} //downcasting
         //void save(const QString& f){stratUV->save(*this,f);}
         void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
@@ -287,14 +296,14 @@ class UVManager: public Manager<UV>{
 
 class StrategieCursusSQL: public StrategieSQL{
 public:
-    void addCursus(Manager<Cursus>& man,const QString& t, unsigned int d){;}
+    void addCursus(Manager<Cursus,CursusManager>& man,const QString& t, unsigned int d){;}
     void deleteCursus(){;}
 };
 
 
 
 /*******CursusManager*******/
-class CursusManager: public Manager<Cursus>{
+class CursusManager: public Manager<Cursus,CursusManager>{
 private:
         StrategieCursusSQL* stratCursus;
         Cursus* trouver(const QString& titre) const; //peut ï¿½tre mettre T en paramï¿½tre
@@ -302,7 +311,7 @@ protected:
    ~CursusManager();
 
 public:
-   CursusManager():Manager<Cursus>(){stratCursus=new StrategieCursusSQL;};
+   CursusManager():Manager<Cursus,CursusManager>(){stratCursus=new StrategieCursusSQL;};
    void ajouter(const QString& t, unsigned int duree) {stratCursus->addCursus(*this,t,duree);}
    Cursus& getCursus(const QString& t);
    const Cursus& getCursus(const QString& t) const;

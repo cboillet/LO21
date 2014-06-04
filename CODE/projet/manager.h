@@ -35,9 +35,9 @@ private:
     QString info;
 };
 
-template<typename T>
+template<typename T,typename Type>
 class Manager{
-   protected: //    ttribut accessible uniquement par les classes filles
+   protected: //    attribut accessible uniquement par les classes filles
     Manager(const Manager& m);
     Manager& operator=(const Manager& m);
     Manager():t(0),nb(0),nbMax(0),file(""),modification(false){}
@@ -51,7 +51,7 @@ class Manager{
     QString file;
     friend struct Handler;
     struct Handler{
-        Manager* instance;
+        Type* instance;
         Handler():instance(0){}
         ~Handler(){ if (instance) delete instance; instance=0; }
     };
@@ -61,18 +61,18 @@ class Manager{
  public:
     bool connect();
     void disconnect();
-    static void libererInstance();
+    static Type& getInstance(){if (!handler.instance) handler.instance = new Type; /* instance créée une seule fois lors de la première utilisation*/
+        return *handler.instance;}
+    static void libererInstance(){
+        if (handler.instance) { delete handler.instance; handler.instance=0; }
+    }
+
     class Iterator {
         friend class Manager;
         T** currentT;
         unsigned int nbRemain;
         Iterator(T** t, unsigned nb):currentT(t),nbRemain(nb){}
     public:
-       static Manager<T>& getInstance(){if (!handler.instance) handler.instance = new Manager<T>; /* instance créée une seule fois lors de la première utilisation*/
-            return *handler.instance;}
-       static void libererInstance();
-
-
         Iterator():nbRemain(0),currentT(0){}
         bool isDone() const { return nbRemain==0; }
         void next() {
@@ -106,8 +106,8 @@ class Manager{
 };
 
 
-template <class T>
-bool Manager<T>::connect(){
+template <class T,class Type>
+bool Manager<T,Type>::connect(){
     mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
     mydb.setHostName("localhost");
@@ -125,16 +125,16 @@ bool Manager<T>::connect(){
      }
 }
 
-template <class T>
-void Manager<T>::disconnect(){
+template <class T,class type>
+void Manager<T,type>::disconnect(){
     QString connection;
     connection=mydb.connectionName();
     QSqlDatabase::removeDatabase(connection);
 }
 
 
-template <class T>
-void Manager<T>::addItem(T* tem){
+template <class T,class type>
+void Manager<T,type>::addItem(T* tem){
     if (nb==nbMax){
         T** newtab=new T*[nbMax+10];
         for(unsigned int i=0; i<nb; i++) newtab[i]=t[i];
@@ -146,14 +146,9 @@ void Manager<T>::addItem(T* tem){
     t[nb++]=tem;
 }
 
-template <class T>
-typename Manager<T>::Handler Manager<T>::handler=Handler();
+template <class T,class type>
+typename Manager<T,type>::Handler Manager<T,type>::handler=Handler();
 
-
-template <class T>
-void Manager<T>::libererInstance(){
-    if (handler.instance) { delete handler.instance; handler.instance=0; }
-}
 
 
 #endif // MANAGER_H

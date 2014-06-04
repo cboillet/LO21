@@ -43,9 +43,9 @@ class TestUV : public QObject{
 
    void TestsetNbCredits(){
        uvtest->setNbCredits(6);
-
+       QVERIFY(uvtest->getNbCredits()==6);
          }
- /*
+
     void TestsetTitre(){
         string content="Programmation orientée objet";
         QString str = QString::fromUtf8(content.c_str());
@@ -66,7 +66,6 @@ class TestUV : public QObject{
              uvtest->setOuverturePrintemps(1);
              QVERIFY(uvtest->ouverturePrintemps() == 1);
          }
-*/
 };
 
 #endif // TESTUV_H
