@@ -12,6 +12,7 @@ TARGET = projet
 QT += widgets
 QT += xml
 QT += sql
+QT += testlib
 CONFIG += c++11
 
 SOURCES += main.cpp\
@@ -20,5 +21,7 @@ SOURCES += main.cpp\
 
 HEADERS  +=UTProfiler.h \
     UVEditeur.h \
-    manager.h
+    manager.h \
+    TEST/testUV.h \
+    TEST/testManager.h
 
