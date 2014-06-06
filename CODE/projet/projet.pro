@@ -17,11 +17,13 @@ CONFIG += c++11
 
 SOURCES += main.cpp\
     UTProfiler.cpp \
-    UVEditeur.cpp
+    UVEditeur.cpp \
+    profiler.cpp
 
 HEADERS  +=UTProfiler.h \
     UVEditeur.h \
     manager.h \
     TEST/testUV.h \
-    TEST/testManager.h
+    TEST/testManager.h \
+    profiler.h
 

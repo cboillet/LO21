@@ -179,10 +179,8 @@ public:
 
 /********CreditsManager**********/
 class CreditsManager: public Manager<Credits,CreditsManager>{
-private:
-    StrategieCreditsSQL* stratCredits;
-
 public:
+    StrategieCreditsSQL* stratCredits;
     ~CreditsManager();
     CreditsManager():Manager<Credits,CreditsManager>(),stratCredits(0){};
     void ajouterCredits(const Categorie& cat, unsigned int n) {stratCredits->ajouterCredits(*this,cat,n);}
@@ -241,12 +239,11 @@ protected:
 /*******UVManager*******/
 class UVManager: public Manager<UV,UVManager>{
     private:
-        StrategieUvSQL* stratUV;
-        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
-     protected:
-        ~UVManager();
 
+        UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
     public:
+        StrategieUvSQL* stratUV;
+        ~UVManager();
         //static UVManager& getInstance(){if (!handler.instance) handler.instance = new UVManager; /* instance créée une seule fois lors de la première utilisation*/
         //           return *handler.instance;}
         //static void libererInstance(){
@@ -305,12 +302,10 @@ public:
 /*******CursusManager*******/
 class CursusManager: public Manager<Cursus,CursusManager>{
 private:
-        StrategieCursusSQL* stratCursus;
         Cursus* trouver(const QString& titre) const; //peut ï¿½tre mettre T en paramï¿½tre
-protected:
-   ~CursusManager();
-
 public:
+   StrategieCursusSQL* stratCursus;
+   ~CursusManager();
    CursusManager():Manager<Cursus,CursusManager>(){stratCursus=new StrategieCursusSQL;};
    void ajouter(const QString& t, unsigned int duree) {stratCursus->addCursus(*this,t,duree);}
    Cursus& getCursus(const QString& t);

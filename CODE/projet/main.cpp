@@ -5,21 +5,25 @@
 #include "UTProfiler.h"
 #include "UVEditeur.h"
 #include "manager.h"
+#include "profiler.h"
 
 int main(int argc, char *argv[])
 {
 
     QApplication app(argc, argv);
-    /*
-    Manager<UV>& man=Manager<UV>::getInstance();
-    QString chemin = QFileDialog::getOpenFileName();
-    m.load(chemin);
-    UV& uv=m.getUV("LO21");
-    UVEditeur fenetre(uv);
 
-    fenetre.show();
-    */
-    return app.exec();
+    UVManager& m=UVManager::getInstance();
+   // QString chemin = QFileDialog::getOpenFileName(); //a tester quand j'aurais la base de données
+   /* m.stratUV->connect();
+   UV& uv=m.getUV("LO21");
+   UV& uv;
+   UVEditeur fenetre(uv);
+   fenetre.show();
+   */
+
+    Profiler profiler;
+    profiler.show();
+   return app.exec();
 
     /*
     int status=0;
