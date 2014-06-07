@@ -21,6 +21,11 @@
 
 using namespace std;
 
+/******Class declaration used in Manager template*******/
+class UVManager;
+class CreditsManager;
+class CursusManager;
+class UV;
 enum class Equival{FormationPrecedente, SejourEtranger, first=FormationPrecedente, last=SejourEtranger};
 enum class Categorie {
     /* Connaissances Scientifiques */ CS,  /* Techniques et Méthodes */ TM,
@@ -59,9 +64,11 @@ public:
     static EnumIterator getFirst() { return EnumIterator(EnumType::first); }
     bool isDone() const { return value>EnumType::last; }
     EnumType operator*() const { return value; }
-    void next() { value=(EnumType)(std::underlying_type<EnumType>::type(value)+1); }
+    void next() { static_cast<EnumType>(static_cast<int>(value) + 1);}//value=(EnumType)(std::underlying_type<EnumType>::type(value)+1); }
+
 };
 
+//typename std::underlying_type<EnumType>::iterator ;
 typedef EnumIterator<Note> NoteIterator;
 typedef EnumIterator<Categorie> CategorieIterator;
 typedef EnumIterator<Saison> SaisonIterator;
@@ -77,6 +84,7 @@ public:
 };
 
 inline QTextStream& operator<<(QTextStream& f, const Semestre& s) { return f<<s.getSaison()<<s.getAnnee()%100; }
+QTextStream& operator<<(QTextStream& f, const UV& uv);
 /************UV*********/
 class UV {
     QString code;
@@ -109,12 +117,6 @@ class Credits{
     unsigned int nbcredits;
 };
 
-
-QTextStream& operator<<(QTextStream& f, const UV& uv);
-/******Class declaration used in Manager template*******/
-class UVManager;
-class CreditsManager;
-class CursusManager;
 
 /*******Strategie*******/
 class StrategieSQL{
@@ -210,6 +212,36 @@ class Cursus{
         public:
             UVObligatoire():Manager<UV,UVManager>(){stratUV=new StrategieAddUvToCursusSQL;};
             void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
+            class FilterIterator {
+                 friend class UVManager;
+                 UV** currentUV;
+                 unsigned int nbRemain;
+                 Categorie categorie;
+
+                 public:
+                    FilterIterator(UV** u, unsigned nb, Categorie c):currentUV(u),nbRemain(nb),categorie(c){
+                     while(nbRemain>0 && (*currentUV)->getCategorie()!=categorie){
+                         nbRemain--; currentUV++;
+                     }
+                 }
+                     FilterIterator():nbRemain(0),currentUV(0){}
+                     bool isDone() const { return nbRemain==0; }
+                     void next() {
+                         if (isDone())
+                             throw UTProfilerException("error, next on an iterator which is done");
+                         do {
+                             nbRemain--; currentUV++;
+                         }while(nbRemain>0 && (*currentUV)->getCategorie()!=categorie);
+                     }
+                     UV& current() const {
+                         if (isDone())
+                             throw UTProfilerException("error, indirection on an iterator which is done");
+                         return **currentUV;
+                     }
+                 };
+             FilterIterator getFilterIterator(Categorie c) {
+                 return FilterIterator(t,nb,c);
+             }
          };
 
     class CreditsObligatoire: public Manager<Credits,CreditsManager>{

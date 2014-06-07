@@ -1,5 +1,7 @@
 #include <QApplication>
 #include <QtTest>
+#include <QMainWindow>
+#include <QTextEdit>
 #include"./TEST/testUV.h"
 #include"./TEST/testManager.h"
 #include "UTProfiler.h"
@@ -12,18 +14,9 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-    UVManager& m=UVManager::getInstance();
-   // QString chemin = QFileDialog::getOpenFileName(); //a tester quand j'aurais la base de données
-   /* m.stratUV->connect();
-   UV& uv=m.getUV("LO21");
-   UV& uv;
-   UVEditeur fenetre(uv);
-   fenetre.show();
-   */
-
     Profiler profiler;
     profiler.show();
-   return app.exec();
+    return app.exec();
 
     /*
     int status=0;

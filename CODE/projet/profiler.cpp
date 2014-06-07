@@ -1,12 +1,15 @@
 #include "Profiler.h"
 #include "UVEditeur.h"
 #include "UTProfiler.h"
+#include "affichage.h"
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QString>
 #include <QMessageBox>
+#include <QStackedWidget>
 Profiler::Profiler(QWidget *parent):QMainWindow(parent){
-    setWindowTitle("UT-Profiler");
+    setWindowTitle("LO21 UTProfiler");
+
     QMenu* mFichier = menuBar()->addMenu("&Fichier");
     QMenu* mCharger=mFichier->addMenu("&Charger");
     QAction * actionChargerUV=mCharger->addAction("Catalogue UVs");
@@ -18,21 +21,45 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     QAction* actionUV=mEdition->addAction("&UV");
     QAction* actionCursus=mEdition->addAction("&Cursus");
     QAction* actionDossier=mEdition->addAction("&Dossier");
-    // connections
+
+    //stratSQL->connect();
+    //connections
     connect(actionChargerUV, SIGNAL(triggered()),this,SLOT(openChargerUV()));
     connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-    connect(actionUV, SIGNAL(triggered()),this,SLOT(openUV()));
+    //connect(actionUV, SIGNAL(triggered()),this,SLOT(openUV());
 }
 
-/*void Profiler::openChargerUV(){
-    QString chemin = QFileDialog::getOpenFileName();
-    try {
-    if (chemin!="")UVManager::getInstance().load(chemin);
-    QMessageBox::information(this, "Chargement Catalogue", "Le catalogue d’UVs
-    a été chargé.");
-    }catch(UTProfilerException& e){
-    QMessageBox::warning(this, "Chargement Catalogue", "Erreur lors du
-    chargement du fichier (non valide ?)");
-    }
+void Profiler::quit(){
+    //stratSQL->disconnect();
+    delete stratSQL;
+}
 
-}*/
+/*
+void Profiler::openUV(){
+    QString code=QInputDialog::getText(this,"Entrez le code de l’UV à éditer","UV")
+    ;
+    if (code!="")
+    try {
+    UV& uv=UVManager::getInstance().getUV(code);
+    UVEditeur* fenetre=new UVEditeur(uv,this);
+    setCentralWidget(fenetre);
+    }catch(UTProfilerException& e){
+    QMessageBox::warning(this, "Edition UV", QString("Erreur : l’UV ")+code+" n
+    ’existe pas.");
+    }
+}
+*/
+
+void Profiler::openChargerUV(){
+    QString titre=QInputDialog::getText(this,"Entrez le cursus que vous souhaitez consulter","Cursus, par défaut nous vous affichons les TSH");
+    if (titre!="")
+    try {
+    Cursus& cursus=CursusManager::getInstance().getCursus(titre);
+    AffichageCatalogue* fenetre=new AffichageCatalogue(cursus,this);//AffichageCatalogue(cursus,this);
+    setCentralWidget(fenetre);
+    }
+    catch(UTProfilerException& e){
+    QMessageBox::warning(this, "Affichage Catalogue du Cursus", QString("Erreur : le Cursus ")+titre+" n’existe pas.");
+    }
+}
+
