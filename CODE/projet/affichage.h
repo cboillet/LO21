@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QInputDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include "UVEditeur.h"
 #include "UTProfiler.h"
 #include "profiler.h"
@@ -16,9 +18,10 @@ public:
 class AffichageCatalogue:public QWidget{
 Q_OBJECT
 public:
-    AffichageCatalogue(Cursus& curs,Profiler* fenetre){
-        Categorie TM;
-        AffichageCatalogueCategorie* affichage=new AffichageCatalogueCategorie(TM, curs,fenetre);}//(const Cursus&,Profiler&){}
+    explicit AffichageCatalogue(Cursus& curs,Profiler* parent = 0);
+    //AffichageCatalogue(Cursus& curs,Profiler* parent){
+    //    Categorie TM;
+    //    AffichageCatalogueCategorie* affichage=new AffichageCatalogueCategorie(TM, curs,parent);}//(const Cursus&,Profiler&){}
 
 };
 

@@ -2,6 +2,8 @@
 #include <QtTest>
 #include <QMainWindow>
 #include <QTextEdit>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include"./TEST/testUV.h"
 #include"./TEST/testManager.h"
 #include "UTProfiler.h"
@@ -13,7 +15,25 @@ int main(int argc, char *argv[])
 {
 
     QApplication app(argc, argv);
+    /*
+    QWidget fenetre;
+    QHBoxLayout* couche=new QHBoxLayout;
+    QVBoxLayout* couchecode=new QVBoxLayout;
+    QVBoxLayout* couchetitre=new QVBoxLayout;
+    QVBoxLayout* couchenbcredits=new QVBoxLayout;
+    QVBoxLayout* coucheouverture=new QVBoxLayout;
+    QLabel* code= new QLabel("code",&fenetre);
+    QLabel* titre= new QLabel("titre",&fenetre);
+    QLabel* nbcredits= new QLabel("nombre de crédits", &fenetre);
+    QLabel* ouverture= new QLabel("semestre d'ouverture", &fenetre);
 
+    couche->addLayout(couchetitre);
+    couche->addLayout(couchecode);
+    couche->addLayout(couchenbcredits);
+    couche->addLayout(coucheouverture);
+   // setLayout(couche);
+    fenetre.show();
+    */
     Profiler profiler;
     profiler.show();
     return app.exec();

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QInputDialog>
 #include <QStackedWidget>
+
 #include "UVEditeur.h"
 #include "UTProfiler.h"
 

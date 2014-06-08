@@ -110,7 +110,7 @@ Cursus::CreditsObligatoire::~CreditsObligatoire(){
 
 bool StrategieSQL::connect(){
     mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
+    mydb.setDatabaseName("C:\\Users\\Camille\\Documents\\SQLite");
     mydb.setHostName("localhost");
     mydb.setUserName("root");
     mydb.setPassword("");

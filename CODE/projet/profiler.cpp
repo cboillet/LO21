@@ -51,6 +51,24 @@ void Profiler::openUV(){
 */
 
 void Profiler::openChargerUV(){
+
+    QHBoxLayout* couche=new QHBoxLayout;
+    QVBoxLayout* couchecode=new QVBoxLayout;
+    QVBoxLayout* couchetitre=new QVBoxLayout;
+    QVBoxLayout* couchenbcredits=new QVBoxLayout;
+    QVBoxLayout* coucheouverture=new QVBoxLayout;
+    QLabel* code= new QLabel("code",this);
+    QLabel* titre= new QLabel("titre",this);
+    QLabel* nbcredits= new QLabel("nombre de crédits",this);
+    QLabel* ouverture= new QLabel("semestre d'ouverture",this);
+
+    couche->addLayout(couchetitre);
+    couche->addLayout(couchecode);
+    couche->addLayout(couchenbcredits);
+    couche->addLayout(coucheouverture);
+    delete layout();
+    //setLayout(couche);
+/*
     QString titre=QInputDialog::getText(this,"Entrez le cursus que vous souhaitez consulter","Cursus, par défaut nous vous affichons les TSH");
     if (titre!="")
     try {
@@ -61,5 +79,6 @@ void Profiler::openChargerUV(){
     catch(UTProfilerException& e){
     QMessageBox::warning(this, "Affichage Catalogue du Cursus", QString("Erreur : le Cursus ")+titre+" n’existe pas.");
     }
+    */
 }
 
