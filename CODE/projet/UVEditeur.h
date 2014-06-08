@@ -11,6 +11,8 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QFileDialog>
+#include <QSqlTableModel>
+#include <QDialogButtonBox>
 #include <QMessageBox>
 #include "UTProfiler.h"
 
@@ -31,6 +33,7 @@ class UVEditeur : public QWidget{
     QCheckBox* printemps;
     QPushButton* sauver;
     QPushButton* annuler;
+  //QPushButton *modifier;
     QVBoxLayout* couche;
     QHBoxLayout* coucheH1;
     QHBoxLayout* coucheH2;
@@ -41,6 +44,14 @@ class UVEditeur : public QWidget{
     signals:
     public slots:
         void sauverUV();
-    private slots:
+        void annulerUV();
+        //void modifierUV();
+    private :
+       // QPushButton *sauver;
+       // QPushButton *annuler;
+        //  QPushButton *modifier;
+        QPushButton *quit;
+        QDialogButtonBox * buttonBox;
+        QSqlTableModel *model;
 };
 #endif // UVEDITEUR_H
