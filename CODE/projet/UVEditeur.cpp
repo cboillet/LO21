@@ -50,6 +50,7 @@ this->setWindowTitle(QString("Edition de l’UV ")+uv.getCode());
     coucheH4 = new QHBoxLayout;
     coucheH4->addWidget(annuler);
     coucheH4->addWidget(sauver);
+    //coucheH4->addWidget(modifier);
     couche = new QVBoxLayout;
     couche->addLayout(coucheH1);
     couche->addLayout(coucheH2);
@@ -70,6 +71,10 @@ uv.setOuverturePrintemps(printemps->isChecked());
 uv.setOuvertureAutomne(automne->isChecked());
 QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
 }
+
+ void UVEditeur::annulerUV(){
+ }
+
 
 
 
