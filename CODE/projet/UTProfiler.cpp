@@ -90,7 +90,7 @@ UVManager::~UVManager(){
 CreditsManager::~CreditsManager(){
     nb=nbMax=0;
     delete [] t; //liste de Credits**
-    delete [] stratCredits;};
+    delete [] stratCredits;}
 
 
 /*************Cursus*************/

@@ -136,8 +136,8 @@ class StrategieUv{
 
 class StrategieUvXML: public StrategieUv{
  public:
-    void load(Manager<UV,UVManager>& man, const QString& f){;}
-    void save(Manager<UV,UVManager>& man, const QString& f){;}
+    void load(Manager<UV,UVManager>& man, const QString& f);
+    void save(Manager<UV,UVManager>& man, const QString& f);
     void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
 };
 
@@ -155,8 +155,8 @@ class StrategieCredits{
 
 class StrategieCreditsXML: public StrategieCredits{
  public:
-    void load(Manager<UV,UVManager>& man, const QString& f){;}
-    void save(Manager<UV,UVManager>& man, const QString& f){;}
+    void load(Manager<UV,UVManager>& man, const QString& f);
+    void save(Manager<UV,UVManager>& man, const QString& f);
     virtual void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits){;}
     virtual void deleteUV();
 };
