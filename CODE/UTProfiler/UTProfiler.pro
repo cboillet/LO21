@@ -10,16 +10,20 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = UTProfiler
 TEMPLATE = app
+CONFIG += c++11
 
 
 SOURCES += main.cpp\
         mainutprofiler.cpp \
     uvadddialog.cpp \
-    dialogupdatedeleteuv.cpp
+    dialogupdatedeleteuv.cpp \
+    UTProfiler.cpp
 
 HEADERS  += mainutprofiler.h \
     uvadddialog.h \
-    dialogupdatedeleteuv.h
+    dialogupdatedeleteuv.h \
+    manager.h \
+    UTProfiler.h
 
 FORMS    += mainutprofiler.ui \
     uvadddialog.ui \

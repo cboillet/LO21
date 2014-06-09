@@ -2,6 +2,7 @@
 #include "UVEditeur.h"
 #include "UTProfiler.h"
 #include "affichage.h"
+#include "CursusEditeur.h"
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QString>
@@ -9,7 +10,8 @@
 #include <QStackedWidget>
 Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     setWindowTitle("LO21 UTProfiler");
-
+    centralWidget = new QWidget(this);
+    this->setCentralWidget( centralWidget );
     QMenu* mFichier = menuBar()->addMenu("&Fichier");
     QMenu* mCharger=mFichier->addMenu("&Charger");
     QAction * actionChargerUV=mCharger->addAction("Catalogue UVs");
@@ -18,82 +20,55 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     mFichier->addSeparator();
     QAction *actionQuitter = mFichier->addAction("&Quitter");
     QMenu* mEdition = menuBar()->addMenu("&Edition");
-    QAction* actionUV=mEdition->addAction("&UV");
-    QAction* actionCursus=mEdition->addAction("&Cursus");
+    QMenu* mUV=mEdition->addMenu("&UV");
+    QAction * actionNewUV=mUV->addAction("Créer");
+    QAction * actionChangeUV=mUV->addAction("Apporter des modifications");
+    QMenu* mCursus=mEdition->addMenu("&Cursus");
+    QAction * actionNewCursus=mCursus->addAction("Créer");
+    QAction * actionChangeCursus=mCursus->addAction("Apporter des modifications");
+    mEdition->addSeparator();
     QAction* actionDossier=mEdition->addAction("&Dossier");
 
-    stratSQL->connect();
+   /* stratSQL->connect();
     try {
     stratSQL->connect();
     }catch(UTProfilerException& e){
-    QMessageBox::warning(this, "Connexion", QString("connexion a la base de donnée impossible");
+    QMessageBox::warning(this, "Connexion", QString("connexion a la base de donnée impossible"));
     }
-
+    */
 
     //connections
     connect(actionChargerUV, SIGNAL(triggered()),this,SLOT(openChargerUV()));
     connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-    connect(actionUV, SIGNAL(triggered()),this,SLOT(openUV()));
+    connect(actionNewUV, SIGNAL(triggered()),this,SLOT(NewUV()));
+    connect(actionChangeUV, SIGNAL(triggered()),this,SLOT(ChangeUV()));
+    connect(actionNewCursus, SIGNAL(triggered()),this,SLOT(NewCursus()));
+    connect(actionChangeCursus, SIGNAL(triggered()),this,SLOT(ChangeCursus()));
 }
 
 void Profiler::quit(){
-    stratSQL->disconnect();
-    delete stratSQL;
+    //stratSQL->disconnect();
+    //delete stratSQL;
 }
 
 
-void Profiler::openUV(){
-    QString code=QInputDialog::getText(this,"Entrez le code de l’UV à éditer ou créer un nouvelle UV","UV")
-    ;
-    if (code!="")
-    /*try {
-    UV& uv=UVManager::getInstance().getUV(code);
-    UVEditeur* fenetre=new UVEditeur(uv,this);
-    setCentralWidget(fenetre);
-    }catch(UTProfilerException& e){
-    QMessageBox::warning(this, "Edition UV", QString("Erreur : l’UV ")+code+" n’existe pas.");
-    }
-    */
-    else
-    try {
+void Profiler::NewUV(){
     UVEditeurNew* fenetre=new UVEditeurNew(this);
-    }
-
-
-
+    this->setCentralWidget(fenetre);
 }
 
+void Profiler::ChangeUV(){
+}
+
+void Profiler::NewCursus(){
+    //addcursus = new CursusEditeurNew( centralWidget );
+    CursusEditeurNew* cursus=new CursusEditeurNew(centralWidget);
+    this->setCentralWidget(cursus);
+}
+
+void Profiler::ChangeCursus(){
+}
 
 void Profiler::openChargerUV(){
-/*
-    QHBoxLayout* couche=new QHBoxLayout;
-    QVBoxLayout* couchecode=new QVBoxLayout;
-    QVBoxLayout* couchetitre=new QVBoxLayout;
-    QVBoxLayout* couchenbcredits=new QVBoxLayout;
-    QVBoxLayout* coucheouverture=new QVBoxLayout;
-    QLabel* code= new QLabel("code",this);
-    QLabel* titre= new QLabel("titre",this);
-    QLabel* nbcredits= new QLabel("nombre de crédits",this);
-    QLabel* ouverture= new QLabel("semestre d'ouverture",this);
-
-    couche->addLayout(couchetitre);
-    couche->addLayout(couchecode);
-    couche->addLayout(couchenbcredits);
-    couche->addLayout(coucheouverture);
-    delete layout();
-    //setLayout(couche);
- */
-/*
-    QString titre=QInputDialog::getText(this,"Entrez le cursus que vous souhaitez consulter","Cursus, par défaut nous vous affichons les TSH");
-    if (titre!="")
-    try {
-    Cursus& cursus=CursusManager::getInstance().getCursus(titre);
-    AffichageCatalogue* fenetre=new AffichageCatalogue(cursus,this);//AffichageCatalogue(cursus,this);
-    setCentralWidget(fenetre);
-    }
-    catch(UTProfilerException& e){
-    QMessageBox::warning(this, "Affichage Catalogue du Cursus", QString("Erreur : le Cursus ")+titre+" n’existe pas.");
-    }
-    */
 }
 

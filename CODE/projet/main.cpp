@@ -34,8 +34,14 @@ int main(int argc, char *argv[])
    // setLayout(couche);
     fenetre.show();
     */
-    Profiler profiler;
-    profiler.show();
+
+   Profiler profiler;
+   profiler.showMaximized();
+
+    /*QWidget* test;
+    UVEditeurNew* fenetre=new UVEditeurNew(test);
+    test->show();
+    */
     return app.exec();
 
     /*

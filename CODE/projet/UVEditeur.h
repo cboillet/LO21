@@ -40,11 +40,13 @@ class UVEditeurNew: public QWidget {
     QHBoxLayout* coucheH4;
     public:
     explicit UVEditeurNew(QWidget *parent = 0);
+    ~UVEditeurNew(){}
     signals:
+
     public slots:
-        virtual void sauverUV() = 0;
-        virtual void annulerUV() = 0;
-        //void modifierUV();
+    void sauverUV() {}
+    void annulerUV() {}
+    //void modifierUV();
     private :
        // QPushButton *sauver;
        // QPushButton *annuler;
@@ -55,23 +57,33 @@ class UVEditeurNew: public QWidget {
 
 };
 
-/*
-class UVEditeur : public UVEditeurNew {
+
+class UVEditeur : public QWidget{
     Q_OBJECT
+    UV& uv;
+    QLineEdit* code;
+    QLabel* codeLabel;
+    QTextEdit* titre;
+    QLabel* titreLabel;
+    QSpinBox* credits;
+    QLabel* creditsLabel;
+    QComboBox* categorie;
+    QLabel* categorieLabel;
+    QLabel* ouvertureLabel;
+    QCheckBox* automne;
+    QCheckBox* printemps;
+    QPushButton* sauver;
+    QPushButton* annuler;
+    QVBoxLayout* couche;
+    QHBoxLayout* coucheH1;
+    QHBoxLayout* coucheH2;
+    QHBoxLayout* coucheH3;
+    QHBoxLayout* coucheH4;
     public:
     explicit UVEditeur(UV& uvToEdit, QWidget *parent = 0);
     signals:
     public slots:
-        void sauverUV();
-        void annulerUV();
-        //void modifierUV();
-    private :
-       // QPushButton *sauver;
-       // QPushButton *annuler;
-        //  QPushButton *modifier;
-        QPushButton *quit;
-        QDialogButtonBox * buttonBox;
-        QSqlTableModel *model;
+    private slots:
 };
-*/
+
 #endif // UVEDITEUR_H

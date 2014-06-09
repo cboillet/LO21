@@ -1,4 +1,5 @@
 #include "mainutprofiler.h"
+#include "UTProfiler.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])

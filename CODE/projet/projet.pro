@@ -14,12 +14,14 @@ QT += xml
 QT += sql
 QT += testlib
 CONFIG += c++11
+CONFIG += console debug
 
 SOURCES += main.cpp\
     UTProfiler.cpp \
     UVEditeur.cpp \
     profiler.cpp \
-    affichage.cpp
+    affichage.cpp \
+    CursusEditeur.cpp
 
 HEADERS  +=UTProfiler.h \
     UVEditeur.h \
@@ -27,5 +29,6 @@ HEADERS  +=UTProfiler.h \
     TEST/testUV.h \
     TEST/testManager.h \
     profiler.h \
-    affichage.h
+    affichage.h \
+    CursusEditeur.h
 

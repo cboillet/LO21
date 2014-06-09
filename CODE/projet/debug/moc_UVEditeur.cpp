@@ -18,27 +18,27 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-struct qt_meta_stringdata_UVEditeur_t {
+struct qt_meta_stringdata_UVEditeurNew_t {
     QByteArrayData data[4];
-    char stringdata[30];
+    char stringdata[33];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_UVEditeur_t, stringdata) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_UVEditeurNew_t, stringdata) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_UVEditeur_t qt_meta_stringdata_UVEditeur = {
+static const qt_meta_stringdata_UVEditeurNew_t qt_meta_stringdata_UVEditeurNew = {
     {
-QT_MOC_LITERAL(0, 0, 9),
-QT_MOC_LITERAL(1, 10, 8),
-QT_MOC_LITERAL(2, 19, 0),
-QT_MOC_LITERAL(3, 20, 9)
+QT_MOC_LITERAL(0, 0, 12),
+QT_MOC_LITERAL(1, 13, 8),
+QT_MOC_LITERAL(2, 22, 0),
+QT_MOC_LITERAL(3, 23, 9)
     },
-    "UVEditeur\0sauverUV\0\0annulerUV"
+    "UVEditeurNew\0sauverUV\0\0annulerUV"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_UVEditeur[] = {
+static const uint qt_meta_data_UVEditeurNew[] = {
 
  // content:
        7,       // revision
@@ -62,16 +62,92 @@ static const uint qt_meta_data_UVEditeur[] = {
        0        // eod
 };
 
-void UVEditeur::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void UVEditeurNew::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        UVEditeur *_t = static_cast<UVEditeur *>(_o);
+        UVEditeurNew *_t = static_cast<UVEditeurNew *>(_o);
         switch (_id) {
         case 0: _t->sauverUV(); break;
         case 1: _t->annulerUV(); break;
         default: ;
         }
     }
+    Q_UNUSED(_a);
+}
+
+const QMetaObject UVEditeurNew::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_UVEditeurNew.data,
+      qt_meta_data_UVEditeurNew,  qt_static_metacall, 0, 0}
+};
+
+
+const QMetaObject *UVEditeurNew::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *UVEditeurNew::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_UVEditeurNew.stringdata))
+        return static_cast<void*>(const_cast< UVEditeurNew*>(this));
+    return QWidget::qt_metacast(_clname);
+}
+
+int UVEditeurNew::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 2)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 2;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_UVEditeur_t {
+    QByteArrayData data[1];
+    char stringdata[10];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_UVEditeur_t, stringdata) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_UVEditeur_t qt_meta_stringdata_UVEditeur = {
+    {
+QT_MOC_LITERAL(0, 0, 9)
+    },
+    "UVEditeur"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_UVEditeur[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void UVEditeur::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
     Q_UNUSED(_a);
 }
 
@@ -99,15 +175,6 @@ int UVEditeur::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
-    if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
-    }
     return _id;
 }
 QT_END_MOC_NAMESPACE
