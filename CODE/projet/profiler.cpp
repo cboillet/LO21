@@ -22,36 +22,50 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     QAction* actionCursus=mEdition->addAction("&Cursus");
     QAction* actionDossier=mEdition->addAction("&Dossier");
 
-    //stratSQL->connect();
+    stratSQL->connect();
+    try {
+    stratSQL->connect();
+    }catch(UTProfilerException& e){
+    QMessageBox::warning(this, "Connexion", QString("connexion a la base de donnée impossible");
+    }
+
+
     //connections
     connect(actionChargerUV, SIGNAL(triggered()),this,SLOT(openChargerUV()));
     connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-    //connect(actionUV, SIGNAL(triggered()),this,SLOT(openUV());
+    connect(actionUV, SIGNAL(triggered()),this,SLOT(openUV()));
 }
 
 void Profiler::quit(){
-    //stratSQL->disconnect();
+    stratSQL->disconnect();
     delete stratSQL;
 }
 
-/*
+
 void Profiler::openUV(){
-    QString code=QInputDialog::getText(this,"Entrez le code de l’UV à éditer","UV")
+    QString code=QInputDialog::getText(this,"Entrez le code de l’UV à éditer ou créer un nouvelle UV","UV")
     ;
     if (code!="")
-    try {
+    /*try {
     UV& uv=UVManager::getInstance().getUV(code);
     UVEditeur* fenetre=new UVEditeur(uv,this);
     setCentralWidget(fenetre);
     }catch(UTProfilerException& e){
-    QMessageBox::warning(this, "Edition UV", QString("Erreur : l’UV ")+code+" n
-    ’existe pas.");
+    QMessageBox::warning(this, "Edition UV", QString("Erreur : l’UV ")+code+" n’existe pas.");
     }
+    */
+    else
+    try {
+    UVEditeurNew* fenetre=new UVEditeurNew(this);
+    }
+
+
+
 }
-*/
+
 
 void Profiler::openChargerUV(){
-
+/*
     QHBoxLayout* couche=new QHBoxLayout;
     QVBoxLayout* couchecode=new QVBoxLayout;
     QVBoxLayout* couchetitre=new QVBoxLayout;
@@ -68,6 +82,7 @@ void Profiler::openChargerUV(){
     couche->addLayout(coucheouverture);
     delete layout();
     //setLayout(couche);
+ */
 /*
     QString titre=QInputDialog::getText(this,"Entrez le cursus que vous souhaitez consulter","Cursus, par défaut nous vous affichons les TSH");
     if (titre!="")

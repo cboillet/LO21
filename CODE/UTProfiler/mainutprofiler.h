@@ -24,7 +24,7 @@ public :
 
 
         mydb = QSqlDatabase::addDatabase("QSQLITE");
-        mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
+        mydb.setDatabaseName("C:/SQLite/UTProfiler.s3db");
         if(!mydb.open()){
 
            qDebug()<<"failed";

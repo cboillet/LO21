@@ -17,9 +17,8 @@
 #include "UTProfiler.h"
 
 
-class UVEditeur : public QWidget{
+class UVEditeurNew: public QWidget {
     Q_OBJECT
-    UV& uv;
     QLineEdit* code;
     QLabel* codeLabel;
     QTextEdit* titre;
@@ -40,6 +39,26 @@ class UVEditeur : public QWidget{
     QHBoxLayout* coucheH3;
     QHBoxLayout* coucheH4;
     public:
+    explicit UVEditeurNew(QWidget *parent = 0);
+    signals:
+    public slots:
+        virtual void sauverUV() = 0;
+        virtual void annulerUV() = 0;
+        //void modifierUV();
+    private :
+       // QPushButton *sauver;
+       // QPushButton *annuler;
+        //  QPushButton *modifier;
+        QPushButton *quit;
+        QDialogButtonBox * buttonBox;
+        QSqlTableModel *model;
+
+};
+
+/*
+class UVEditeur : public UVEditeurNew {
+    Q_OBJECT
+    public:
     explicit UVEditeur(UV& uvToEdit, QWidget *parent = 0);
     signals:
     public slots:
@@ -54,4 +73,5 @@ class UVEditeur : public QWidget{
         QDialogButtonBox * buttonBox;
         QSqlTableModel *model;
 };
+*/
 #endif // UVEDITEUR_H

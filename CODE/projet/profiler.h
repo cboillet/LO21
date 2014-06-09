@@ -18,6 +18,6 @@ signals:
 public slots:
     void quit();
     void openChargerUV();
-    //void openUV();
+    void openUV();
 };
 #endif

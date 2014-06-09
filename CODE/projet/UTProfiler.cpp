@@ -109,9 +109,9 @@ Cursus::CreditsObligatoire::~CreditsObligatoire(){
 /******Base de donnée*******/
 
 bool StrategieSQL::connect(){
-<<<<<<< HEAD
+
     mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("C:\\Users\\Camille\\Documents\\SQLite");
+    mydb.setDatabaseName("C:/SQLite/UTProfiler.s3db");
     mydb.setHostName("localhost");
     mydb.setUserName("root");
     mydb.setPassword("");
@@ -125,7 +125,7 @@ bool StrategieSQL::connect(){
         qDebug()<<"succes";
         return true;
      }
-=======
+
    mydb = QSqlDatabase::addDatabase("QSQLITE");
    //QString dbPath = QCoreApplication::applicationDirPath()+"C:/SQlite/sqliteadmin/UTProfiler.s3db";
   // mydb.setDatabaseName(dbPath);
@@ -144,7 +144,6 @@ bool StrategieSQL::connect(){
        qDebug()<<"connected";
        return true;
     }
->>>>>>> 8966077920355239013949575931efd935f11b74
 }
 
 void StrategieSQL::disconnect(){

@@ -264,6 +264,13 @@ debug/moc_UVEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qdir.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
 		UTProfiler.h \
@@ -459,8 +466,6 @@ debug/moc_UVEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSql \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSqlDepends \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriver.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriverplugin.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlerror.h \
@@ -469,13 +474,11 @@ debug/moc_UVEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrecord.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquery.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlresult.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
@@ -985,6 +988,8 @@ debug/moc_profiler.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextformat.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qpen.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
 		UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QCheckBox \
@@ -1023,6 +1028,13 @@ debug/moc_profiler.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qfiledialog.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qdir.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qfileinfo.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
 		UTProfiler.h \
@@ -1214,8 +1226,6 @@ debug/moc_profiler.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSql \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSqlDepends \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriver.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriverplugin.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlerror.h \
@@ -1224,13 +1234,11 @@ debug/moc_profiler.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrecord.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquery.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlresult.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
@@ -1357,6 +1365,12 @@ debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextformat.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qpen.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QVBoxLayout \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QHBoxLayout \
 		UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QCheckBox \
@@ -1367,12 +1381,6 @@ debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtextedit.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextdocument.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QVBoxLayout \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QHBoxLayout \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QString \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QSpinBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qspinbox.h \
@@ -1395,6 +1403,13 @@ debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qfiledialog.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qdir.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qfileinfo.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
 		UTProfiler.h \
@@ -1586,8 +1601,6 @@ debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSql \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSqlDepends \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriver.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriverplugin.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlerror.h \
@@ -1596,18 +1609,18 @@ debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrecord.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquery.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlresult.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
 		profiler.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
 		affichage.h
 	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore affichage.h -o debug\moc_affichage.cpp
 
@@ -1880,6 +1893,12 @@ debug/main.o: main.cpp C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextcursor.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextformat.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qpen.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QVBoxLayout \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QHBoxLayout \
 		TEST/testUV.h \
 		UTProfiler.h \
 		manager.h \
@@ -1975,17 +1994,11 @@ debug/main.o: main.cpp C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qrubberband.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QSpinBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qspinbox.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QHBoxLayout \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QCheckBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qcheckbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QPushButton \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QVBoxLayout \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QFileDialog \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qfiledialog.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialog.h \
@@ -2014,11 +2027,16 @@ debug/main.o: main.cpp C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		TEST/testManager.h \
 		UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QComboBox \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
 		profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QInputDialog \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qinputdialog.h
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qinputdialog.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o main.cpp
 
 debug/UTProfiler.o: UTProfiler.cpp UTProfiler.h \
@@ -2531,6 +2549,13 @@ debug/UVEditeur.o: UVEditeur.cpp UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qdir.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qfileinfo.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialog.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
 		UTProfiler.h \
@@ -2726,8 +2751,6 @@ debug/UVEditeur.o: UVEditeur.cpp UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSql \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSqlDepends \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriver.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriverplugin.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlerror.h \
@@ -2736,13 +2759,11 @@ debug/UVEditeur.o: UVEditeur.cpp UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrecord.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquery.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlresult.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
@@ -2869,6 +2890,8 @@ debug/profiler.o: profiler.cpp Profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextformat.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qpen.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
 		UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QCheckBox \
@@ -2907,6 +2930,13 @@ debug/profiler.o: profiler.cpp Profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qfiledialog.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qdir.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qfileinfo.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
 		UTProfiler.h \
@@ -3098,8 +3128,6 @@ debug/profiler.o: profiler.cpp Profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSql \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSqlDepends \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriver.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriverplugin.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlerror.h \
@@ -3108,13 +3136,11 @@ debug/profiler.o: profiler.cpp Profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrecord.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquery.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlresult.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
@@ -3248,6 +3274,12 @@ debug/affichage.o: affichage.cpp affichage.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextformat.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qpen.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextoption.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QVBoxLayout \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QHBoxLayout \
 		UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QCheckBox \
@@ -3258,12 +3290,6 @@ debug/affichage.o: affichage.cpp affichage.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtextedit.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/5.3/mingw482_32/include/QtGui/qtextdocument.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QVBoxLayout \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qboxlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlayoutitem.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qgridlayout.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QHBoxLayout \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QString \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QSpinBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qspinbox.h \
@@ -3286,6 +3312,13 @@ debug/affichage.o: affichage.cpp affichage.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qfiledialog.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qdir.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qfileinfo.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
 		UTProfiler.h \
@@ -3477,8 +3510,6 @@ debug/affichage.o: affichage.cpp affichage.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSql \
 		C:/Qt/5.3/mingw482_32/include/QtSql/QtSqlDepends \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsql.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldatabase.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriver.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqldriverplugin.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlerror.h \
@@ -3487,18 +3518,18 @@ debug/affichage.o: affichage.cpp affichage.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrecord.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquery.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlresult.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtSql/qsqltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
-		profiler.h
+		profiler.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\affichage.o affichage.cpp
 
 debug/moc_UVEditeur.o: debug/moc_UVEditeur.cpp 
