@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QLabel>
 #include <QDebug>
+#include <QString>
 
 namespace Ui {
 class MainUTProfiler;
@@ -24,7 +25,10 @@ public :
 
 
         mydb = QSqlDatabase::addDatabase("QSQLITE");
-        mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
+       // db = QSqlDatabase::addDatabase("QSQLITE");
+        QString dbPath = QDir::currentPath()+"/UTProfiler.db" ;
+        mydb.setDatabaseName(dbPath);
+       // mydb.setDatabaseName("C:/SQlite/DataBase/UTProfiler.db");
         if(!mydb.open()){
 
            qDebug()<<"failed";

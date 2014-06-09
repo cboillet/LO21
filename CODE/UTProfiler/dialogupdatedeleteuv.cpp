@@ -25,14 +25,14 @@ DialogUpdateDeleteUV::DialogUpdateDeleteUV(QWidget *parent) :
         }
 
         // SET The Possible Categorie Values
-        query->prepare("SELECT uvType FROM categorie");
+        query->prepare("SELECT type FROM categorie");
         query->exec();
         modelCategorie->setQuery(*query);
         ui->categorieComb->setModel(modelCategorie);
 
         // SET The Possible Saison Values
 
-        query->prepare("SELECT SaisonType FROM saison");
+        query->prepare("SELECT type FROM saison");
         query->exec();
         modelSaison->setQuery(*query);
         ui->saisonComb->setModel(modelSaison);
