@@ -28,8 +28,7 @@ class UVEditeurNew: public QWidget {
     QComboBox* categorie;
     QLabel* categorieLabel;
     QLabel* ouvertureLabel;
-    QCheckBox* automne;
-    QCheckBox* printemps;
+    QComboBox* saison;
     QPushButton* sauver;
     QPushButton* annuler;
     QVBoxLayout* couche;

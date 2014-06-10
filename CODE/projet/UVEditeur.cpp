@@ -13,18 +13,13 @@ UVEditeurNew::UVEditeurNew(QWidget *parent){
     credits=new QSpinBox(this);
     credits->setRange(1,8);
     categorie=new QComboBox(this);
-   /* for(CategorieIterator it=CategorieIterator::getFirst(); !it.isDone(); it.next())
-    categorie->addItem(CategorieToString(*it));
-    */
-    /*for ( int itint = CS; it != SP; it++ )
-    {
-       Categorie cat=static_cast<Categorie>(itint);
-       categorie->addItem(CategorieToString(*cat));
-    }
-    */
+    for(Categorie cat = Categorie::CS; cat != Categorie::END; cat = static_cast<Categorie>(static_cast<int>(cat) + 1))
+       categorie->addItem(CategorieToString(cat));
     categorie->setCurrentIndex(0);
-    automne=new QCheckBox("automne",this);
-    printemps=new QCheckBox("printemps",this);
+    saison=new QComboBox(this);
+    for(Saison sais = Saison::Automne; sais!= Saison::END; sais = static_cast<Saison>(static_cast<int>(sais) + 1))
+       saison->addItem(SaisonToString(sais));
+    saison->setCurrentIndex(0);
     sauver= new QPushButton("Sauver", this);
     annuler= new QPushButton("Annuler", this);
 
@@ -41,8 +36,7 @@ UVEditeurNew::UVEditeurNew(QWidget *parent){
     coucheH2->addWidget(titre);
     coucheH3 = new QHBoxLayout;
     coucheH3->addWidget(ouvertureLabel);
-    coucheH3->addWidget(automne);
-    coucheH3->addWidget(printemps);
+    coucheH3->addWidget(saison);
     coucheH4 = new QHBoxLayout;
     coucheH4->addWidget(annuler);
     coucheH4->addWidget(sauver);
@@ -62,14 +56,15 @@ UVEditeurNew::UVEditeurNew(QWidget *parent){
 }
 
 void UVEditeurNew::sauverUV(){
-/*    uv.setCode(code->text());
-    uv.setTitre(titre->toPlainText());
-    uv.setNbCredits(credits->value());
-    uv.setCategorie(Categorie(categorie->currentIndex()));
-    uv.setOuverturePrintemps(printemps->isChecked());
-    uv.setOuvertureAutomne(automne->isChecked());
-    QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
-*/
+    QString c=code->text();
+    QString t=titre->toPlainText();
+    unsigned int nbc=credits->value();
+    Categorie cat=Categorie(categorie->currentIndex());
+    Saison sais=Saison(saison->currentIndex());
+    UVManager& uvm=UVManager::getInstance();
+    //void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
+    //QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
+
 }
 
 
@@ -89,9 +84,8 @@ credits=new QSpinBox(this);
 credits->setRange(1,8);
 credits->setValue(uv.getNbCredits());
 categorie=new QComboBox(this);
-for(CategorieIterator it=CategorieIterator::getFirst(); !it.isDone(); it.next()
-)
-categorie->addItem(CategorieToString(*it));
+for(Categorie cat = Categorie::CS; cat != Categorie::SP; cat = static_cast<Categorie>(static_cast<int>(cat) + 1))
+categorie->addItem(CategorieToString(cat));
 categorie->setCurrentIndex(int(uv.getCategorie()));
 automne=new QCheckBox("automne",this);
 automne->setChecked(uv.ouvertureAutomne());

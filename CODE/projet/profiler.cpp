@@ -29,13 +29,16 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     mEdition->addSeparator();
     QAction* actionDossier=mEdition->addAction("&Dossier");
 
-    /*stratSQL->connect();
-    try {
+    if(!connectDb()){
+       qDebug()<<"failed";
+    }
+   /* try {
     stratSQL->connect();
     }catch(UTProfilerException& e){
     QMessageBox::warning(this, "Connexion", QString("connexion a la base de donnée impossible"));
     }
     */
+
 
     //connections
     connect(actionChargerUV, SIGNAL(triggered()),this,SLOT(openChargerUV()));
@@ -47,8 +50,9 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
 }
 
 void Profiler::quit(){
-   // stratSQL->disconnect();
-   // delete stratSQL;
+    deconnect();
+    //stratSQL->disconnect();
+    //delete stratSQL;
 }
 
 

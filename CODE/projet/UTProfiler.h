@@ -28,16 +28,28 @@ class CursusManager;
 class UV;
 enum class Equival{FormationPrecedente, SejourEtranger, first=FormationPrecedente, last=SejourEtranger};
 enum class Categorie {
-    /* Connaissances Scientifiques */ CS,  /* Techniques et Méthodes */ TM,
-    /* Technologies et Sciences de l'Homme */ TSH, /* Stage et Projet */ SP,
-    first=CS, last=SP
+   CS,TM,TSH,SP,END
 };
+enum class Saison { Automne, Printemps,END};
 
-QTextStream& operator<<(QTextStream& f, const Categorie& s);
+template<typename EnumType>
+QTextStream& operator<<(QTextStream& f, const EnumType& s){}
+template<typename EnumType>
+EnumType StringToEnumType(const QString& s){}
+template<typename EnumType>
+QString EnumTypeToString(const QString& s){}
+template<typename EnumType>
+QTextStream& operator>>(QTextStream& f, EnumType& cat){}
 
+QTextStream& operator<<(QTextStream& f, const Categorie& cat);
 Categorie StringToCategorie(const QString& s);
 QString CategorieToString(Categorie c);
 QTextStream& operator>>(QTextStream& f, Categorie& cat);
+
+Saison StringToSaison(const QString& s);
+QString SaisonToString(Saison c);
+QTextStream& operator<<(QTextStream& f, const Saison& cat);
+QTextStream& operator>>(QTextStream& f, Saison& cat);
 
 enum class Note { A, B, C, D, E, F, FX, RES, ABS, EC /* en cours */ , first=A, last=EC };
 
@@ -52,7 +64,6 @@ public:
     void next() { std::underlying_type<Note>::type(value)++; }
 };*/
 
-enum class Saison { Automne, Printemps, first=Automne, last=Printemps };
 inline QTextStream& operator<<(QTextStream& f, const Saison& s) { if (s==Saison::Automne) f<<"A"; else f<<"P"; return f;}
 
 template<typename EnumType>
@@ -62,7 +73,7 @@ class EnumIterator {
     EnumIterator(EnumType val):value(val){}
 public:
     static EnumIterator getFirst() { return EnumIterator(EnumType::first); }
-    bool isDone() const { return value>EnumType::last; }
+    bool isDone() const { if (value==EnumType::last) return 1; }
     EnumType operator*() const { return value; }
     void next() { static_cast<EnumType>(static_cast<int>(value) + 1);}//value=(EnumType)(std::underlying_type<EnumType>::type(value)+1); }
 
@@ -70,9 +81,6 @@ public:
 
 //typename std::underlying_type<EnumType>::iterator ;
 typedef EnumIterator<Note> NoteIterator;
-typedef EnumIterator<Categorie> CategorieIterator;
-typedef EnumIterator<Saison> SaisonIterator;
-
 
 class Semestre {
 	Saison saison;
@@ -123,8 +131,6 @@ class StrategieSQL{
 protected:
     QSqlDatabase mydb;
 public:
-    bool connect();
-    void disconnect();
 };
 
 class StrategieUv{

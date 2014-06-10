@@ -16,8 +16,6 @@ int main(int argc, char *argv[])
 {
 
     QApplication app(argc, argv);
-    for(CategorieIterator it=CategorieIterator::getFirst(); !it.isDone(); it.next())
-        std::cout << "affichage avec précision" << "\n";
 
    Profiler profiler;
    profiler.showMaximized();
