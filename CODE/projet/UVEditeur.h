@@ -32,29 +32,36 @@ class UVEditeurNew: public QWidget {
     QCheckBox* printemps;
     QPushButton* sauver;
     QPushButton* annuler;
-  //QPushButton *modifier;
     QVBoxLayout* couche;
     QHBoxLayout* coucheH1;
     QHBoxLayout* coucheH2;
     QHBoxLayout* coucheH3;
     QHBoxLayout* coucheH4;
+    /*
+    QString c;
+    QString t;
+    unsigned int nbc;
+    Categorie cat;
+    bool aut;
+    bool print;
+    */
     public:
     explicit UVEditeurNew(QWidget *parent = 0);
     ~UVEditeurNew(){}
     signals:
 
     public slots:
-    void sauverUV() {}
+    void sauverUV();
+    void close() {}
     void annulerUV() {}
     //void modifierUV();
     private :
        // QPushButton *sauver;
        // QPushButton *annuler;
-        //  QPushButton *modifier;
+       //  QPushButton *modifier;
         QPushButton *quit;
         QDialogButtonBox * buttonBox;
         QSqlTableModel *model;
-
 };
 
 

@@ -29,7 +29,7 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     mEdition->addSeparator();
     QAction* actionDossier=mEdition->addAction("&Dossier");
 
-   /* stratSQL->connect();
+    /*stratSQL->connect();
     try {
     stratSQL->connect();
     }catch(UTProfilerException& e){
@@ -47,8 +47,8 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
 }
 
 void Profiler::quit(){
-    //stratSQL->disconnect();
-    //delete stratSQL;
+   // stratSQL->disconnect();
+   // delete stratSQL;
 }
 
 

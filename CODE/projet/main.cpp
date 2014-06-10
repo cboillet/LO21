@@ -8,6 +8,7 @@
 #include"./TEST/testManager.h"
 #include "UTProfiler.h"
 #include "UVEditeur.h"
+#include "iostream"
 #include "manager.h"
 #include "profiler.h"
 
@@ -15,34 +16,12 @@ int main(int argc, char *argv[])
 {
 
     QApplication app(argc, argv);
-    /*
-    QWidget fenetre;
-    QHBoxLayout* couche=new QHBoxLayout;
-    QVBoxLayout* couchecode=new QVBoxLayout;
-    QVBoxLayout* couchetitre=new QVBoxLayout;
-    QVBoxLayout* couchenbcredits=new QVBoxLayout;
-    QVBoxLayout* coucheouverture=new QVBoxLayout;
-    QLabel* code= new QLabel("code",&fenetre);
-    QLabel* titre= new QLabel("titre",&fenetre);
-    QLabel* nbcredits= new QLabel("nombre de crédits", &fenetre);
-    QLabel* ouverture= new QLabel("semestre d'ouverture", &fenetre);
-
-    couche->addLayout(couchetitre);
-    couche->addLayout(couchecode);
-    couche->addLayout(couchenbcredits);
-    couche->addLayout(coucheouverture);
-   // setLayout(couche);
-    fenetre.show();
-    */
+    for(CategorieIterator it=CategorieIterator::getFirst(); !it.isDone(); it.next())
+        std::cout << "affichage avec précision" << "\n";
 
    Profiler profiler;
    profiler.showMaximized();
-
-    /*QWidget* test;
-    UVEditeurNew* fenetre=new UVEditeurNew(test);
-    test->show();
-    */
-    return app.exec();
+   return app.exec();
 
     /*
     int status=0;
