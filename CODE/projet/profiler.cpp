@@ -28,7 +28,6 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     QAction * actionChangeCursus=mCursus->addAction("Apporter des modifications");
     mEdition->addSeparator();
     QAction* actionDossier=mEdition->addAction("&Dossier");
-
     if(!connectDb()){
        qDebug()<<"failed";
     }
@@ -38,8 +37,6 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     QMessageBox::warning(this, "Connexion", QString("connexion a la base de donnée impossible"));
     }
     */
-
-
     //connections
     connect(actionChargerUV, SIGNAL(triggered()),this,SLOT(openChargerUV()));
     connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
@@ -50,14 +47,14 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
 }
 
 void Profiler::quit(){
-    deconnect();
+    //deconnect();
     //stratSQL->disconnect();
     //delete stratSQL;
 }
 
 
 void Profiler::NewUV(){
-    UVEditeurNew* fenetre=new UVEditeurNew(this);
+    UVEditeurNew* fenetre=new UVEditeurNew(mydb,this);
     this->setCentralWidget(fenetre);
 }
 

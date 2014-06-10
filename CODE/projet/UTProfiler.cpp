@@ -129,13 +129,13 @@ Cursus::CreditsObligatoire::~CreditsObligatoire(){
 
 
 /******Base de donnée*******/
-void StrategieUvSQL::ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){
+void StrategieUvSQL::ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase& db){
    QString code, titre, categorie, saison;
    int nbCredit;
    code=  c;
    titre= t;
    categorie= CategorieToString(cat);
-   saison= a; //saison à 1 si automne et 0 si printemps
+   saison= SaisonToString(sais); //saison à 1 si automne et 0 si printemps
    nbCredit = nbc;
 
    if(code.isEmpty() || categorie.isEmpty() || saison.isEmpty()  ||(nbCredit<=-1 || nbCredit>MAXCREDIT ))
@@ -143,10 +143,7 @@ void StrategieUvSQL::ajouterUV(Manager<UV,UVManager>& man, const QString& c, con
            qDebug()<<"Insertion Failed";
 
    }
-
-  {
-   QSqlQuery *query = new QSqlQuery(mydb);
-
+   QSqlQuery *query = new QSqlQuery(db);
    query->prepare("INSERT INTO UV (code,titre,uvCategorie,nbCredits,saison)"
                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
 
@@ -155,13 +152,16 @@ void StrategieUvSQL::ajouterUV(Manager<UV,UVManager>& man, const QString& c, con
    query->bindValue(2,categorie);
    query->bindValue(3,nbCredit);
    query->bindValue(4,saison);
+   try{
    query->exec();
-
+   }
+   catch(UTProfilerException& e){
+       //QMessageBox::warning("Insertion", QString("Insertion dans la base de données impossible"));
    }
 }
 
 void StrategieUvSQL::deleteUV(){
-  {
+/*  {
    QSqlDatabase::database().transaction();
    QSqlQuery *query = new QSqlQuery(mydb);
 
@@ -176,10 +176,11 @@ void StrategieUvSQL::deleteUV(){
 
    QSqlDatabase::database().commit();
    }
+   */
 }
 
 void StrategieCreditsSQL::ajouterCredits(Manager<Credits,CreditsManager>& man,const Categorie& cat, unsigned int nbcredits){
-   QString categorie= CategorieToString(cat);
+  /* QString categorie= CategorieToString(cat);
    int nbCredits=nbcredits;
 
    if((nbCredits<=-1 || nbCredits>MAXCREDIT ))
@@ -205,12 +206,13 @@ void StrategieCreditsSQL::ajouterCredits(Manager<Credits,CreditsManager>& man,co
    query->bindValue(0,cursus);
    query->bindValue(1,categorie);
    query->bindValue(2,nbCredits);
-   query->exec();*/
+   query->exec();
    }
+*/
 }
 
 void StrategieCreditsSQL::deleteCredits(){
-   QSqlDatabase::database().transaction();
+ /*  QSqlDatabase::database().transaction();
    QSqlQuery *query = new QSqlQuery(mydb);
 
    query->prepare("DELETE FROM Credits where categorie='cat'");
@@ -223,10 +225,11 @@ void StrategieCreditsSQL::deleteCredits(){
            }
 
    QSqlDatabase::database().commit();
+   */
 }
 
 void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV,UVManager>& man, const QString& c){
-   QString code=c, titre,  uvObligatoire, categorie;
+ /*  QString code=c, titre,  uvObligatoire, categorie;
    int creditsObligatoire, duree;
    if(code.isEmpty() )
    {
@@ -259,14 +262,13 @@ void StrategieAddUvToCursusSQL::ajouterUvToCursus(Manager<UV,UVManager>& man, co
                     }
        QSqlDatabase::database().commit();
      }
-
-
+*/
 }
 
 
 void StrategieAddUvToCursusSQL::deleteUvToCursus(){
     QString code=code;
-   {
+  /* {
     QSqlDatabase::database().transaction();
     QSqlQuery *query = new QSqlQuery(mydb);
 
@@ -281,11 +283,12 @@ void StrategieAddUvToCursusSQL::deleteUvToCursus(){
 
     QSqlDatabase::database().commit();
     }
+    */
 }
 
 
 void StrategieAddCreditsToCursusSQL::deleteCreditsToCursus(){
-   {
+  /* {
     QSqlDatabase::database().transaction();
     QSqlQuery *query = new QSqlQuery(mydb);
 
@@ -300,6 +303,7 @@ void StrategieAddCreditsToCursusSQL::deleteCreditsToCursus(){
 
     QSqlDatabase::database().commit();
     }
+    */
 }
 
 
@@ -335,7 +339,7 @@ void StrategieCursusSQL::addCursus(Manager<Cursus,CursusManager>& man,const QStr
 }
 
 void StrategieCursusSQL::deleteCursus(){
-   //QString code=code;
+ /*  //QString code=code;
   {
    QSqlDatabase::database().transaction();
    QSqlQuery *query = new QSqlQuery(mydb);
@@ -351,6 +355,7 @@ void StrategieCursusSQL::deleteCursus(){
 
    QSqlDatabase::database().commit();
    }
+   */
 }
 
 Cursus* CursusManager::trouver(const QString& code)const{

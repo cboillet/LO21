@@ -36,6 +36,7 @@ class UVEditeurNew: public QWidget {
     QHBoxLayout* coucheH2;
     QHBoxLayout* coucheH3;
     QHBoxLayout* coucheH4;
+    QSqlDatabase& mydb;
     /*
     QString c;
     QString t;
@@ -45,12 +46,12 @@ class UVEditeurNew: public QWidget {
     bool print;
     */
     public:
-    explicit UVEditeurNew(QWidget *parent = 0);
+    explicit UVEditeurNew(QSqlDatabase &db,QWidget *parent = 0);
     ~UVEditeurNew(){}
     signals:
 
     public slots:
-    void sauverUV();
+    void sauverUV(QSqlDatabase& db);
     void close() {}
     void annulerUV() {}
     //void modifierUV();

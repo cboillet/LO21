@@ -18,6 +18,11 @@
 #include <QVBoxLayout>
 #include <type_traits>
 #include <QFileDialog>
+#include <QtSql>
+#include <QtDebug>
+#include <QFileInfo>
+#include <QLabel>
+#include <QDebug>
 
 using namespace std;
 
@@ -127,29 +132,16 @@ class Credits{
 
 
 /*******Strategie*******/
-class StrategieSQL{
-protected:
-    QSqlDatabase mydb;
-public:
-};
-
-class StrategieUv{
- public:
-    //template<class type>
-    virtual void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p)=0;
-    virtual void deleteUV()=0;
-};
-
-class StrategieUvXML: public StrategieUv{
+class StrategieUvXML{
  public:
     void load(Manager<UV,UVManager>& man, const QString& f){;}
     void save(Manager<UV,UVManager>& man, const QString& f){;}
     void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
 };
 
-class StrategieUvSQL: public StrategieUv, public StrategieSQL{
+class StrategieUvSQL{
   public:
-    void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p);
+    void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase& db);
     void deleteUV();
 };
 
@@ -167,19 +159,19 @@ class StrategieCreditsXML: public StrategieCredits{
     virtual void deleteUV();
 };
 
-class StrategieCreditsSQL: public StrategieSQL, public StrategieCredits{
+class StrategieCreditsSQL:public StrategieCredits{
   public:
     void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits);
     void deleteCredits();
 };
 
-class StrategieAddUvToCursusSQL:public StrategieSQL{
+class StrategieAddUvToCursusSQL{
 public:
     void ajouterUvToCursus(Manager<UV,UVManager>& man, const QString& c);
     void deleteUvToCursus();
 };
 
-class StrategieAddCreditsToCursusSQL:public StrategieSQL{
+class StrategieAddCreditsToCursusSQL{
 public:
     void ajouterCreditsToCursus(Manager<Credits,CreditsManager>& man, const Credits& cursus);
     void deleteCreditsToCursus();
@@ -295,7 +287,7 @@ class UVManager: public Manager<UV,UVManager>{
         UVManager():Manager<UV,UVManager>(){stratUV=new StrategieUvSQL;}
         //void load(const QString& f){stratUV->load(*this,f);} //downcasting
         //void save(const QString& f){stratUV->save(*this,f);}
-        void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
+        void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase &db) {stratUV->ajouterUV(*this,c,t,nbc,cat,sais,db);}
         UV& getUV(const QString& code);
         const UV& getUV(const QString& code) const;
 
@@ -333,7 +325,7 @@ class UVManager: public Manager<UV,UVManager>{
 
 
 
-class StrategieCursusSQL: public StrategieSQL{
+class StrategieCursusSQL{
 public:
     void addCursus(Manager<Cursus,CursusManager>& man,const QString& c,const QString& t, unsigned int d);
     void deleteCursus();

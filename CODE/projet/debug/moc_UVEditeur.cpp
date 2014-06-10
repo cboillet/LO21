@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_UVEditeurNew_t {
-    QByteArrayData data[5];
-    char stringdata[39];
+    QByteArrayData data[7];
+    char stringdata[56];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,10 +32,13 @@ static const qt_meta_stringdata_UVEditeurNew_t qt_meta_stringdata_UVEditeurNew =
 QT_MOC_LITERAL(0, 0, 12),
 QT_MOC_LITERAL(1, 13, 8),
 QT_MOC_LITERAL(2, 22, 0),
-QT_MOC_LITERAL(3, 23, 5),
-QT_MOC_LITERAL(4, 29, 9)
+QT_MOC_LITERAL(3, 23, 13),
+QT_MOC_LITERAL(4, 37, 2),
+QT_MOC_LITERAL(5, 40, 5),
+QT_MOC_LITERAL(6, 46, 9)
     },
-    "UVEditeurNew\0sauverUV\0\0close\0annulerUV"
+    "UVEditeurNew\0sauverUV\0\0QSqlDatabase&\0"
+    "db\0close\0annulerUV"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,12 +56,12 @@ static const uint qt_meta_data_UVEditeurNew[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x0a /* Public */,
-       3,    0,   30,    2, 0x0a /* Public */,
-       4,    0,   31,    2, 0x0a /* Public */,
+       1,    1,   29,    2, 0x0a /* Public */,
+       5,    0,   32,    2, 0x0a /* Public */,
+       6,    0,   33,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -70,13 +73,12 @@ void UVEditeurNew::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     if (_c == QMetaObject::InvokeMetaMethod) {
         UVEditeurNew *_t = static_cast<UVEditeurNew *>(_o);
         switch (_id) {
-        case 0: _t->sauverUV(); break;
+        case 0: _t->sauverUV((*reinterpret_cast< QSqlDatabase(*)>(_a[1]))); break;
         case 1: _t->close(); break;
         case 2: _t->annulerUV(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject UVEditeurNew::staticMetaObject = {

@@ -1,7 +1,7 @@
 #include "UVEditeur.h"
 #include <QMessageBox>
 
-UVEditeurNew::UVEditeurNew(QWidget *parent){
+UVEditeurNew::UVEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     codeLabel = new QLabel("code",this);
     titreLabel = new QLabel("titre",this);
     creditsLabel = new QLabel("credits",this);
@@ -49,21 +49,23 @@ UVEditeurNew::UVEditeurNew(QWidget *parent){
     setLayout(couche);
 
     //Connection du slot au signal QUIT
-    QObject::connect(sauver,SIGNAL(clicked()),this,SLOT(sauverUV()));
+    connect(sauver,  &QPushButton::clicked,[this]{sauverUV(mydb);});
+   // QObject::connect(sauver,SIGNAL(clicked()),this,SLOT(sauverUV(QSqlDatabase&)));
     QObject::connect(annuler,SIGNAL(clicked()),this,SLOT(close()));
     // creation des labels
 
 }
 
-void UVEditeurNew::sauverUV(){
+void UVEditeurNew::sauverUV(QSqlDatabase& db){
     QString c=code->text();
     QString t=titre->toPlainText();
     unsigned int nbc=credits->value();
     Categorie cat=Categorie(categorie->currentIndex());
     Saison sais=Saison(saison->currentIndex());
-    UVManager& uvm=UVManager::getInstance();
+    UVManager& man=UVManager::getInstance();
+    man.ajouter(c,t,nbc,cat,sais,db);
     //void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
-    //QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
+    QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
 
 }
 
