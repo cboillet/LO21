@@ -121,11 +121,11 @@ Cursus::UVObligatoire::~UVObligatoire(){
     delete [] stratUV;
     delete [] t;
 }
-Cursus::CreditsObligatoire::~CreditsObligatoire(){
+/*Cursus::CreditsObligatoire::~CreditsObligatoire(){
     nb=nbMax=0;
     delete [] stratCredits;
     delete [] t;
-}
+}*/
 
 
 /******Base de donnée*******/
@@ -332,9 +332,34 @@ void StrategieAddCreditsToCursusSQL::deleteCreditsToCursus(){
 
 }*/
 
-void StrategieCursusSQL::addCursus(Manager<Cursus,CursusManager>& man,const QString& c, const QString& t, unsigned int d)
+void StrategieCursusSQL::ajouterCursus(Manager<Cursus,CursusManager>& man, const QString& c,const QString& t, unsigned int d,unsigned int Ccs,unsigned int Ctm,unsigned int Ctsh,unsigned int Csp,QSqlDatabase& db)
 {
+    QString code=c, titre=t;
+    unsigned int duree=d,CS=Ccs,TM=Ctm,TSH=Ctsh,SP=Csp;
+    if(code.isEmpty() || titre.isEmpty())
+    {
+            qDebug()<<"Insertion Failed";
 
+    }
+    QSqlQuery *query = new QSqlQuery(db);
+    query->prepare("INSERT INTO Cursus (code,titre,duree,nbCS,nbTM,nbTSH,nbSP)"
+                   "VALUES (:code,:titre,:duree,:CS,:TM,:TSH,:SP)");
+
+    query->bindValue(0,code);
+    query->bindValue(1,titre);
+    query->bindValue(2,duree);
+   // query->bindValue(3,NULL);
+   // query->bindValue(4,NULL);
+    query->bindValue(3,CS);
+    query->bindValue(4,TM);
+    query->bindValue(5,TSH);
+    query->bindValue(6,SP);
+    try{
+    query->exec();
+    }
+    catch(UTProfilerException& e){
+        //QMessageBox::warning("Insertion", QString("Insertion dans la base de données impossible"));
+    }
 
 }
 
