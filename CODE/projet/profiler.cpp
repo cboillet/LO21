@@ -63,8 +63,8 @@ void Profiler::ChangeUV(){
 
 void Profiler::NewCursus(){
     //addcursus = new CursusEditeurNew( centralWidget );
-    CursusEditeurNew* cursus=new CursusEditeurNew(centralWidget);
-    this->setCentralWidget(cursus);
+    CursusEditeurNew* fenetre=new CursusEditeurNew(mydb,this);
+    this->setCentralWidget(fenetre);
 }
 
 void Profiler::ChangeCursus(){

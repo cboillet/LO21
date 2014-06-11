@@ -9,4 +9,5 @@ INPUT(
 ./debug\moc_testUV.o
 ./debug\moc_profiler.o
 ./debug\moc_affichage.o
+./debug\moc_CursusEditeur.o
 );
