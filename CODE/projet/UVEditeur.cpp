@@ -6,7 +6,9 @@ UVEditeurNew::UVEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     titreLabel = new QLabel("titre",this);
     creditsLabel = new QLabel("credits",this);
     categorieLabel = new QLabel("categorie",this);
-    ouvertureLabel = new QLabel("ouverture",this);
+    ouvertureLabel = new QLabel("saison",this);
+   // anneeLabel = new QLabel("annee",this);
+
     // création des composants éditables
     code = new QLineEdit;
     titre = new QTextEdit;
@@ -20,6 +22,8 @@ UVEditeurNew::UVEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     for(Saison sais = Saison::Automne; sais!= Saison::END; sais = static_cast<Saison>(static_cast<int>(sais) + 1))
        saison->addItem(SaisonToString(sais));
     saison->setCurrentIndex(0);
+   // annee=new QSpinBox(this);
+    //annee->setRange(1972,2099);
     sauver= new QPushButton("Sauver", this);
     annuler= new QPushButton("Annuler", this);
 
@@ -37,6 +41,8 @@ UVEditeurNew::UVEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     coucheH3 = new QHBoxLayout;
     coucheH3->addWidget(ouvertureLabel);
     coucheH3->addWidget(saison);
+   // coucheH3->addWidget(anneeLabel);
+   // coucheH3->addWidget(annee);
     coucheH4 = new QHBoxLayout;
     coucheH4->addWidget(annuler);
     coucheH4->addWidget(sauver);
@@ -62,6 +68,7 @@ void UVEditeurNew::sauverUV(QSqlDatabase& db){
     unsigned int nbc=credits->value();
     Categorie cat=Categorie(categorie->currentIndex());
     Saison sais=Saison(saison->currentIndex());
+    //unsigned int an=annee->value();
     UVManager& man=UVManager::getInstance();
     man.ajouter(c,t,nbc,cat,sais,db);
     //void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
@@ -78,7 +85,7 @@ this->setWindowTitle(QString("Edition de l’UV ")+uv.getCode());
 titreLabel = new QLabel("titre",this);
 creditsLabel = new QLabel("credits",this);
 categorieLabel = new QLabel("categorie",this);
-ouvertureLabel = new QLabel("ouverture",this);
+ouvertureLabel = new QLabel("saison",this);
 // création des composants éditables
 code = new QLineEdit(uv.getCode(),this);
 titre = new QTextEdit(uv.getTitre(),this);

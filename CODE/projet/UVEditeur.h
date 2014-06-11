@@ -29,6 +29,8 @@ class UVEditeurNew: public QWidget {
     QLabel* categorieLabel;
     QLabel* ouvertureLabel;
     QComboBox* saison;
+    //QSpinBox* annee;
+   // QLabel* anneeLabel;
     QPushButton* sauver;
     QPushButton* annuler;
     QVBoxLayout* couche;
@@ -79,6 +81,8 @@ class UVEditeur : public QWidget{
     QLabel* ouvertureLabel;
     QCheckBox* automne;
     QCheckBox* printemps;
+    //QSpinBox* annee;
+    //QLabel* anneeLabel;
     QPushButton* sauver;
     QPushButton* annuler;
     QVBoxLayout* couche;

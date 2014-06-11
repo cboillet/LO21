@@ -43,6 +43,7 @@ public slots:
     }
     void quit();
     void openChargerUV();
+    void openChargerCursus();
     void NewUV();
     void ChangeUV();
     void NewCursus();

@@ -108,6 +108,7 @@ class UV {
 	Categorie categorie;
     bool automne;
     bool printemps;
+   // unsigned int annee;
 	UV(const UV& u);
 	UV& operator=(const UV& u);
     UV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p):
@@ -117,12 +118,14 @@ public:
     QString getCode() const { return code; }
     QString getTitre() const { return titre; }
 	unsigned int getNbCredits() const { return nbCredits; }
+    //unsigned int getAnnee() const { return annee; }
 	Categorie getCategorie() const { return categorie; }
     bool ouvertureAutomne() const { return automne; }
     bool ouverturePrintemps() const { return printemps; }
     void setCode(const QString& c) { code=c; }
     void setTitre(const QString& t) { titre=t; }
     void setNbCredits(unsigned int n) { nbCredits=n; }
+   // void setAnnee(unsigned int an) { annee=an;}
     void setCategorie(Categorie c) { categorie=c; }
     void setOuvertureAutomne(bool b) { automne=b; }
     void setOuverturePrintemps(bool b) { printemps=b; }
@@ -169,19 +172,19 @@ class StrategieCreditsXML: public StrategieCredits{
 
 class StrategieCreditsSQL:public StrategieCredits{
   public:
-    void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits);
+    void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits,QSqlDatabase& db);
     void deleteCredits();
 };
 
 class StrategieAddUvToCursusSQL{
 public:
-    void ajouterUvToCursus(Manager<UV,UVManager>& man, const QString& c);
+    void ajouterUvToCursus(Manager<UV,UVManager>& man, const QString& c, QSqlDatabase& db);
     void deleteUvToCursus();
 };
 
 class StrategieAddCreditsToCursusSQL{
 public:
-    void ajouterCreditsToCursus(Manager<Credits,CreditsManager>& man, const Credits& cursus);
+    void ajouterCreditsToCursus(Manager<Credits,CreditsManager>& man, const Credits& cursus, QSqlDatabase& db);
     void deleteCreditsToCursus();
 };
 
@@ -191,7 +194,7 @@ public:
     StrategieCreditsSQL* stratCredits;
     ~CreditsManager();
     CreditsManager():Manager<Credits,CreditsManager>(),stratCredits(0){}
-    void ajouterCredits(const Categorie& cat, unsigned int n) {stratCredits->ajouterCredits(*this,cat,n);}
+    void ajouterCredits(const Categorie& cat, unsigned int n,QSqlDatabase& db) {stratCredits->ajouterCredits(*this,cat,n,db);}
 };
 
 /**********Equivalence*********/
@@ -223,7 +226,7 @@ class Cursus{
             ~UVObligatoire();
         public:
             UVObligatoire():Manager<UV,UVManager>(){stratUV=new StrategieAddUvToCursusSQL;}
-            void ajouter(const QString& c) {stratUV->ajouterUvToCursus(*this,c);} //utiliser l'itérateur sur les UV
+            void ajouter(const QString& c, QSqlDatabase& db) {stratUV->ajouterUvToCursus(*this,c,db);} //utiliser l'itérateur sur les UV
             class FilterIterator {
                  friend class UVManager;
                  UV** currentUV;
