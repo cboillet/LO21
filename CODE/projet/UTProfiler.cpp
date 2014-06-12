@@ -395,6 +395,7 @@ void StrategieCursusSQL::deleteCursus(){
 
 }
 
+
 Cursus* CursusManager::trouver(const QString& code)const{
     for(unsigned int i=0; i<nb; i++)
         if (code==t[i]->getCode()) return t[i];
@@ -417,13 +418,4 @@ CursusManager::~CursusManager(){
     delete [] t;
 }
 
-void initializeModel(QSqlTableModel *model)
- {
-     model->setTable("UV");
-     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-     model->select();
 
-     model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-     model->setHeaderData(1, Qt::Horizontal, QObject::tr("First name"));
-     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Last name"));
- }

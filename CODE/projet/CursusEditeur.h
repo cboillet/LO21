@@ -14,6 +14,7 @@
 #include <QSqlTableModel>
 #include <QDialogButtonBox>
 #include <QMessageBox>
+#include <QTableView>
 #include "UTProfiler.h"
 
 
@@ -36,7 +37,6 @@ class CursusEditeurNew: public QWidget {
     QSpinBox* SP;
     QPushButton* sauver;
     QPushButton* annuler;
-    QPushButton* UVObligatoire;
     QVBoxLayout* couche;
     QHBoxLayout* coucheH1;
     QHBoxLayout* coucheH2;
@@ -52,7 +52,6 @@ class CursusEditeurNew: public QWidget {
     void sauverCursus(QSqlDatabase& db);
     void close() {}
     void annulerCursus() {}
-    void setUVObligatoire(QSqlDatabase& db) {}
     //void modifierUV();
     private :
        // QPushButton *sauver;
@@ -61,5 +60,25 @@ class CursusEditeurNew: public QWidget {
         QPushButton *quit;
         QDialogButtonBox * buttonBox;
         QSqlTableModel *model;
+};
+
+class CursusEditeurAddUV: public QWidget {
+    Q_OBJECT
+    QSqlDatabase& mydb;
+    QComboBox* cursus;
+    QComboBox* uv;
+    public:
+    explicit CursusEditeurAddUV(QSqlDatabase &db,QWidget *parent = 0);
+    ~CursusEditeurAddUV(){}
+signals:
+public slots:
+    void sauverCursus(QSqlDatabase& db);
+    void close() {}
+    void annulerCursus() {}
+private :
+    QPushButton *quit;
+    QDialogButtonBox * buttonBox;
+    QSqlTableModel *model;
+    QSqlTableModel *model2;
 };
 #endif // CURSUSEDITEUR_H

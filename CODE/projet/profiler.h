@@ -47,6 +47,6 @@ public slots:
     void NewUV();
     void ChangeUV();
     void NewCursus();
-    void ChangeCursus();
+    void SetUVCursus();
 };
 #endif

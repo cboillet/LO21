@@ -3526,7 +3526,9 @@ debug/profiler.o: profiler.cpp Profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmenubar.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmenu.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qaction.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qactiongroup.h
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\profiler.o profiler.cpp
 
 debug/affichage.o: affichage.cpp affichage.h \

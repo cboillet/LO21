@@ -26,7 +26,7 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     QAction * actionChangeUV=mUV->addAction("Apporter des modifications");
     QMenu* mCursus=mEdition->addMenu("&Cursus");
     QAction * actionNewCursus=mCursus->addAction("Créer");
-    QAction * actionChangeCursus=mCursus->addAction("Apporter des modifications");
+    QAction * actionSetUVCursus=mCursus->addAction("Enregistrer les UV d'un cursus");
     mEdition->addSeparator();
     QAction* actionDossier=mEdition->addAction("&Dossier");
     if(!connectDb()){
@@ -45,7 +45,7 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     connect(actionNewUV, SIGNAL(triggered()),this,SLOT(NewUV()));
     connect(actionChangeUV, SIGNAL(triggered()),this,SLOT(ChangeUV()));
     connect(actionNewCursus, SIGNAL(triggered()),this,SLOT(NewCursus()));
-    connect(actionChangeCursus, SIGNAL(triggered()),this,SLOT(ChangeCursus()));
+    connect(actionSetUVCursus, SIGNAL(triggered()),this,SLOT(SetUVCursus()));
 }
 
 void Profiler::quit(){
@@ -61,6 +61,16 @@ void Profiler::NewUV(){
 }
 
 void Profiler::ChangeUV(){
+    QString code=QInputDialog::getText(this,"Entrez le code de l’UV à éditer","UV")
+    ;
+    if (code!="")
+    try {
+    UV& uv=UVManager::getInstance().getUV(code);
+    //UVEditeur* fenetre=new UVEditeur(uv,this);
+    //setCentralWidget(fenetre);
+    }catch(UTProfilerException& e){
+    QMessageBox::warning(this, "Edition UV", QString("Erreur : l’UV ")+code+" n’existe pas.");
+    }
 
 }
 
@@ -70,11 +80,25 @@ void Profiler::NewCursus(){
     this->setCentralWidget(fenetre);
 }
 
-void Profiler::ChangeCursus(){
+void Profiler::SetUVCursus(){
+   /* QString code=QInputDialog::getText(this,"Entrez le code du Cursus auquel vous souhaitez enregistrer les UV","Cursus")
+    ;
+    if (code!="")
+    try {
+    CursusManager& cursusman =CursusManager::getInstance();
+    Cursus& cursus=cursusman.getCursus(code);
+    //CursusEditeurAddUV* fenetre=new CursusEditeurAddUV(cursus,mydb,this);
+    //setCentralWidget(fenetre);
+    }
+    catch(UTProfilerException& e){
+    QMessageBox::warning(this, "Edition Cursus", QString("Erreur : le Cursus ")+code+" n’existe pas.");
+    }
+    */
+    CursusEditeurAddUV* fenetre=new CursusEditeurAddUV(mydb,this);
+    setCentralWidget(fenetre);
 }
 
 void Profiler::openChargerUV(){
-
     QSqlQueryModel *model = new QSqlQueryModel;
          model->setQuery("SELECT code, titre, uvCategorie,nbCredits, saison  FROM UV");
          model->setHeaderData(0, Qt::Horizontal, tr("Code"));

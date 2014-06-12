@@ -347,6 +347,7 @@ public:
    ~CursusManager();
    CursusManager():Manager<Cursus,CursusManager>(){stratCursus=new StrategieCursusSQL;}
    void ajouter(const QString& c,const QString& t, unsigned int duree,unsigned int Ccs,unsigned int Ctm,unsigned int Ctsh,unsigned int Csp,QSqlDatabase& db) {stratCursus->ajouterCursus(*this,c,t,duree,Ccs,Ctm,Ctsh,Csp,db);}
+
    Cursus& getCursus(const QString& c);
    const Cursus& getCursus(const QString& c) const;
 /*

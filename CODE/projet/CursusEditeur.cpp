@@ -26,7 +26,6 @@ CursusEditeurNew::CursusEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     SP->setRange(0,60);
     sauver= new QPushButton("Sauver", this);
     annuler= new QPushButton("Annuler", this);
-    UVObligatoire= new QPushButton("Enregistrer les UV obligatoires", this);
     coucheH1 = new QHBoxLayout;
     coucheH1->addWidget(codeLabel);
     coucheH1->addWidget(code);
@@ -48,7 +47,6 @@ CursusEditeurNew::CursusEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     coucheH4 = new QHBoxLayout;
     coucheH4->addWidget(annuler);
     coucheH4->addWidget(sauver);
-    coucheH4->addWidget(UVObligatoire);
     couche = new QVBoxLayout;
     couche->addLayout(coucheH1);
     couche->addLayout(coucheH2);
@@ -58,7 +56,7 @@ CursusEditeurNew::CursusEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
 
     //Connection du slot au signal QUIT
    connect(sauver,  &QPushButton::clicked,[this]{sauverCursus(mydb);});
-   connect(UVObligatoire,  &QPushButton::clicked,[this]{setUVObligatoire(mydb);});
+  // connect(UVObligatoire,  &QPushButton::clicked,[this]{setUVObligatoire(mydb);});
    // QObject::connect(sauver,SIGNAL(clicked()),this,SLOT(sauverUV(QSqlDatabase&)));
     QObject::connect(annuler,SIGNAL(clicked()),this,SLOT(close()));
 }
@@ -74,4 +72,64 @@ void CursusEditeurNew::sauverCursus(QSqlDatabase& db){
     CursusManager& cursus=CursusManager::getInstance();
     cursus.ajouter(c,t,d,Ccs,Ctm,Ctsh,Csp,db);
     QMessageBox::information(this, "Sauvegarde", "Cursus sauvegardée...");
+}
+
+CursusEditeurAddUV::CursusEditeurAddUV(QSqlDatabase &db, QWidget *parent):mydb(db){
+    this->setWindowTitle(QString("Lier une UV à un cursus"));
+    model=new QSqlTableModel(parent,mydb);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("Cursus");
+    model->select();
+    model->setSort(model->fieldIndex("code"),Qt::AscendingOrder);
+
+    QTableView *view = new QTableView;
+    view->setModel(model);
+    view->hideColumn(1);view->hideColumn(2);view->hideColumn(3);view->hideColumn(5);view->hideColumn(6);view->hideColumn(7);view->hideColumn(8);
+
+    QLabel* cursusLabel = new QLabel("code:",this);
+    cursus=new QComboBox(this);
+    cursus->setModel(model);
+    cursus->setModelColumn(model->fieldIndex("code"));
+    cursus->setCurrentIndex(0);
+    QLabel* uvLabel = new QLabel("titre:",this);
+    uv=new QComboBox(this);
+    model2=new QSqlTableModel(parent,mydb);
+    model2->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model2->setTable("UV");
+    model2->select();
+    model2->setSort(model2->fieldIndex("code"),Qt::AscendingOrder);
+    uv->setModel(model2);
+    uv->setModelColumn(model2->fieldIndex("code"));
+    uv->setCurrentIndex(0);
+    QPushButton* sauver=new QPushButton("sauver",this);
+    QVBoxLayout* couche = new QVBoxLayout;
+    QHBoxLayout* coucheH1 = new QHBoxLayout;
+    QHBoxLayout* coucheH2 = new QHBoxLayout;
+    QHBoxLayout* coucheH3 = new QHBoxLayout;
+    coucheH1->addWidget(cursusLabel);
+    coucheH1->addWidget(cursus);
+    coucheH1->addWidget(uvLabel);
+    coucheH1->addWidget(uv);
+    coucheH2->addWidget(sauver);
+    coucheH3->addWidget(view);
+    couche->addLayout(coucheH1);
+    couche->addLayout(coucheH2);
+    couche->addLayout(coucheH3);
+    setLayout(couche);
+    connect(sauver,  &QPushButton::clicked,[this]{sauverCursus(mydb);});
+}
+
+void CursusEditeurAddUV::sauverCursus(QSqlDatabase &db){
+    int codeCursus=cursus->currentIndex();
+    int codeUV=uv->currentIndex();
+
+    int rowCount = model->rowCount();
+    //QString uvCode = model->data(codeCursus,0);
+    QSqlRecord record = model->record(codeCursus);
+    QSqlRecord rec = model2->record(codeUV);
+    QString uvCode = rec.value("code").toString();
+    record.setValue("codeUV", uvCode);
+    //record.insertValue("salary", salary);
+     model->insertRecord(codeCursus, record);
+     model->submitAll();
 }
