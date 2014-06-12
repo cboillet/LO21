@@ -11,7 +11,7 @@ MAKEFILE      = Makefile.Debug
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -DQT_WIDGETS_LIB -DQT_TESTLIB_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"C:/Users/Camille/Documents/GitHub/LO21/CODE/projet\"
+DEFINES       = -DUNICODE -DQT_WIDGETS_LIB -DQT_TESTLIB_LIB -DQT_XML_LIB -DQT_SQL_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"C:/Users/Camille/Documents/CODE/projet\"
 CFLAGS        = -pipe -fno-keep-inline-dllexport -g -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -fno-keep-inline-dllexport -g -std=c++0x -frtti -Wall -Wextra -fexceptions -mthreads $(DEFINES)
 INCPATH       = -I. -I"C:\Qt\5.3\mingw482_32\include" -I"C:\Qt\5.3\mingw482_32\include\QtWidgets" -I"C:\Qt\5.3\mingw482_32\include\QtTest" -I"C:\Qt\5.3\mingw482_32\include\QtXml" -I"C:\Qt\5.3\mingw482_32\include\QtSql" -I"C:\Qt\5.3\mingw482_32\include\QtGui" -I"C:\Qt\5.3\mingw482_32\include\QtCore" -I"debug" -I"C:\Qt\5.3\mingw482_32\mkspecs\win32-g++"
@@ -48,7 +48,8 @@ SOURCES       = main.cpp \
 		UVEditeur.cpp \
 		profiler.cpp \
 		affichage.cpp \
-		CursusEditeur.cpp debug\moc_UVEditeur.cpp \
+		CursusEditeur.cpp \
+		dossier.cpp debug\moc_UVEditeur.cpp \
 		debug\moc_testUV.cpp \
 		debug\moc_profiler.cpp \
 		debug\moc_affichage.cpp \
@@ -59,6 +60,7 @@ OBJECTS       = debug/main.o \
 		debug/profiler.o \
 		debug/affichage.o \
 		debug/CursusEditeur.o \
+		debug/dossier.o \
 		debug/moc_UVEditeur.o \
 		debug/moc_testUV.o \
 		debug/moc_profiler.o \
@@ -104,7 +106,7 @@ dist:
 	$(ZIP) projet.zip $(SOURCES) $(DIST) projet.pro C:\Qt\5.3\mingw482_32\mkspecs\features\spec_pre.prf C:\Qt\5.3\mingw482_32\mkspecs\qdevice.pri C:\Qt\5.3\mingw482_32\mkspecs\features\device_config.prf C:\Qt\5.3\mingw482_32\mkspecs\common\shell-win32.conf C:\Qt\5.3\mingw482_32\mkspecs\qconfig.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_core.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_declarative.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_declarative_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_enginio.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_enginio_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_help.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_network.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_script.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_webkit.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_webkit_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_webkitwidgets.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_webkitwidgets_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.3\mingw482_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.3\mingw482_32\mkspecs\features\qt_functions.prf C:\Qt\5.3\mingw482_32\mkspecs\features\qt_config.prf C:\Qt\5.3\mingw482_32\mkspecs\features\win32\qt_config.prf C:\Qt\5.3\mingw482_32\mkspecs\win32-g++\qmake.conf C:\Qt\5.3\mingw482_32\mkspecs\features\spec_post.prf C:\Qt\5.3\mingw482_32\mkspecs\features\exclusive_builds.prf C:\Qt\5.3\mingw482_32\mkspecs\features\default_pre.prf C:\Qt\5.3\mingw482_32\mkspecs\features\win32\default_pre.prf C:\Qt\5.3\mingw482_32\mkspecs\features\resolve_config.prf C:\Qt\5.3\mingw482_32\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.3\mingw482_32\mkspecs\features\default_post.prf C:\Qt\5.3\mingw482_32\mkspecs\features\build_pass.prf C:\Qt\5.3\mingw482_32\mkspecs\features\win32\console.prf C:\Qt\5.3\mingw482_32\mkspecs\features\c++11.prf C:\Qt\5.3\mingw482_32\mkspecs\features\win32\rtti.prf C:\Qt\5.3\mingw482_32\mkspecs\features\precompile_header.prf C:\Qt\5.3\mingw482_32\mkspecs\features\warn_on.prf C:\Qt\5.3\mingw482_32\mkspecs\features\qt.prf C:\Qt\5.3\mingw482_32\mkspecs\features\resources.prf C:\Qt\5.3\mingw482_32\mkspecs\features\moc.prf C:\Qt\5.3\mingw482_32\mkspecs\features\win32\opengl.prf C:\Qt\5.3\mingw482_32\mkspecs\features\testlib_defines.prf C:\Qt\5.3\mingw482_32\mkspecs\features\uic.prf C:\Qt\5.3\mingw482_32\mkspecs\features\testcase_targets.prf C:\Qt\5.3\mingw482_32\mkspecs\features\exceptions.prf C:\Qt\5.3\mingw482_32\mkspecs\features\yacc.prf C:\Qt\5.3\mingw482_32\mkspecs\features\lex.prf projet.pro C:/Qt/5.3/mingw482_32/lib/Qt5Widgetsd.prl C:/Qt/5.3/mingw482_32/lib/Qt5Testd.prl C:/Qt/5.3/mingw482_32/lib/Qt5Xmld.prl C:/Qt/5.3/mingw482_32/lib/Qt5Sqld.prl C:/Qt/5.3/mingw482_32/lib/Qt5Guid.prl C:/Qt/5.3/mingw482_32/lib/Qt5Cored.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.o debug\UTProfiler.o debug\UVEditeur.o debug\profiler.o debug\affichage.o debug\CursusEditeur.o debug\moc_UVEditeur.o debug\moc_testUV.o debug\moc_profiler.o debug\moc_affichage.o debug\moc_CursusEditeur.o
+	-$(DEL_FILE) debug\main.o debug\UTProfiler.o debug\UVEditeur.o debug\profiler.o debug\affichage.o debug\CursusEditeur.o debug\dossier.o debug\moc_UVEditeur.o debug\moc_testUV.o debug\moc_profiler.o debug\moc_affichage.o debug\moc_CursusEditeur.o
 
 distclean: clean 
 	-$(DEL_FILE) $(DESTDIR_TARGET)
@@ -487,8 +489,11 @@ debug/moc_UVEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		UVEditeur.h
-	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore UVEditeur.h -o debug\moc_UVEditeur.cpp
+	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore UVEditeur.h -o debug\moc_UVEditeur.cpp
 
 debug/moc_testUV.cpp: C:/Qt/5.3/mingw482_32/include/QtTest/QtTest \
 		C:/Qt/5.3/mingw482_32/include/QtTest/QtTestDepends \
@@ -870,8 +875,12 @@ debug/moc_testUV.cpp: C:/Qt/5.3/mingw482_32/include/QtTest/QtTest \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		TEST/testUV.h
-	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore TEST\testUV.h -o debug\moc_testUV.cpp
+	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore TEST\testUV.h -o debug\moc_testUV.cpp
 
 debug/moc_profiler.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qapplication.h \
@@ -1247,11 +1256,12 @@ debug/moc_profiler.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QCombobox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QPushButton \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
-		CursusEditeur.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
+		CursusEditeur.h \
 		profiler.h
-	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore profiler.h -o debug\moc_profiler.cpp
+	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore profiler.h -o debug\moc_profiler.cpp
 
 debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qapplication.h \
@@ -1625,14 +1635,15 @@ debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
 		CursusEditeur.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		affichage.h
-	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore affichage.h -o debug\moc_affichage.cpp
+	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore affichage.h -o debug\moc_affichage.cpp
 
 debug/moc_CursusEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qwidget.h \
@@ -2000,8 +2011,9 @@ debug/moc_CursusEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
 		CursusEditeur.h
-	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore CursusEditeur.h -o debug\moc_CursusEditeur.cpp
+	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore CursusEditeur.h -o debug\moc_CursusEditeur.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -2403,10 +2415,13 @@ debug/main.o: main.cpp C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		TEST/testManager.h \
 		UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QComboBox \
-		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QDialogButtonBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
@@ -2416,9 +2431,7 @@ debug/main.o: main.cpp C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qinputdialog.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
-		CursusEditeur.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h
+		CursusEditeur.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o main.cpp
 
 debug/UTProfiler.o: UTProfiler.cpp UTProfiler.h \
@@ -2779,6 +2792,10 @@ debug/UTProfiler.o: UTProfiler.cpp UTProfiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlTableModel \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFile \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QTextCodec \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
@@ -3149,7 +3166,10 @@ debug/UVEditeur.o: UVEditeur.cpp UVEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
-		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug
+		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\UVEditeur.o UVEditeur.cpp
 
 debug/profiler.o: profiler.cpp Profiler.h \
@@ -3527,9 +3547,10 @@ debug/profiler.o: profiler.cpp Profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QCombobox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QPushButton \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
-		CursusEditeur.h \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
+		CursusEditeur.h \
 		affichage.h \
 		profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMenuBar \
@@ -3912,12 +3933,13 @@ debug/affichage.o: affichage.cpp affichage.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
-		CursusEditeur.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h
+		CursusEditeur.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\affichage.o affichage.cpp
 
 debug/CursusEditeur.o: CursusEditeur.cpp CursusEditeur.h \
@@ -4286,8 +4308,12 @@ debug/CursusEditeur.o: CursusEditeur.cpp CursusEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QFileInfo \
-		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug
+		C:/Qt/5.3/mingw482_32/include/QtCore/QDebug \
+		C:/Qt/5.3/mingw482_32/include/QtSql/QSqlDatabase
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\CursusEditeur.o CursusEditeur.cpp
+
+debug/dossier.o: dossier.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\dossier.o dossier.cpp
 
 debug/moc_UVEditeur.o: debug/moc_UVEditeur.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\moc_UVEditeur.o debug\moc_UVEditeur.cpp

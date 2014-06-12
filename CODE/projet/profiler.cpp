@@ -2,6 +2,7 @@
 #include "UVEditeur.h"
 #include "UTProfiler.h"
 #include "affichage.h"
+#include "dossier.h"
 #include "CursusEditeur.h"
 #include <QMenuBar>
 #include <QFileDialog>
@@ -32,6 +33,12 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     if(!connectDb()){
        qDebug()<<"failed";
     }
+
+    //UVManager& man=UVManager::getInstance();
+    //man.load(mydb);
+    CursusManager& cur=CursusManager::getInstance();
+    cur.load(mydb);
+
    /* try {
     stratSQL->connect();
     }catch(UTProfilerException& e){

@@ -5,6 +5,7 @@ INPUT(
 ./release\profiler.o
 ./release\affichage.o
 ./release\CursusEditeur.o
+./release\dossier.o
 ./release\moc_UVEditeur.o
 ./release\moc_testUV.o
 ./release\moc_profiler.o

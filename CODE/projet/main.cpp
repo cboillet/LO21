@@ -7,6 +7,7 @@
 #include"./TEST/testUV.h"
 #include"./TEST/testManager.h"
 #include "UTProfiler.h"
+#include "dossier.h"
 #include "UVEditeur.h"
 #include "iostream"
 #include "manager.h"

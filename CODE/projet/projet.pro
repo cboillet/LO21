@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     UVEditeur.cpp \
     profiler.cpp \
     affichage.cpp \
-    CursusEditeur.cpp
+    CursusEditeur.cpp \
+    dossier.cpp
 
 HEADERS  +=UTProfiler.h \
     UVEditeur.h \
@@ -30,5 +31,6 @@ HEADERS  +=UTProfiler.h \
     TEST/testManager.h \
     profiler.h \
     affichage.h \
-    CursusEditeur.h
+    CursusEditeur.h \
+    dossier.h
 
