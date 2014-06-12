@@ -56,7 +56,7 @@ class Manager{
         ~Handler(){ if (instance) delete instance; instance=0; }
     };
     static Handler handler;
-    QSqlDatabase mydb;
+   // QSqlDatabase mydb;
 
  public:
     bool connect();
@@ -105,7 +105,7 @@ class Manager{
     iterator end() { return iterator(t+nb); }
 };
 
-
+/*
 template <class T,class Type>
 bool Manager<T,Type>::connect(){
     mydb = QSqlDatabase::addDatabase("QSQLITE");
@@ -124,14 +124,15 @@ bool Manager<T,Type>::connect(){
         return true;
      }
 }
-
+*/
+/*
 template <class T,class type>
 void Manager<T,type>::disconnect(){
     QString connection;
     connection=mydb.connectionName();
     QSqlDatabase::removeDatabase(connection);
 }
-
+*/
 
 template <class T,class type>
 void Manager<T,type>::addItem(T* tem){

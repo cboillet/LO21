@@ -70,7 +70,7 @@ void CursusEditeurNew::sauverCursus(QSqlDatabase& db){
     unsigned int Ctsh=TSH->value();
     unsigned int Csp=SP->value();
     CursusManager& cursus=CursusManager::getInstance();
-    cursus.ajouter(c,t,d,Ccs,Ctm,Ctsh,Csp,db);
+    cursus.addCursus(c,t,d,Ccs,Ctm,Ctsh,Csp,db);
     QMessageBox::information(this, "Sauvegarde", "Cursus sauvegardée...");
 }
 
@@ -82,9 +82,10 @@ CursusEditeurAddUV::CursusEditeurAddUV(QSqlDatabase &db, QWidget *parent):mydb(d
     model->select();
     model->setSort(model->fieldIndex("code"),Qt::AscendingOrder);
 
-    QTableView *view = new QTableView;
+    /*QTableView *view = new QTableView;
     view->setModel(model);
     view->hideColumn(1);view->hideColumn(2);view->hideColumn(3);view->hideColumn(5);view->hideColumn(6);view->hideColumn(7);view->hideColumn(8);
+    */
 
     QLabel* cursusLabel = new QLabel("code:",this);
     cursus=new QComboBox(this);
@@ -101,6 +102,12 @@ CursusEditeurAddUV::CursusEditeurAddUV(QSqlDatabase &db, QWidget *parent):mydb(d
     uv->setModel(model2);
     uv->setModelColumn(model2->fieldIndex("code"));
     uv->setCurrentIndex(0);
+    modelUvToCursus=new QSqlTableModel(parent,mydb);
+    modelUvToCursus->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    modelUvToCursus->setTable("UVObligatoire");
+    modelUvToCursus->select();
+    QTableView *view = new QTableView;
+        view->setModel(modelUvToCursus);
     QPushButton* sauver=new QPushButton("sauver",this);
     QVBoxLayout* couche = new QVBoxLayout;
     QHBoxLayout* coucheH1 = new QHBoxLayout;
@@ -122,14 +129,17 @@ CursusEditeurAddUV::CursusEditeurAddUV(QSqlDatabase &db, QWidget *parent):mydb(d
 void CursusEditeurAddUV::sauverCursus(QSqlDatabase &db){
     int codeCursus=cursus->currentIndex();
     int codeUV=uv->currentIndex();
-
-    int rowCount = model->rowCount();
+    int rowCount = modelUvToCursus->rowCount();
     //QString uvCode = model->data(codeCursus,0);
-    QSqlRecord record = model->record(codeCursus);
-    QSqlRecord rec = model2->record(codeUV);
-    QString uvCode = rec.value("code").toString();
-    record.setValue("codeUV", uvCode);
-    //record.insertValue("salary", salary);
-     model->insertRecord(codeCursus, record);
-     model->submitAll();
+    QSqlRecord recordCursus = model->record(codeCursus);
+    QString cursusCode= recordCursus.value("code").toString();
+    QSqlRecord recordUV = model2->record(codeUV);
+    QString uvCode = recordUV.value("code").toString();
+    QSqlRecord recordUvToCursus = modelUvToCursus->record(rowCount);
+    recordUvToCursus.setValue("cursus", cursusCode);
+    recordUvToCursus.setValue("uv", uvCode);
+     //model->insertRecord(codeCursus, record);
+    modelUvToCursus->insertRecord(rowCount, recordUvToCursus);
+    modelUvToCursus->submitAll();
+    QMessageBox::information(this, "Sauvegarde", "Cursus sauvegardée...");
 }

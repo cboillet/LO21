@@ -80,5 +80,6 @@ private :
     QDialogButtonBox * buttonBox;
     QSqlTableModel *model;
     QSqlTableModel *model2;
+    QSqlTableModel *modelUvToCursus;
 };
 #endif // CURSUSEDITEUR_H

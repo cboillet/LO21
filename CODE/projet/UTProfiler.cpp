@@ -342,7 +342,7 @@ void StrategieAddUvToCursusSQL::deleteUvToCursus(){
 }
 
 }*/
-
+/*
 void StrategieCursusSQL::ajouterCursus(Manager<Cursus,CursusManager>& man, const QString& c,const QString& t, unsigned int d,unsigned int Ccs,unsigned int Ctm,unsigned int Ctsh,unsigned int Csp,QSqlDatabase& db)
 {
     QString code=c, titre=t;
@@ -373,7 +373,8 @@ void StrategieCursusSQL::ajouterCursus(Manager<Cursus,CursusManager>& man, const
     }
 
 }
-
+*/
+/*
 void StrategieCursusSQL::deleteCursus(){
  QSqlDatabase db;
  QString code=code;
@@ -392,14 +393,72 @@ void StrategieCursusSQL::deleteCursus(){
 
    QSqlDatabase::database().commit();
    }
-
 }
-
+*/
 
 Cursus* CursusManager::trouver(const QString& code)const{
     for(unsigned int i=0; i<nb; i++)
         if (code==t[i]->getCode()) return t[i];
     return 0;
+}
+
+void CursusManager::load(QSqlDatabase& db){
+    QString code;
+    QString titre;
+    unsigned int duree;
+    unsigned int CS;
+    unsigned int TM;
+    unsigned int TSH;
+    unsigned int SP;
+    QWidget* parent=new QWidget;
+    QSqlTableModel* model=new QSqlTableModel(parent,db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("Cursus");
+    model->select();
+    int rowCount = model->rowCount();
+    //QString uvCode = model->data(codeCursus,0);
+    for(int i = 0; i < rowCount; ++i)
+        {
+            QSqlRecord record = model->record(i);
+            code = record.value("code").toString();
+            titre = record.value("titre").toString();
+            duree = record.value("duree").toInt();
+            CS = record.value("nbCS").toInt();
+            TM = record.value("nbTM").toInt();
+            TSH = record.value("nbTSH").toInt();
+            SP = record.value("nbSP").toInt();
+            Cursus* cursustoadd=new Cursus(code, titre, duree,CS,TM,TSH,SP);
+            addItem(cursustoadd);
+    }
+  }
+
+void CursusManager::addCursus(const QString& c,const QString& t, unsigned int duree,unsigned int Ccs,unsigned int Ctm,unsigned int Ctsh,unsigned int Csp,QSqlDatabase& db){
+    /******Ajoute a la liste de cursus******/
+    Cursus* cursustoadd=new Cursus(c,t,duree,Ccs,Ctm,Ctsh,Csp);
+    addItem(cursustoadd);
+    /***********Ajoute à la BD*************/
+    if(c.isEmpty() || t.isEmpty())
+    {
+            qDebug()<<"Insertion Failed";
+
+    }
+    QSqlQuery *query = new QSqlQuery(db);
+    query->prepare("INSERT INTO Cursus (code,titre,duree,nbCS,nbTM,nbTSH,nbSP)"
+                   "VALUES (:code,:titre,:duree,:CS,:TM,:TSH,:SP)");
+
+    query->bindValue(0,c);
+    query->bindValue(1,t);
+    query->bindValue(2,duree);
+    query->bindValue(3,Ccs);
+    query->bindValue(4,Ctm);
+    query->bindValue(5,Ctsh);
+    query->bindValue(6,Csp);
+    try{
+    query->exec();
+    }
+    catch(UTProfilerException& e){
+        //QMessageBox::warning("Insertion", QString("Insertion dans la base de données impossible"));
+    }
 }
 
 Cursus& CursusManager::getCursus(const QString& c){
@@ -414,7 +473,6 @@ const Cursus& CursusManager::getCursus(const QString& c)const{
 
 CursusManager::~CursusManager(){
     nb=nbMax=0;
-    delete [] stratCursus;
     delete [] t;
 }
 

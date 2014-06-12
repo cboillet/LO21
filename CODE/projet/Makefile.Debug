@@ -1248,6 +1248,8 @@ debug/moc_profiler.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QPushButton \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		CursusEditeur.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		profiler.h
 	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore profiler.h -o debug\moc_profiler.cpp
 
@@ -1627,6 +1629,8 @@ debug/moc_affichage.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
 		CursusEditeur.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		affichage.h
 	C:\Qt\5.3\mingw482_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/5.3/mingw482_32/mkspecs/win32-g++ -IC:/Users/Camille/Documents/GitHub/LO21/CODE/projet -IC:/Qt/5.3/mingw482_32/include -IC:/Qt/5.3/mingw482_32/include/QtWidgets -IC:/Qt/5.3/mingw482_32/include/QtTest -IC:/Qt/5.3/mingw482_32/include/QtXml -IC:/Qt/5.3/mingw482_32/include/QtSql -IC:/Qt/5.3/mingw482_32/include/QtGui -IC:/Qt/5.3/mingw482_32/include/QtCore affichage.h -o debug\moc_affichage.cpp
 
@@ -1784,6 +1788,10 @@ debug/moc_CursusEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/5.3/mingw482_32/include/QtCore/qitemselectionmodel.h \
 		UTProfiler.h \
 		manager.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QTextStream \
@@ -1821,7 +1829,6 @@ debug/moc_CursusEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qabstractproxymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qidentityproxymodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qsortfilterproxymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qstringlistmodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qjsonarray.h \
@@ -1988,7 +1995,6 @@ debug/moc_CursusEditeur.cpp: C:/Qt/5.3/mingw482_32/include/QtWidgets/QWidget \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \
@@ -2410,7 +2416,9 @@ debug/main.o: main.cpp C:/Qt/5.3/mingw482_32/include/QtWidgets/QApplication \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qinputdialog.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
-		CursusEditeur.h
+		CursusEditeur.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o main.cpp
 
 debug/UTProfiler.o: UTProfiler.cpp UTProfiler.h \
@@ -3520,15 +3528,15 @@ debug/profiler.o: profiler.cpp Profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QPushButton \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qpushbutton.h \
 		CursusEditeur.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
 		affichage.h \
 		profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMenuBar \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmenubar.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmenu.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qaction.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qactiongroup.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qactiongroup.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\profiler.o profiler.cpp
 
 debug/affichage.o: affichage.cpp affichage.h \
@@ -3907,7 +3915,9 @@ debug/affichage.o: affichage.cpp affichage.h \
 		profiler.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QStackedWidget \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qstackedwidget.h \
-		CursusEditeur.h
+		CursusEditeur.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\affichage.o affichage.cpp
 
 debug/CursusEditeur.o: CursusEditeur.cpp CursusEditeur.h \
@@ -4065,6 +4075,10 @@ debug/CursusEditeur.o: CursusEditeur.cpp CursusEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qdialogbuttonbox.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/QMessageBox \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/QTableView \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qtableview.h \
+		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
+		C:/Qt/5.3/mingw482_32/include/QtCore/qitemselectionmodel.h \
 		UTProfiler.h \
 		manager.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QTextStream \
@@ -4102,7 +4116,6 @@ debug/CursusEditeur.o: CursusEditeur.cpp CursusEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qtemporaryfile.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qabstractproxymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qidentityproxymodel.h \
-		C:/Qt/5.3/mingw482_32/include/QtCore/qitemselectionmodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qsortfilterproxymodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qstringlistmodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/qjsonarray.h \
@@ -4269,7 +4282,6 @@ debug/CursusEditeur.o: CursusEditeur.cpp CursusEditeur.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaldelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qitemdelegate.h \
 		C:/Qt/5.3/mingw482_32/include/QtWidgets/qlistview.h \
-		C:/Qt/5.3/mingw482_32/include/QtWidgets/qabstractitemview.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/5.3/mingw482_32/include/QtSql/qtsqlversion.h \
 		C:/Qt/5.3/mingw482_32/include/QtCore/QtDebug \

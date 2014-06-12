@@ -21,6 +21,9 @@
 #include <QtSql>
 #include <QtDebug>
 #include <QFileInfo>
+#include <QSqlDatabase>
+#include <QSqlTableModel>
+#include <QTableView>
 #include <QLabel>
 #include <QDebug>
 
@@ -155,13 +158,13 @@ class StrategieCredits{
     virtual void ajouterCredits(Manager<Credits,CreditsManager>& man, const Categorie& cat, unsigned int nbcredits)=0;
     virtual void deleteUV()=0;
 };
-
+/*
 class StrategieCursusSQL{
  public:
     void ajouterCursus(Manager<Cursus,CursusManager>& man, const QString& c,const QString& t, unsigned int duree,unsigned int Ccs,unsigned int Ctm,unsigned int Ctsh,unsigned int Csp,QSqlDatabase& db);
     void deleteCursus();
 };
-
+*/
 class StrategieCreditsXML: public StrategieCredits{
  public:
     void load(Manager<UV,UVManager>& man, const QString& f){;}
@@ -272,7 +275,7 @@ protected:
     Cursus(){}
     Cursus(const Cursus& cu);
     Cursus& operator=(const Cursus& cu);
-    Cursus(const QString& c, const QString& t, unsigned int dur):code(c),titre(t),duree(dur){}
+    Cursus(const QString& c, const QString& t, unsigned int dur,unsigned int ncs,unsigned int ntm,unsigned int ntsh,unsigned int nsp):code(c),titre(t),duree(dur),CreditsCS(ncs),CreditsTM(ntm),CreditsTSH(ntsh),CreditsSP(nsp){}
     friend class CursusManager;
     Equivalence equival;
 
@@ -342,14 +345,14 @@ class UVManager: public Manager<UV,UVManager>{
 class CursusManager: public Manager<Cursus,CursusManager>{
 private:
         Cursus* trouver(const QString& code) const; //peut �tre mettre T en param�tre
-public:
-   StrategieCursusSQL* stratCursus;
-   ~CursusManager();
-   CursusManager():Manager<Cursus,CursusManager>(){stratCursus=new StrategieCursusSQL;}
-   void ajouter(const QString& c,const QString& t, unsigned int duree,unsigned int Ccs,unsigned int Ctm,unsigned int Ctsh,unsigned int Csp,QSqlDatabase& db) {stratCursus->ajouterCursus(*this,c,t,duree,Ccs,Ctm,Ctsh,Csp,db);}
 
+public:
+   void load(QSqlDatabase& db);
+   ~CursusManager();
+   CursusManager():Manager<Cursus,CursusManager>(){}
    Cursus& getCursus(const QString& c);
    const Cursus& getCursus(const QString& c) const;
+   void addCursus(const QString& c,const QString& t, unsigned int duree,unsigned int Ccs,unsigned int Ctm,unsigned int Ctsh,unsigned int Csp,QSqlDatabase& db);
 /*
    class FilterIterator {
         friend class UVManager;
