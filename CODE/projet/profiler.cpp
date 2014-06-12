@@ -106,27 +106,14 @@ void Profiler::SetUVCursus(){
 }
 
 void Profiler::openChargerUV(){
-    QSqlQueryModel *model = new QSqlQueryModel;
-         model->setQuery("SELECT code, titre, uvCategorie,nbCredits, saison  FROM UV");
-         model->setHeaderData(0, Qt::Horizontal, tr("Code"));
-         model->setHeaderData(1, Qt::Horizontal, tr("Titre"));
-         model->setHeaderData(2, Qt::Horizontal, tr("Categorie"));
-         model->setHeaderData(3, Qt::Horizontal, tr("Nombre de Credits"));
-         model->setHeaderData(4, Qt::Horizontal, tr("Saison"));
-
-
-         QTableView *view = new QTableView;
-         view->setModel(model);
-         view->show();
-
+   AffichageCatalogue* affichage=new AffichageCatalogue(mydb,this);
+   setCentralWidget(affichage);
 }
 
 
 
 void Profiler::openChargerCursus(){
-   /* QSqlQueryModel model;
-         model.setQuery("SELECT * FROM Cursus");
-         Qstring code = model.record(4).value("Code").toString();*/
+
 
     QSqlQueryModel *model = new QSqlQueryModel;
          model->setQuery("SELECT code, titre, duree,equivalence, codeUV, nbCS, nbTM, nbTSH, nbSP  FROM Cursus");
@@ -134,15 +121,15 @@ void Profiler::openChargerCursus(){
          model->setHeaderData(1, Qt::Horizontal, tr("Titre"));
          model->setHeaderData(2, Qt::Horizontal, tr("Duree en semestre"));
          model->setHeaderData(3, Qt::Horizontal, tr("Equivalence"));
-         model->setHeaderData(4, Qt::Horizontal, tr("UV"));
-         model->setHeaderData(5, Qt::Horizontal, tr("Credits CS"));
-         model->setHeaderData(6, Qt::Horizontal, tr("Credits TM"));
-         model->setHeaderData(7, Qt::Horizontal, tr("Credits TSH"));
-         model->setHeaderData(8, Qt::Horizontal, tr("Credits SP"));
+         model->setHeaderData(4, Qt::Horizontal, tr("Credits CS"));
+         model->setHeaderData(5, Qt::Horizontal, tr("Credits TM"));
+         model->setHeaderData(6, Qt::Horizontal, tr("Credits TSH"));
+         model->setHeaderData(7, Qt::Horizontal, tr("Credits SP"));
 
 
          QTableView *view = new QTableView;
          view->setModel(model);
+         view->setWindowTitle("Catalogues Cursus");
          view->show();
 
 
