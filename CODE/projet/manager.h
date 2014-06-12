@@ -1,6 +1,5 @@
 #ifndef MANAGER_H
 #define MANAGER_H
-
 #include <QString>
 #include <QTextStream>
 #include <QWidget>

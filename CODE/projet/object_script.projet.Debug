@@ -5,6 +5,7 @@ INPUT(
 ./debug\profiler.o
 ./debug\affichage.o
 ./debug\CursusEditeur.o
+./debug\dossier.o
 ./debug\moc_UVEditeur.o
 ./debug\moc_testUV.o
 ./debug\moc_profiler.o
