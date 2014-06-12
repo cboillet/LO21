@@ -73,7 +73,6 @@ void UVEditeurNew::sauverUV(QSqlDatabase& db){
     man.ajouter(c,t,nbc,cat,sais,db);
     //void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
     QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
-
 }
 
 
