@@ -12,16 +12,20 @@
 class AffichageCatalogueCategorie:public QWidget{
 Q_OBJECT
 public:
-    AffichageCatalogueCategorie(Categorie& cat,Cursus& curs,Profiler* fenetre);
+    AffichageCatalogueCategorie(Categorie& cat,Cursus& curs,QWidget *parent = 0);
 };
 
 class AffichageCatalogue:public QWidget{
 Q_OBJECT
+    QSqlDatabase& mydb;
+     QComboBox* cursus;
+     QComboBox* uv;
 public:
-    explicit AffichageCatalogue(Cursus& curs,Profiler* parent = 0);
-    //AffichageCatalogue(Cursus& curs,Profiler* parent){
-    //    Categorie TM;
-    //    AffichageCatalogueCategorie* affichage=new AffichageCatalogueCategorie(TM, curs,parent);}//(const Cursus&,Profiler&){}
+    explicit AffichageCatalogue( QSqlDatabase& db,QWidget *parent = 0);
+
+private :
+
+    QSqlTableModel *model;
 
 };
 

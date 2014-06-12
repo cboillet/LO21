@@ -1,7 +1,8 @@
 #include"affichage.h"
+#include <QSqlTableModel>
 
-AffichageCatalogue::AffichageCatalogue(Cursus& curs,Profiler* parent){
-    QHBoxLayout* couche=new QHBoxLayout;
+AffichageCatalogue::AffichageCatalogue( QSqlDatabase& db,QWidget *parent):mydb(db){
+    /*QHBoxLayout* couche=new QHBoxLayout;
     QVBoxLayout* couchecode=new QVBoxLayout;
     QVBoxLayout* couchetitre=new QVBoxLayout;
     QVBoxLayout* couchenbcredits=new QVBoxLayout;
@@ -20,10 +21,29 @@ AffichageCatalogue::AffichageCatalogue(Cursus& curs,Profiler* parent){
     couche->addLayout(coucheouverture);
     couche->addLayout(coucheannee);
     //delete layout();
-    //setLayout(couche);
+    //setLayout(couche);*/
+
+    model = new QSqlTableModel(parent,mydb);
+    model->setTable("UV");
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->select();
+    model->removeColumn(0); // don't show the ID
+    model->setSort(model->fieldIndex("uvCategorie"),Qt::AscendingOrder);
+    model->setHeaderData(0, Qt::Horizontal, tr("Code"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Titre"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Categorie"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Credits"));
+    model->setHeaderData(4, Qt::Horizontal, tr("Saison"));
+
+    QTableView *view = new QTableView;
+    view->setModel(model);
+    view->setWindowTitle("Catalogue UVs");
+    view->width();
+    view->setMaximumHeight(50000);
+    view->show();
 }
 
-AffichageCatalogueCategorie::AffichageCatalogueCategorie(Categorie& categorie,Cursus& cursus,Profiler* parent):QWidget(parent){
+AffichageCatalogueCategorie::AffichageCatalogueCategorie(Categorie& categorie,Cursus& cursus,QWidget *parent ):QWidget(parent){
     QHBoxLayout* couche=new QHBoxLayout;
     QVBoxLayout* couchecode=new QVBoxLayout;
     QVBoxLayout* couchetitre=new QVBoxLayout;
