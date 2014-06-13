@@ -40,18 +40,46 @@ const Inscription& Dossier::InscriptionManager::getInscription(const QString& u,
 }
 
 /******ETUDIANT_MANAGER******/
-Etudiant* EtudiantManager::trouver(QString n, QString p)const{
+Etudiant* EtudiantManager::trouver(QString n)const{
     for(unsigned int i=0; i<nb; i++)
-        if (n==t[i]->getNom() && p==t[i]->getPrenom()) return t[i];
+        if (n==t[i]->getNom()) return t[i];
     return 0;
 }
 
-Etudiant& EtudiantManager::getEtudiant(QString n, QString p){
-    Etudiant* etudiant=trouver(n,p);
+Etudiant& EtudiantManager::getEtudiant(QString n){
+    Etudiant* etudiant=trouver(n);
     if (!etudiant) throw UTProfilerException("erreur, DossierManager, dossier inexistante");
     return *etudiant;
 }
 
-const Etudiant& EtudiantManager::getEtudiant(QString n, QString p)const{
-    return const_cast<EtudiantManager*>(this)->getEtudiant(n,p);
+const Etudiant& EtudiantManager::getEtudiant(QString n)const{
+    return const_cast<EtudiantManager*>(this)->getEtudiant(n);
+}
+
+void EtudiantManager::load(QSqlDatabase& db){
+    QString nomEtu;
+    QString prenomEtu;
+    QString cursusString;
+    QWidget* parent=new QWidget;
+    QSqlTableModel* model=new QSqlTableModel(parent,db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("Etudiant");
+    model->select();
+    int rowCount = model->rowCount();
+
+    for(int i = 0; i < rowCount; ++i)
+        {
+            QSqlRecord record = model->record(i);
+            nomEtu = record.value("nom").toString();
+            prenomEtu = record.value("prenom").toString();
+            cursusString = record.value("cursusCode").toString();
+            Etudiant* etudiantToadd=new Etudiant(nomEtu,prenomEtu);
+            addItem(etudiantToadd);
+            etudiantToadd->setCursus(cursusString);
+    }
+  }
+void EtudiantManager::addEtudiant(const QString& nom, const QString& pre,const QString& cur){
+    Etudiant* etudiantToadd=new Etudiant(nom,pre);
+    addItem(etudiantToadd);
+    etudiantToadd->setCursus(cur);
 }

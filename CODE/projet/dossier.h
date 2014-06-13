@@ -45,14 +45,14 @@ public:
 
 /*********UTProfiler (=Etudiant Manager)*********/
 class EtudiantManager: public Manager<Etudiant,EtudiantManager> {
-    Etudiant* trouver(QString n, QString p) const; //peut ï¿½tre mettre T en paramï¿½tre
+    Etudiant* trouver(QString n) const; //peut ï¿½tre mettre T en paramï¿½tre
     public:
-    void load(QSqlDatabase& db){}
+    void load(QSqlDatabase& db);
     ~EtudiantManager(){}
     EtudiantManager():Manager<Etudiant,EtudiantManager>(){}
-    Etudiant& getEtudiant(QString n, QString p);
-    const Etudiant& getEtudiant(QString n, QString p) const;
-    void addEtudiant(unsigned int n,QSqlDatabase& db){}
+    Etudiant& getEtudiant(QString n);
+    const Etudiant& getEtudiant(QString n) const;
+    void addEtudiant(const QString& nom, const QString& pre,const QString& cur);
 };
 
 

@@ -4,6 +4,7 @@
 #include "affichage.h"
 #include "dossier.h"
 #include "CursusEditeur.h"
+#include "EtudiantEditeur.h"
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QString>
@@ -18,7 +19,6 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     QMenu* mCharger=mFichier->addMenu("&Charger");
     QAction * actionChargerUV=mCharger->addAction("Catalogue UVs");
     QAction * actionChargerCursus=mCharger->addAction("Catalogue Cursus");
-    QAction * actionChargerDossier=mCharger->addAction("Dossier");
     mFichier->addSeparator();
     QAction *actionQuitter = mFichier->addAction("&Quitter");
     QMenu* mEdition = menuBar()->addMenu("&Edition");
@@ -29,7 +29,8 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     QAction * actionNewCursus=mCursus->addAction("Créer");
     QAction * actionSetUVCursus=mCursus->addAction("Enregistrer les UV d'un cursus");
     mEdition->addSeparator();
-    QAction* actionDossier=mEdition->addAction("&Dossier");
+    QMenu* mDossier = menuBar()->addMenu("&Dossier");
+    QAction* actionDossier=mDossier->addAction("&Dossier");
     if(!connectDb()){
        qDebug()<<"failed";
     }
@@ -38,6 +39,8 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     man.load(mydb);
    CursusManager& cur=CursusManager::getInstance();
    cur.load(mydb);
+   EtudiantManager& etu=EtudiantManager::getInstance();
+   etu.load(mydb);
 
     /* try {
     //stratSQL->connect();
@@ -53,6 +56,7 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
     connect(actionChangeUV, SIGNAL(triggered()),this,SLOT(ChangeUV()));
     connect(actionNewCursus, SIGNAL(triggered()),this,SLOT(NewCursus()));
     connect(actionSetUVCursus, SIGNAL(triggered()),this,SLOT(SetUVCursus()));
+    connect(actionDossier, SIGNAL(triggered()),this,SLOT(entrerDossier())); // se connecte à la partie Dossier
 }
 
 void Profiler::quit(){
@@ -87,7 +91,7 @@ void Profiler::NewCursus(){
 }
 
 void Profiler::SetUVCursus(){
-   /* QString code=QInputDialog::getText(this,"Entrez le code du Cursus auquel vous souhaitez enregistrer les UV","Cursus")
+    QString code=QInputDialog::getText(this,"Entrez le code du Cursus auquel vous souhaitez enregistrer les UV","Cursus")
     ;
     if (code!="")
     try {
@@ -99,7 +103,7 @@ void Profiler::SetUVCursus(){
     catch(UTProfilerException& e){
     QMessageBox::warning(this, "Edition Cursus", QString("Erreur : le Cursus ")+code+" n’existe pas.");
     }
-    */
+
     CursusEditeurAddUV* fenetre=new CursusEditeurAddUV(mydb,this);
     setCentralWidget(fenetre);
 }
@@ -108,27 +112,18 @@ void Profiler::openChargerUV(){
 
     AffichageCatalogue* fenetre=new AffichageCatalogue(mydb,this);
     setCentralWidget(fenetre);
-
-
 }
 
 
 
 void Profiler::openChargerCursus(){
-
-
-
-
-    QSqlQueryModel *model = new QSqlQueryModel;
+QSqlQueryModel *model = new QSqlQueryModel;
          model->setQuery("SELECT code, titre, duree,equivalence, nbCS, nbTM, nbTSH, nbSP  FROM Cursus");
          model->setHeaderData(0, Qt::Horizontal, tr("Code"));
          model->setHeaderData(1, Qt::Horizontal, tr("Titre"));
          model->setHeaderData(2, Qt::Horizontal, tr("Duree en semestre"));
-
          model->setHeaderData(3, Qt::Horizontal, tr("Equivalence"));        
-
          model->setHeaderData(3, Qt::Horizontal, tr("Equivalence"));
-
          model->setHeaderData(4, Qt::Horizontal, tr("Credits CS"));
          model->setHeaderData(5, Qt::Horizontal, tr("Credits TM"));
          model->setHeaderData(6, Qt::Horizontal, tr("Credits TSH"));
@@ -139,7 +134,21 @@ void Profiler::openChargerCursus(){
          view->setModel(model);
          view->setWindowTitle("Catalogues Cursus");
          view->show();
-
-
 }
 
+void Profiler::entrerDossier(){
+    QString nomEtu=QInputDialog::getText(this,"Entrez votre nom","nom de l'étudiant");
+    if (nomEtu!="")
+    try {
+    EtudiantManager& etuman =EtudiantManager::getInstance();
+    Etudiant& etudiant=etuman.getEtudiant(nomEtu);
+    //CursusEditeurAddUV* fenetre=new CursusEditeurAddUV(cursus,mydb,this);
+    //setCentralWidget(fenetre);
+    }
+    catch(UTProfilerException& e){
+    QMessageBox::warning(this, "Edition Etudiant", QString("Erreur : l'étudiant ")+nomEtu+" n’existe pas.");
+    EtudiantManager& etuman =EtudiantManager::getInstance();
+    EtudiantEditeur* fenetre=new EtudiantEditeur(mydb,this);
+    setCentralWidget(fenetre);
+    }
+}

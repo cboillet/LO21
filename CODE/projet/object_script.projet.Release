@@ -6,9 +6,11 @@ INPUT(
 ./release\affichage.o
 ./release\CursusEditeur.o
 ./release\dossier.o
+./release\EtudiantEditeur.o
 ./release\moc_UVEditeur.o
 ./release\moc_testUV.o
 ./release\moc_profiler.o
 ./release\moc_affichage.o
 ./release\moc_CursusEditeur.o
+./release\moc_EtudiantEditeur.o
 );

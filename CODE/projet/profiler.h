@@ -48,5 +48,6 @@ public slots:
     void ChangeUV();
     void NewCursus();
     void SetUVCursus();
+    void entrerDossier();
 };
 #endif

@@ -6,9 +6,11 @@ INPUT(
 ./debug\affichage.o
 ./debug\CursusEditeur.o
 ./debug\dossier.o
+./debug\EtudiantEditeur.o
 ./debug\moc_UVEditeur.o
 ./debug\moc_testUV.o
 ./debug\moc_profiler.o
 ./debug\moc_affichage.o
 ./debug\moc_CursusEditeur.o
+./debug\moc_EtudiantEditeur.o
 );
