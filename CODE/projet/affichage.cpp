@@ -1,8 +1,14 @@
 #include"affichage.h"
+#include <QSqlTableModel>
 
+<<<<<<< HEAD
 AffichageCatalogue::AffichageCatalogue(QSqlDatabase &db,QWidget* parent):mydb(db)
 {
    /* QHBoxLayout* couche=new QHBoxLayout;
+=======
+AffichageCatalogue::AffichageCatalogue( QSqlDatabase& db,QWidget *parent):mydb(db){
+    /*QHBoxLayout* couche=new QHBoxLayout;
+>>>>>>> 3c0dfa3975565aeac34e43fbed849adf2cf67801
     QVBoxLayout* couchecode=new QVBoxLayout;
     QVBoxLayout* couchetitre=new QVBoxLayout;
     QVBoxLayout* couchenbcredits=new QVBoxLayout;
@@ -39,11 +45,19 @@ AffichageCatalogue::AffichageCatalogue(QSqlDatabase &db,QWidget* parent):mydb(db
     view->setModel(model);
     view->setWindowTitle("Catalogue UVs");
     view->width();
+<<<<<<< HEAD
     //view->setMaximumHeight(50000);
     view->show();
 }
 
 AffichageCatalogueCategorie::AffichageCatalogueCategorie(Categorie& categorie,Cursus& cursus,QWidget* parent):QWidget(parent){
+=======
+    view->setMaximumHeight(50000);
+    view->show();
+}
+
+AffichageCatalogueCategorie::AffichageCatalogueCategorie(Categorie& categorie,Cursus& cursus,QWidget *parent ):QWidget(parent){
+>>>>>>> 3c0dfa3975565aeac34e43fbed849adf2cf67801
     QHBoxLayout* couche=new QHBoxLayout;
     QVBoxLayout* couchecode=new QVBoxLayout;
     QVBoxLayout* couchetitre=new QVBoxLayout;

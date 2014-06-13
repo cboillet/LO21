@@ -114,12 +114,15 @@ class UV {
    // unsigned int annee;
 	UV(const UV& u);
 	UV& operator=(const UV& u);
+protected:
     UV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p):
       code(c),titre(t),nbCredits(nbc),categorie(cat),automne(a),printemps(p){}
 	friend class UVManager;
+    friend class Cursus;
 public:
     QString getCode() const { return code; }
     QString getTitre() const { return titre; }
+    const QString& geTitre() const {return const_cast<const QString&>(titre);}
 	unsigned int getNbCredits() const { return nbCredits; }
     //unsigned int getAnnee() const { return annee; }
 	Categorie getCategorie() const { return categorie; }
@@ -229,7 +232,8 @@ class Cursus{
             ~UVObligatoire();
         public:
             UVObligatoire():Manager<UV,UVManager>(){stratUV=new StrategieAddUvToCursusSQL;}
-            void ajouter(const QString& c, QSqlDatabase& db) {stratUV->ajouterUvToCursus(*this,c,db);} //utiliser l'itérateur sur les UV
+            void addUvToCursus(const QString& c, QSqlDatabase db);
+            //void ajouter(const QString& c, QSqlDatabase& db){} //utiliser l'itérateur sur les UV
             class FilterIterator {
                  friend class UVManager;
                  UV** currentUV;

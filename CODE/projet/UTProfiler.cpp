@@ -199,6 +199,14 @@ Cursus* CursusManager::trouver(const QString& code)const{
     return 0;
 }
 
+void Cursus::UVObligatoire::addUvToCursus(const QString &c, QSqlDatabase db){
+    UVManager& uv=UVManager::getInstance();
+    UV& uvToEdit=uv.getUV(c);
+    //UV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p)
+    UV* uvToAdd=new UV(c,uvToEdit.geTitre(),uvToEdit.getNbCredits(),uvToEdit.getCategorie(),uvToEdit.ouvertureAutomne(),uvToEdit.ouverturePrintemps());
+    addItem(uvToAdd);
+}
+
 void CursusManager::load(QSqlDatabase& db){
     QString code;
     QString titre;

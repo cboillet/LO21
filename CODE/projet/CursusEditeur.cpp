@@ -141,5 +141,8 @@ void CursusEditeurAddUV::sauverCursus(QSqlDatabase &db){
      //model->insertRecord(codeCursus, record);
     modelUvToCursus->insertRecord(rowCount, recordUvToCursus);
     modelUvToCursus->submitAll();
+    CursusManager& cursus=CursusManager::getInstance();
+    Cursus& cursusToEdit=cursus.getCursus(cursusCode);
+    //cursus.addCursus(c,t,d,Ccs,Ctm,Ctsh,Csp,db);
     QMessageBox::information(this, "Sauvegarde", "Cursus sauvegardée...");
 }
