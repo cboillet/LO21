@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Profiler_t {
     QByteArrayData data[11];
-    char stringdata[105];
+    char stringdata[104];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,11 +39,11 @@ QT_MOC_LITERAL(6, 49, 17),
 QT_MOC_LITERAL(7, 67, 5),
 QT_MOC_LITERAL(8, 73, 8),
 QT_MOC_LITERAL(9, 82, 9),
-QT_MOC_LITERAL(10, 92, 12)
+QT_MOC_LITERAL(10, 92, 11)
     },
     "Profiler\0connectDb\0\0deconnect\0quit\0"
     "openChargerUV\0openChargerCursus\0NewUV\0"
-    "ChangeUV\0NewCursus\0ChangeCursus"
+    "ChangeUV\0NewCursus\0SetUVCursus"
 };
 #undef QT_MOC_LITERAL
 
@@ -99,7 +99,7 @@ void Profiler::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 5: _t->NewUV(); break;
         case 6: _t->ChangeUV(); break;
         case 7: _t->NewCursus(); break;
-        case 8: _t->ChangeCursus(); break;
+        case 8: _t->SetUVCursus(); break;
         default: ;
         }
     }

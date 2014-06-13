@@ -147,11 +147,11 @@ class StrategieUvXML{
     void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p){;}
 };
 
-class StrategieUvSQL{
+/*class StrategieUvSQL{
   public:
     void ajouterUV(Manager<UV,UVManager>& man, const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase& db);
     void deleteUV();
-};
+};*/
 
 class StrategieCredits{
  public:
@@ -294,18 +294,10 @@ class UVManager: public Manager<UV,UVManager>{
 
         UV* trouver(const QString& c) const; //peut ï¿½tre mettre T en paramï¿½tre
     public:
-        StrategieUvSQL* stratUV;
+        void load(QSqlDatabase& db);
         ~UVManager();
-        //static UVManager& getInstance(){if (!handler.instance) handler.instance = new UVManager; /* instance créée une seule fois lors de la première utilisation*/
-        //           return *handler.instance;}
-        //static void libererInstance(){
-        //        if (handler.instance) { delete handler.instance; handler.instance=0; }
-        //    }
-
-        UVManager():Manager<UV,UVManager>(){stratUV=new StrategieUvSQL;}
-        //void load(const QString& f){stratUV->load(*this,f);} //downcasting
-        //void save(const QString& f){stratUV->save(*this,f);}
-        void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase &db) {stratUV->ajouterUV(*this,c,t,nbc,cat,sais,db);}
+        UVManager():Manager<UV,UVManager>(){}
+        void addUV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase &db);
         UV& getUV(const QString& code);
         const UV& getUV(const QString& code) const;
 
