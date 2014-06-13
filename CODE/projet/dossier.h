@@ -98,14 +98,14 @@ public:
 class Dossier::InscriptionManager: public Manager<Inscription,InscriptionManager>{
     private:
         //StrategieAddUvToDossierSQL* stratUV;
-   //     Inscription* trouver(const UV& u, const Semestre& s) const; //peut ï¿½tre mettre T en paramï¿½tre
+        Inscription* trouver(const QString& u, unsigned int a, const QString& s) const; //peut ï¿½tre mettre T en paramï¿½tre
     protected:
         ~InscriptionManager();
     public:
         InscriptionManager():Manager<Inscription,InscriptionManager>(){}
-     //   Inscription& getInscription(const UV& u, const Semestre& s);
-       // const Inscription& getInscription(const UV& u, const Semestre& s) const;
-        //void ajouter(const QString& c, QSqlDatabase& db) {stratUV->ajouterUvToDossier(*this,c,db);} //utiliser l'itérateur sur les UV
+        Inscription& getInscription(const QString& u, unsigned int a, const QString& s);
+        const Inscription& getInscription(const QString& u, unsigned int a, const QString& s) const;
+        void ajouter(const QString& c, QSqlDatabase& db) {} //utiliser l'itérateur sur les UV
     };
 
 #endif // DOSSIER_H

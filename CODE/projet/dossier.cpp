@@ -22,23 +22,23 @@ const Dossier& Etudiant::DossierManager::getDossier(unsigned int nb)const{
 }
 
 /*******Inscription********/
-/*
-Inscription* Dossier::InscriptionManager::trouver(const UV& u, const Semestre& s)const{
+
+Inscription* Dossier::InscriptionManager::trouver(const QString& u, unsigned int a, const QString& s)const{
     for(unsigned int i=0; i<nb; i++)
-        if (u==t[i]->getUV() && s==t[i]->getSemestre()) return t[i];
+        if (u==t[i]->getUV().getCode() && a==t[i]->getSemestre()->getAnnee() && s==SaisonToString(t[i]->getSemestre()->getSaison())) return t[i];
     return 0;
 }
 
-Inscription& Dossier::InscriptionManager::getInscription(const UV& u, const Semestre& s){
-    Inscription* inscription=trouver(u,s);
+Inscription& Dossier::InscriptionManager::getInscription(const QString& u, unsigned int a, const QString& s){
+    Inscription* inscription=trouver(u,a,s);
     if (!inscription) throw UTProfilerException("erreur, DossierManager, dossier inexistante");
     return *inscription;
 }
 
-const Inscription& Dossier::InscriptionManager::getInscription(const UV& u, const Semestre& s)const{
-    return const_cast<EtudiantManager*>(this)->getInscription(u,s);
+const Inscription& Dossier::InscriptionManager::getInscription(const QString& u, unsigned int a, const QString& s)const{
+    return const_cast<InscriptionManager*>(this)->getInscription(u,a,s);
 }
-*/
+
 /******ETUDIANT_MANAGER******/
 Etudiant* EtudiantManager::trouver(QString n, QString p)const{
     for(unsigned int i=0; i<nb; i++)
