@@ -58,14 +58,14 @@ class TestUV : public QObject{
              uvtest->setCode("LO21");
              QCOMPARE(uvtest->getCode(), QString("LO21"));
          }
-         void TestsetOuvertureAutomne(){
+         /*void TestsetOuvertureAutomne(){
              uvtest->setOuvertureAutomne(1);
              QVERIFY(uvtest->ouvertureAutomne() == 1);
          }
          void TestsetOuverturePrintemps(){
              uvtest->setOuverturePrintemps(1);
              QVERIFY(uvtest->ouverturePrintemps() == 1);
-         }
+         }*/
 };
 
 #endif // TESTUV_H

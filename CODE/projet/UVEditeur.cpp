@@ -6,7 +6,7 @@ UVEditeurNew::UVEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     titreLabel = new QLabel("titre",this);
     creditsLabel = new QLabel("credits",this);
     categorieLabel = new QLabel("categorie",this);
-    ouvertureLabel = new QLabel("saison",this);
+    //ouvertureLabel = new QLabel("saison",this);
    // anneeLabel = new QLabel("annee",this);
 
     // création des composants éditables
@@ -39,7 +39,7 @@ UVEditeurNew::UVEditeurNew(QSqlDatabase &db,QWidget *parent):mydb(db){
     coucheH2->addWidget(titreLabel);
     coucheH2->addWidget(titre);
     coucheH3 = new QHBoxLayout;
-    coucheH3->addWidget(ouvertureLabel);
+   // coucheH3->addWidget(ouvertureLabel);
     coucheH3->addWidget(saison);
    // coucheH3->addWidget(anneeLabel);
    // coucheH3->addWidget(annee);
@@ -70,7 +70,7 @@ void UVEditeurNew::sauverUV(QSqlDatabase& db){
     Saison sais=Saison(saison->currentIndex());
     //unsigned int an=annee->value();
     UVManager& man=UVManager::getInstance();
-    man.ajouter(c,t,nbc,cat,sais,db);
+    man.addUV(c,t,nbc,cat,sais,db);
     //void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
     QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
 }
@@ -84,7 +84,7 @@ this->setWindowTitle(QString("Edition de l’UV ")+uv.getCode());
 titreLabel = new QLabel("titre",this);
 creditsLabel = new QLabel("credits",this);
 categorieLabel = new QLabel("categorie",this);
-ouvertureLabel = new QLabel("saison",this);
+//ouvertureLabel = new QLabel("saison",this);
 // création des composants éditables
 code = new QLineEdit(uv.getCode(),this);
 titre = new QTextEdit(uv.getTitre(),this);
@@ -95,10 +95,10 @@ categorie=new QComboBox(this);
 for(Categorie cat = Categorie::CS; cat != Categorie::SP; cat = static_cast<Categorie>(static_cast<int>(cat) + 1))
 categorie->addItem(CategorieToString(cat));
 categorie->setCurrentIndex(int(uv.getCategorie()));
-automne=new QCheckBox("automne",this);
-automne->setChecked(uv.ouvertureAutomne());
-printemps=new QCheckBox("printemps",this);
-printemps->setChecked(uv.ouverturePrintemps());
+//automne=new QCheckBox("automne",this);
+//automne->setChecked(uv.ouvertureAutomne());
+//printemps=new QCheckBox("printemps",this);
+//printemps->setChecked(uv.ouverturePrintemps());
 sauver= new QPushButton("Sauver", this);
 annuler= new QPushButton("Annuler", this);
 // diposition des couches
@@ -113,9 +113,9 @@ coucheH2 = new QHBoxLayout;
 coucheH2->addWidget(titreLabel);
 coucheH2->addWidget(titre);
 coucheH3 = new QHBoxLayout;
-coucheH3->addWidget(ouvertureLabel);
-coucheH3->addWidget(automne);
-coucheH3->addWidget(printemps);
+//coucheH3->addWidget(ouvertureLabel);
+//coucheH3->addWidget(automne);
+//coucheH3->addWidget(printemps);
 coucheH4 = new QHBoxLayout;
 coucheH4->addWidget(annuler);
 coucheH4->addWidget(sauver);

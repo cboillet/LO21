@@ -39,7 +39,7 @@ enum class Equival{FormationPrecedente, SejourEtranger, first=FormationPrecedent
 enum class Categorie {
    CS,TM,TSH,SP,END
 };
-enum TSH{CommunicationPratique, CommunicationTheorique, ConcevoirPratique, ConcevoirTheorique, ManagerPratique, ManagerTheorique};
+//enum TSH{CommunicationPratique, CommunicationTheorique, ConcevoirPratique, ConcevoirTheorique, ManagerPratique, ManagerTheorique};
 enum class Saison { Automne, Printemps,END};
 
 template<typename EnumType>
@@ -109,14 +109,15 @@ class UV {
     QString titre;
 	unsigned int nbCredits;
 	Categorie categorie;
-    bool automne;
-    bool printemps;
+    Saison saison;
+    //bool automne;
+    //bool printemps;
    // unsigned int annee;
 	UV(const UV& u);
 	UV& operator=(const UV& u);
 protected:
-    UV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p):
-      code(c),titre(t),nbCredits(nbc),categorie(cat),automne(a),printemps(p){}
+    UV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison s):
+      code(c),titre(t),nbCredits(nbc),categorie(cat),saison(s){}
 	friend class UVManager;
     friend class Cursus;
 public:
@@ -126,15 +127,17 @@ public:
 	unsigned int getNbCredits() const { return nbCredits; }
     //unsigned int getAnnee() const { return annee; }
 	Categorie getCategorie() const { return categorie; }
-    bool ouvertureAutomne() const { return automne; }
-    bool ouverturePrintemps() const { return printemps; }
+    Saison getSaison() const { return saison; }
+    //bool ouvertureAutomne() const { return automne; }
+    //bool ouverturePrintemps() const { return printemps; }
     void setCode(const QString& c) { code=c; }
     void setTitre(const QString& t) { titre=t; }
     void setNbCredits(unsigned int n) { nbCredits=n; }
    // void setAnnee(unsigned int an) { annee=an;}
     void setCategorie(Categorie c) { categorie=c; }
-    void setOuvertureAutomne(bool b) { automne=b; }
-    void setOuverturePrintemps(bool b) { printemps=b; }
+     void setSaison(Saison s) { saison=s;}
+    //void setOuvertureAutomne(bool b) { automne=b; }
+    //void setOuverturePrintemps(bool b) { printemps=b; }
 };
 class Credits{
     Categorie categorie;
@@ -194,19 +197,20 @@ public:
     void deleteCreditsToCursus();
 };
 
+
 /********CreditsManager**********/
-class CreditsManager: public Manager<Credits,CreditsManager>{
+/*class CreditsManager: public Manager<Credits,CreditsManager>{
 public:
     StrategieCreditsSQL* stratCredits;
     ~CreditsManager();
     CreditsManager():Manager<Credits,CreditsManager>(),stratCredits(0){}
     void ajouterCredits(const Categorie& cat, unsigned int n,QSqlDatabase& db) {stratCredits->ajouterCredits(*this,cat,n,db);}
 };
-
+*/
 /**********Equivalence*********/
 class Equivalence{
     Equival equivalence;
-    CreditsManager creditsObtenus;
+    //CreditsManager creditsObtenus;
 public:
     Equivalence(){}
     Equivalence(const Equival& equi):equivalence(equi){}

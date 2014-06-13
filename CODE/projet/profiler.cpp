@@ -34,17 +34,17 @@ Profiler::Profiler(QWidget *parent):QMainWindow(parent){
        qDebug()<<"failed";
     }
 
-    //UVManager& man=UVManager::getInstance();
-    //man.load(mydb);
-    CursusManager& cur=CursusManager::getInstance();
-    cur.load(mydb);
+    UVManager& man=UVManager::getInstance();
+    man.load(mydb);
+   CursusManager& cur=CursusManager::getInstance();
+   cur.load(mydb);
 
-   /* try {
-    stratSQL->connect();
+    /* try {
+    //stratSQL->connect();
     }catch(UTProfilerException& e){
     QMessageBox::warning(this, "Connexion", QString("connexion a la base de donnée impossible"));
-    }
-    */
+    }*/
+
     //connections
     connect(actionChargerUV, SIGNAL(triggered()),this,SLOT(openChargerUV()));
     connect(actionChargerCursus, SIGNAL(triggered()),this,SLOT(openChargerCursus()));
@@ -68,11 +68,10 @@ void Profiler::NewUV(){
 }
 
 void Profiler::ChangeUV(){
-    QString code=QInputDialog::getText(this,"Entrez le code de l’UV à éditer","UV")
-    ;
+    QString code=QInputDialog::getText(this,"Entrez le code de l’UV à éditer","UV");
     if (code!="")
-    try {
-    UV& uv=UVManager::getInstance().getUV(code);
+    try {   
+     UV& uv=UVManager::getInstance().getUV(code);
     //UVEditeur* fenetre=new UVEditeur(uv,this);
     //setCentralWidget(fenetre);
     }catch(UTProfilerException& e){
@@ -106,33 +105,30 @@ void Profiler::SetUVCursus(){
 }
 
 void Profiler::openChargerUV(){
-<<<<<<< HEAD
+
     AffichageCatalogue* fenetre=new AffichageCatalogue(mydb,this);
     setCentralWidget(fenetre);
-=======
-   AffichageCatalogue* affichage=new AffichageCatalogue(mydb,this);
-   setCentralWidget(affichage);
->>>>>>> 3c0dfa3975565aeac34e43fbed849adf2cf67801
+
+
 }
 
 
 
 void Profiler::openChargerCursus(){
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 3c0dfa3975565aeac34e43fbed849adf2cf67801
+
+
     QSqlQueryModel *model = new QSqlQueryModel;
          model->setQuery("SELECT code, titre, duree,equivalence, nbCS, nbTM, nbTSH, nbSP  FROM Cursus");
          model->setHeaderData(0, Qt::Horizontal, tr("Code"));
          model->setHeaderData(1, Qt::Horizontal, tr("Titre"));
          model->setHeaderData(2, Qt::Horizontal, tr("Duree en semestre"));
-<<<<<<< HEAD
+
          model->setHeaderData(3, Qt::Horizontal, tr("Equivalence"));        
-=======
+
          model->setHeaderData(3, Qt::Horizontal, tr("Equivalence"));
->>>>>>> 3c0dfa3975565aeac34e43fbed849adf2cf67801
+
          model->setHeaderData(4, Qt::Horizontal, tr("Credits CS"));
          model->setHeaderData(5, Qt::Horizontal, tr("Credits TM"));
          model->setHeaderData(6, Qt::Horizontal, tr("Credits TSH"));

@@ -27,7 +27,7 @@ class UVEditeurNew: public QWidget {
     QLabel* creditsLabel;
     QComboBox* categorie;
     QLabel* categorieLabel;
-    QLabel* ouvertureLabel;
+    //QLabel* ouvertureLabel;
     QComboBox* saison;
     //QSpinBox* annee;
    // QLabel* anneeLabel;
@@ -78,7 +78,7 @@ class UVEditeur : public QWidget{
     QLabel* creditsLabel;
     QComboBox* categorie;
     QLabel* categorieLabel;
-    QLabel* ouvertureLabel;
+    //QLabel* ouvertureLabel;
     QCheckBox* automne;
     QCheckBox* printemps;
     //QSpinBox* annee;

@@ -104,36 +104,65 @@ UV& UVManager::getUV(const QString& code){
 
 UVManager::~UVManager(){
     nb=nbMax=0;
-    delete [] stratUV;
     delete [] t;
 }
 
-/**********CreditsManager*********/
-CreditsManager::~CreditsManager(){
-    nb=nbMax=0;
-    delete [] t; //liste de Credits**
-    delete [] stratCredits;}
+
 
 
 /*************Cursus*************/
 Cursus::UVObligatoire::~UVObligatoire(){
     nb=nbMax=0;
-    delete [] stratUV;
     delete [] t;
 }
+
 /*Cursus::CreditsObligatoire::~CreditsObligatoire(){
     nb=nbMax=0;
-    delete [] stratCredits;
     delete [] t;
 }*/
 
 
 /******Base de donnée*******/
+
+void UVManager::load(QSqlDatabase& db){
+    QString code;
+    QString titre;
+    unsigned int nbc;
+    Categorie cat;
+    Saison sais;
+    QWidget* parent=new QWidget;
+    QString categorie;
+    QString saison;
+    QSqlTableModel* model=new QSqlTableModel(parent,db);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->setTable("UV");
+    model->select();
+    int rowCount = model->rowCount();
+    for(int i = 0; i < rowCount; ++i)
+        {
+            QSqlRecord record = model->record(i);
+            code = record.value("code").toString();
+            titre = record.value("titre").toString();
+            nbc = record.value("nbCredits").toInt();
+            categorie = record.value("uvCategorie").toString();
+            cat=StringToCategorie(categorie);
+            saison = record.value("saison").toString();
+            sais = StringToSaison(saison);
+            UV* uvtoadd=new UV(code, titre, nbc,cat,sais);
+            addItem(uvtoadd);
+    }
+
+  }
+
 void UVManager::addUV( const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase& db){
-   QString code, titre, categorie, saison;
+   /******Ajoute a la liste UVs******/
+ QString categorie= CategorieToString(cat);
+ QString saison= SaisonToString(sais);
+   UV* uvtoadd=new UV(c,t,nbc,cat,sais);
+   addItem(uvtoadd);
+   /***********Ajoute à la BD*************/
 
-
-   if(code.isEmpty() || categorie.isEmpty() || saison.isEmpty()  ||(nbCredit<=-1 || nbCredit>MAXCREDIT ))
+   if(c.isEmpty()  || saison.isEmpty()  ||(nbc<=-1 || nbc>MAXCREDIT ))
    {
            qDebug()<<"Insertion Failed";
 
@@ -142,10 +171,10 @@ void UVManager::addUV( const QString& c, const QString& t, unsigned int nbc, Cat
    query->prepare("INSERT INTO UV (code,titre,uvCategorie,nbCredits,saison)"
                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
 
-   query->bindValue(0,code);
-   query->bindValue(1,titre);
+   query->bindValue(0,c);
+   query->bindValue(1,t);
    query->bindValue(2,categorie);
-   query->bindValue(3,nbCredit);
+   query->bindValue(3,nbc);
    query->bindValue(4,saison);
 
    try{
@@ -156,43 +185,6 @@ void UVManager::addUV( const QString& c, const QString& t, unsigned int nbc, Cat
    }
 }
 
-
-
-void StrategieCreditsSQL::ajouterCredits(Manager<Credits,CreditsManager>& man,const Categorie& cat, unsigned int nbcredits,QSqlDatabase& db){
-   QString categorie= CategorieToString(cat);
-   int nbCredits=nbcredits;
-   // QSqlDatabase db;
-
-   if((nbCredits<=-1 || nbCredits>MAXCREDIT ))
-   {
-           qDebug()<<" Insertion Failed";
-           return;
-   }
-
-  {
-   QSqlQuery *query = new QSqlQuery(db);
-
-   query->prepare("INSERT INTO Credits ( categorie,nbCredits)"
-                  "VALUES (:categorie,:nbCredits)");
-
-
-   query->bindValue(0,categorie);
-   query->bindValue(1,nbCredits);
-   query->exec();
-
-   /*query->prepare("INSERT INTO Credits (cursus, categorie,nbCredits)"
-                  "VALUES (:cursus,:categorie,:nbCredits)");
-
-   query->bindValue(0,cursus);
-   query->bindValue(1,categorie);
-   query->bindValue(2,nbCredits);
-   query->exec();*/
-   }
-
-}
-
-
-
 Cursus* CursusManager::trouver(const QString& code)const{
     for(unsigned int i=0; i<nb; i++)
         if (code==t[i]->getCode()) return t[i];
@@ -202,8 +194,7 @@ Cursus* CursusManager::trouver(const QString& code)const{
 void Cursus::UVObligatoire::addUvToCursus(const QString &c, QSqlDatabase db){
     UVManager& uv=UVManager::getInstance();
     UV& uvToEdit=uv.getUV(c);
-    //UV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p)
-    UV* uvToAdd=new UV(c,uvToEdit.geTitre(),uvToEdit.getNbCredits(),uvToEdit.getCategorie(),uvToEdit.ouvertureAutomne(),uvToEdit.ouverturePrintemps());
+    UV* uvToAdd=new UV(c,uvToEdit.getTitre(),uvToEdit.getNbCredits(),uvToEdit.getCategorie(),uvToEdit.getSaison());
     addItem(uvToAdd);
 }
 

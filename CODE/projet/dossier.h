@@ -3,54 +3,85 @@
 #include<vector>
 #include "UTProfiler.h"
 
+class Inscription;
+class Etudiant;
+class DossierManager;
 
 /*******INSCRIPTION*******/
 class Inscription {
     const UV* uv;
-    Semestre semestre;
+    Semestre* semestre;
     Note resultat;
 public:
-    Inscription(const UV& u, const Semestre& s, Note res=Note::EC):uv(&u),semestre(s),resultat(res){}
+    Inscription(const UV& u, Semestre& s, Note res=Note::EC):uv(&u),semestre(&s),resultat(res){}
     const UV& getUV() const { return *uv; }
-    const Semestre& getSemestre() const { return semestre; }
+    //const Semestre& getSemestre() const { return *semestre; }
    // UV& getUV(){return &uv;}
-    Semestre& getSemestre(){return semestre;}
+    Semestre* getSemestre(){return semestre;}
     Note getResultat() const { return resultat; }
     void setResultat(Note newres) { resultat=newres; }
 };
+
+
+class Etudiant{
+    QString nom;
+    QString prenom;
+    Cursus* cursus;
+    class DossierManager;
+protected:
+    Etudiant(){}
+    Etudiant(const Etudiant& etu){}
+    Etudiant& operator=(const Etudiant& etu);
+    Etudiant(const QString& n, const QString& p):nom(n),prenom(p){}
+    friend class EtudiantManager;
+public:
+    QString getNom() const { return nom; }
+    QString getPrenom() const { return prenom; }
+    const QString& geNom() const {return const_cast<const QString&>(nom);}
+    const QString& gePrenom() const {return const_cast<const QString&>(prenom);}
+    Cursus* getCursus() const {return cursus;}
+    void setCursus(const QString& cur);
+};
+
+/*********UTProfiler (=Etudiant Manager)*********/
+class EtudiantManager: public Manager<Etudiant,EtudiantManager> {
+    Etudiant* trouver(QString n, QString p) const; //peut ï¿½tre mettre T en paramï¿½tre
+    public:
+    void load(QSqlDatabase& db){}
+    ~EtudiantManager(){}
+    EtudiantManager():Manager<Etudiant,EtudiantManager>(){}
+    Etudiant& getEtudiant(QString n, QString p);
+    const Etudiant& getEtudiant(QString n, QString p) const;
+    void addEtudiant(unsigned int n,QSqlDatabase& db){}
+};
+
+
+
 
 /**********Dossier*********/
 class Dossier{
     unsigned int numero;
     bool valide;
-    Cursus* cursus;
-    class InscriptionManager: public Manager<Inscription,InscriptionManager>{
-        private:
-            //StrategieAddUvToDossierSQL* stratUV;
-            Inscription* trouver(const UV& u, const Semestre& s) const; //peut ï¿½tre mettre T en paramï¿½tre
-        protected:
-            ~InscriptionManager();
-        public:
-            InscriptionManager():Manager<Inscription,InscriptionManager>(){/*stratUV=new StrategieAddUvToDossierSQL;*/}
-            //void ajouter(const QString& c, QSqlDatabase& db) {stratUV->ajouterUvToDossier(*this,c,db);} //utiliser l'itérateur sur les UV
-        };
+    bool past; // dossier des uv obtenues par l'étudiant
+    class InscriptionManager;
 protected:
     Dossier(){}
     Dossier(const Dossier& cu){}
     Dossier& operator=(const Dossier& cu){}
-    Dossier(unsigned int i):numero(i),valide(false){}
+    Dossier(unsigned int i,unsigned int fini=0):numero(i),valide(false),past(0){}
     friend class DossierManager;
 
  public:
     unsigned int getNumero() const {return numero;}
     bool getValidation() const {return valide;}
-    Cursus* getCursus() const {return cursus;}
+    bool getPasse() const {return past;}
     void valider() { valide=true; }
-    void setCursus(const QString& cur);
+    void passe() {past=true;}
 };
 
+
 /*******DossierManager*******/
-class DossierManager: public Manager<Dossier,DossierManager>{
+class Etudiant::DossierManager: public Manager<Dossier,DossierManager>{
 private:
         Dossier* trouver(unsigned int num) const; //peut ï¿½tre mettre T en paramï¿½tre
 
@@ -59,11 +90,22 @@ public:
    ~DossierManager(){}
    DossierManager():Manager<Dossier,DossierManager>(){}
    Dossier& getDossier(unsigned int nb);
-   const Dossier& getDossier(unsigned int) const;
+   const Dossier& getDossier(unsigned int nb) const;
    void addDossier(unsigned int n,QSqlDatabase& db){}
 };
 
-
-
+/******InscriptionManager*******/
+class Dossier::InscriptionManager: public Manager<Inscription,InscriptionManager>{
+    private:
+        //StrategieAddUvToDossierSQL* stratUV;
+   //     Inscription* trouver(const UV& u, const Semestre& s) const; //peut ï¿½tre mettre T en paramï¿½tre
+    protected:
+        ~InscriptionManager();
+    public:
+        InscriptionManager():Manager<Inscription,InscriptionManager>(){}
+     //   Inscription& getInscription(const UV& u, const Semestre& s);
+       // const Inscription& getInscription(const UV& u, const Semestre& s) const;
+        //void ajouter(const QString& c, QSqlDatabase& db) {stratUV->ajouterUvToDossier(*this,c,db);} //utiliser l'itérateur sur les UV
+    };
 
 #endif // DOSSIER_H
