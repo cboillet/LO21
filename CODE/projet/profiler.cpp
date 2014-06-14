@@ -5,6 +5,7 @@
 #include "dossier.h"
 #include "CursusEditeur.h"
 #include "EtudiantEditeur.h"
+#include "DossierEditeur.h"
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QString>
@@ -142,8 +143,8 @@ void Profiler::entrerDossier(){
     try {
     EtudiantManager& etuman =EtudiantManager::getInstance();
     Etudiant& etudiant=etuman.getEtudiant(nomEtu);
-    //CursusEditeurAddUV* fenetre=new CursusEditeurAddUV(cursus,mydb,this);
-    //setCentralWidget(fenetre);
+    DossierEditeur* fenetre=new DossierEditeur(etudiant,mydb,this);
+    setCentralWidget(fenetre);
     }
     catch(UTProfilerException& e){
     QMessageBox::warning(this, "Edition Etudiant", QString("Erreur : l'étudiant ")+nomEtu+" n’existe pas.");

@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     affichage.cpp \
     CursusEditeur.cpp \
     dossier.cpp \
-    EtudiantEditeur.cpp
+    EtudiantEditeur.cpp \
+    DossierEditeur.cpp
 
 HEADERS  +=UTProfiler.h \
     UVEditeur.h \
@@ -34,5 +35,6 @@ HEADERS  +=UTProfiler.h \
     affichage.h \
     CursusEditeur.h \
     dossier.h \
-    EtudiantEditeur.h
+    EtudiantEditeur.h \
+    DossierEditeur.h
 
