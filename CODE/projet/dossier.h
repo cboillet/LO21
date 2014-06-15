@@ -10,17 +10,20 @@ class Dossier;
 class Equivalence{
     QString nomEquivalence;
     Equival equivalence;
-    unsigned int nCS;
-    unsigned int nTM;
-    unsigned int nTSH;
-    unsigned int nSP;
+    Inscription* nCS;
+    Inscription* nTM;
+    Inscription* nTSH;
+    Inscription* nSP;
+    Semestre* semestre;
     //CreditsManager creditsObtenus;
 public:
     Equivalence(){}
-    Equivalence(const QString& nom,const Equival& equi,unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP):nomEquivalence(nom), equivalence(equi),nCS(CS),nTM(TM),nTSH(TSH),nSP(SP){}
+    Equivalence(const QString& nom,const Equival& equi,unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, Semestre& s);
     Equival getEquivalence()const{return equivalence;}
     QString getNomE() const { return nomEquivalence; }
     const QString& geNomE() const {return const_cast<const QString&>(nomEquivalence);}
+    void setSemestre(){}
+    //void effectuerInscription(unsigned int nCS, unsigned int nTM,unsigned int nTSH, unsigned int nTM, unsigned int nSP){}
     ~Equivalence(){}
 };
 

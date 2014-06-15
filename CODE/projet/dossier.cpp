@@ -201,3 +201,23 @@ void Dossier::addInscription(const UV& u, Semestre& s, Note res){
 
 /*******INSCRIPTION********/
 
+/*******EQUIVALENCE*******/
+void Equivalence::Equivalence(const QString& nom,const Equival& equi,unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, Semestre& s, QSqlDatabase& db);:nomEquivalence(nom), equivalence(equi,semestre(s){
+    Saison sais=SaisonToString(s.getSaison());                                                                                                                                                                                             QString TSH="tsh";
+    QString CS="cs";
+    QString TM="tm";
+    QString SP="sp";
+
+    if (CS!=0)
+    {
+    UVManager& man=UVManager::getInstance();
+    man.addUV(c,t,nbc,cat,sais,db);
+    }
+    if (TM!=0)
+    {
+
+
+
+    }
+
+}
