@@ -9,7 +9,8 @@
 #include "UTProfiler.h"
 #include "dossier.h"
 #include "UVEditeur.h"
-#include "iostream"
+#include "istream"
+#include "ostream"
 #include "manager.h"
 #include "profiler.h"
 
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
 {
 
     QApplication app(argc, argv);
-
+    //Semestre* s=new Semestre(sais,annee);
    Profiler profiler;
    profiler.showMaximized();
    return app.exec();

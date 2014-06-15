@@ -70,7 +70,7 @@ void UVEditeurNew::sauverUV(QSqlDatabase& db){
     Saison sais=Saison(saison->currentIndex());
     //unsigned int an=annee->value();
     UVManager& man=UVManager::getInstance();
-    man.addUV(c,t,nbc,cat,sais,db);
+    man.addUV(c,t,nbc,sais,db,cat);
     //void ajouter(const QString& c, const QString& t, unsigned int nbc, Categorie cat, bool a, bool p) {stratUV->ajouterUV(*this,c,t,nbc,cat,a,p);}
     QMessageBox::information(this, "Sauvegarde", "UV sauvegardée...");
 }

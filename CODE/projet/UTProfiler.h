@@ -101,7 +101,7 @@ class Semestre {
 	Saison saison;
 	unsigned int annee;
 public:
-    Semestre(Saison s=Saison::END, unsigned int a =0):saison(s),annee(a){ if (annee<1972||annee>2099) throw UTProfilerException("annee non valide"); }
+    Semestre(Saison s, unsigned int a):saison(s),annee(a){ if (annee<1972||annee>2099) throw UTProfilerException("annee non valide"); }
 	Saison getSaison() const { return saison; }
 	unsigned int getAnnee() const { return annee; }
 };
@@ -250,7 +250,8 @@ class UVManager: public Manager<UV,UVManager>{
         void load(QSqlDatabase& db);
         ~UVManager();
         UVManager():Manager<UV,UVManager>(){}
-        void addUV(const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase &db);
+        void addUV(const QString& c, const QString& t, unsigned int nbc,  Saison sais,QSqlDatabase &dbCategorie, Categorie cat = Categorie::SP);
+        void ajouterUV(const QString& c, const QString& t, unsigned int nbc, Saison saisCategorie,Categorie cat = Categorie::SP);
         UV& getUV(const QString& code);
         const UV& getUV(const QString& code) const;
 

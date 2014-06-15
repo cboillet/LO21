@@ -18,11 +18,15 @@ class Equivalence{
     //CreditsManager creditsObtenus;
 public:
     Equivalence(){}
-    Equivalence(const QString& nom,const Equival& equi,unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, Semestre& s);
+    Equivalence(const QString& nom, const Equival& equi, unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, const Saison& saison, unsigned int annee);
     Equival getEquivalence()const{return equivalence;}
     QString getNomE() const { return nomEquivalence; }
     const QString& geNomE() const {return const_cast<const QString&>(nomEquivalence);}
     void setSemestre(){}
+    void setCS(const UV& uvToAdd, Semestre* s);
+    void setTM(const UV& uvToAdd, Semestre* s);
+    void setTSH(const UV& uvToAdd, Semestre* s);
+    void setSP(const UV& uvToAdd, Semestre* s);
     //void effectuerInscription(unsigned int nCS, unsigned int nTM,unsigned int nTSH, unsigned int nTM, unsigned int nSP){}
     ~Equivalence(){}
 };
@@ -33,7 +37,7 @@ class Inscription {
     Semestre* semestre;
     Note resultat;
 public:
-    Inscription(const UV& u, Semestre& s, Note res=Note::EC):uv(&u),semestre(&s),resultat(res){}
+    Inscription(const UV& u, Semestre* s, Note res=Note::EC):uv(&u),semestre(s),resultat(res){}
     const UV& getUV() const { return *uv; }
     //const Semestre& getSemestre() const { return *semestre; }
    // UV& getUV(){return &uv;}
@@ -73,6 +77,13 @@ public:
 /*********UTProfiler (=Etudiant Manager)*********/
 class EtudiantManager: public Manager<Etudiant,EtudiantManager> {
     Etudiant* trouver(QString n) const; //peut ï¿½tre mettre T en paramï¿½tre
+    QSqlTableModel *modelUV;
+    QSqlTableModel *modelEqui;
+    QSqlTableModel *modelEtu;
+    QSqlTableModel *modelDossier;
+    QSqlTableModel *modelInsc;
+    QSqlTableModel *modelDoInsc;
+    QSqlDatabase* mydb;
     public:
     void load(QSqlDatabase& db);
     ~EtudiantManager(){}
@@ -80,6 +91,13 @@ class EtudiantManager: public Manager<Etudiant,EtudiantManager> {
     Etudiant& getEtudiant(QString n);
     const Etudiant& getEtudiant(QString n) const;
     void addEtudiant(const QString& nom, const QString& pre,const QString& cur,unsigned int s);
+    void loadEquiToClass(const QString& nomEtu, unsigned int numeroDossier,unsigned int codeInsc,QSqlDatabase& db);
+    void loadInscToClass(const QString& nomEtu, unsigned int numeroDossier,unsigned int codeInsc,QSqlDatabase& db);
+    int addInscEqui(const QString& nomEtu, unsigned int numeroDossier,QSqlDatabase& db,const QString& titreE, const Equival& typeE, unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, QString saison, unsigned int annee);
+   // (const QString& nomEtu,QSqlDatabase& db,const QString& titreE, const Equival& typeE, unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, QString saison, unsigned int annee);
+    int addInsc(const QString& codeUV,const QString& saison,unsigned int annee,const QString& res,QSqlDatabase& db);
+    void addUVdb(const QString& c, const QString& t, unsigned int nbc,const QString& sais, const QString& cat,QSqlDatabase &db);
+    int addDossierdb(const QString& etudiantNom, unsigned int numero, bool valide, bool past, QSqlDatabase& db);
 };
 
 /**********Dossier*********/
@@ -90,7 +108,7 @@ class Dossier{
 
 protected:
     Dossier(){}
-    Dossier& operator=(const Dossier& cu){}
+    //Dossier& operator=(const Dossier& cu){}
     Dossier(unsigned int i):numero(i),valide(false),past(0){}
     friend class Etudiant;
 
@@ -106,8 +124,9 @@ public:
     //std::vector<Inscriptions>& getInscriptions{return (std::vector<Inscriptions>&) inscriptions;}
     void setValidation() { valide=true; }
     void setPasse() {past=true;}
-    void addInscription(const UV& u, Semestre& s, Note res=Note::EC);
-    void addEquivalence(const QString& titreE, const Equival& typeE, unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP);
+    void addInscription(const UV& u, Semestre* s, Note res=Note::EC);
+    void addEquivalence(const QString& titreE, const Equival& typeE, unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, QString saison, unsigned int annee,QSqlDatabase& db);
+
 };
 
 

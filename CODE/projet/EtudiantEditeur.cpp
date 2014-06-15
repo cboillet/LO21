@@ -126,13 +126,13 @@ EtudiantEditeurFormationPasse::EtudiantEditeurFormationPasse(Etudiant& etu, QSql
        typeE->addItem(EquivalToString(equi));
     typeE->setCurrentIndex(0);
     CS=new QSpinBox;
-    CS->setRange(1,20);
+    CS->setRange(0,20);
     TM=new QSpinBox;
-    TM->setRange(1,20);
+    TM->setRange(0,20);
     TSH=new QSpinBox;
-    TSH->setRange(1,20);
+    TSH->setRange(0,20);
     SP=new QSpinBox;
-    SP->setRange(1,20);
+    SP->setRange(0,20);
     sauver=new QPushButton("sauver",this);
     annuler=new QPushButton("annuler",this);
 
@@ -172,44 +172,21 @@ EtudiantEditeurFormationPasse::EtudiantEditeurFormationPasse(Etudiant& etu, QSql
 
 
 void EtudiantEditeurFormationPasse::sauverEtudiant(QSqlDatabase& db){
-    int rowAsso = modelDossierInsc->rowCount();
-    QSqlRecord recordDossierInsc = modelDossierInsc->record(rowAsso);
-
-    /******AJOUT DU DOSSIER*****/
-    int rowCount = modelDossier->rowCount();
-    QSqlRecord recordDossier = modelDossier->record(rowCount);
-    recordDossier.setValue("etudiantNom", etudiant.geNom());
-    recordDossier.setValue("numero", 1);
-    recordDossier.setValue("past", 1);
-    recordDossier.setValue("valide", 0);
-    modelDossier->insertRecord(rowCount, recordDossier);
-    modelDossier->submitAll();
-    EtudiantManager& etuman=EtudiantManager::getInstance();
-    Etudiant& etudiantToEdit=etuman.getEtudiant(etudiant.getNom());
-    etudiantToEdit.addDossierPasse(1,db);
-
-    // Dossier& dossierToEdit=etudiantToEdit.dossiers[(1)];
-
     /**********AJOUT DE L'EQUIVALENCE************/
+    EtudiantManager& etuman=EtudiantManager::getInstance();
     QString nomEqui=nomE->text();
     Equival typeEqui=Equival(typeE->currentIndex());
     unsigned int nCS=CS->value();
     unsigned int nTM=TM->value();
     unsigned int nTSH=TSH->value();
     unsigned int nSP=SP->value();
-    int rowEqui = modelEquival->rowCount();
-    QSqlRecord recordEquival = modelEquival->record(rowEqui);
-    recordEquival.setValue("titre", nomEqui);
-    recordEquival.setValue("type", EquivalToString(typeEqui));
-    recordEquival.setValue("nCS", nCS);
-    recordEquival.setValue("nTM", nTM);
-    recordEquival.setValue("nTSH", nTSH);
-    recordEquival.setValue("nSP", nSP);
-    modelEquival->insertRecord(rowEqui, recordEquival);
-    modelEquival->submitAll();
-
-    /*************AJOUT DES INSCRIPTIONS*************/
-    //etudiant.addDossierPasse(1,db); ajouter le l'equivalence au dossier
-
+    unsigned int annee=2000;
+    QString tem="Automne";
+    unsigned int dossier=etuman.addDossierdb(etudiant.getNom(),1,false,true,mydb);
+    unsigned int equi=etuman.addInscEqui(etudiant.getNom(),1,db,nomEqui,typeEqui,nCS,nTM,nTSH,nSP,tem,0);
+    //(const QString& nomEtu,QSqlDatabase& db,const QString& titreE, const Equival& typeE, unsigned int CS, unsigned int TM, unsigned int TSH, unsigned int SP, QString saison, unsigned int annee)
+    etudiant.addDossierPasse(1,db); //ajouter le l'equivalence au dossier
+    Dossier& DossierToEdit=etudiant.dossiers[0];
+    DossierToEdit.addEquivalence(nomEqui,typeEqui,nCS,nTM,nTSH,nSP,tem,annee,mydb);
     /*************INSCRIPTION***************/
 }

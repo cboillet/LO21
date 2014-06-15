@@ -65,7 +65,7 @@ QString EquivalToString(Equival e){
     case Equival::FormationPrecedente: return "FormationPrecedente";
     case Equival::SejourEtranger: return "SejourEtranger";
     case Equival::Stage: return "Stage";
-    default: throw UTProfilerException("erreur, type d'équivalence non traitee");
+    default: throw UTProfilerException("erreur, type d'ï¿½quivalence non traitee");
     }
 }
 
@@ -169,7 +169,7 @@ UVManager::~UVManager(){
 
 
 
-/******Base de donnée*******/
+/******Base de donnï¿½e*******/
 
 void UVManager::load(QSqlDatabase& db){
     QString code;
@@ -201,20 +201,20 @@ void UVManager::load(QSqlDatabase& db){
 
   }
 
-void UVManager::addUV( const QString& c, const QString& t, unsigned int nbc, Categorie cat, Saison sais,QSqlDatabase& db){
+void UVManager::addUV(const QString& c, const QString& t, unsigned int nbc, Saison sais, QSqlDatabase& dbCategorie, Categorie cat){
    /******Ajoute a la liste UVs******/
  QString categorie= CategorieToString(cat);
  QString saison= SaisonToString(sais);
    UV* uvtoadd=new UV(c,t,nbc,cat,sais);
    addItem(uvtoadd);
-   /***********Ajoute à la BD*************/
+   /***********Ajoute ï¿½ la BD*************/
 
    if(c.isEmpty()  || saison.isEmpty()  ||(nbc<=-1 || nbc>MAXCREDIT ))
    {
            qDebug()<<"Insertion Failed";
 
    }
-   QSqlQuery *query = new QSqlQuery(db);
+   QSqlQuery *query = new QSqlQuery(dbCategorie);
    query->prepare("INSERT INTO UV (code,titre,uvCategorie,nbCredits,saison)"
                   "VALUES (:code,:titre,:uvCategorie,:nbCredits,:saison)");
 
@@ -228,8 +228,13 @@ void UVManager::addUV( const QString& c, const QString& t, unsigned int nbc, Cat
    query->exec();
    }
    catch(UTProfilerException& e){
-       //QMessageBox::warning("Insertion", QString("Insertion dans la base de données impossible"));
+       //QMessageBox::warning("Insertion", QString("Insertion dans la base de donnï¿½es impossible"));
    }
+}
+
+void UVManager::ajouterUV(const QString& c, const QString& t, unsigned int nbc, Saison sais, Categorie cat){
+    UV* uvAdd=new UV(c,t,nbc,cat,sais);
+    addItem(uvAdd);
 }
 
 Cursus* CursusManager::trouver(const QString& code)const{
@@ -278,7 +283,7 @@ void CursusManager::addCursus(const QString& c,const QString& t, unsigned int du
     /******Ajoute a la liste de cursus******/
     Cursus* cursustoadd=new Cursus(c,t,duree,Ccs,Ctm,Ctsh,Csp);
     addItem(cursustoadd);
-    /***********Ajoute à la BD*************/
+    /***********Ajoute ï¿½ la BD*************/
     if(c.isEmpty() || t.isEmpty())
     {
             qDebug()<<"Insertion Failed";
@@ -299,7 +304,7 @@ void CursusManager::addCursus(const QString& c,const QString& t, unsigned int du
     query->exec();
     }
     catch(UTProfilerException& e){
-        //QMessageBox::warning("Insertion", QString("Insertion dans la base de données impossible"));
+        //QMessageBox::warning("Insertion", QString("Insertion dans la base de donnï¿½es impossible"));
     }
 }
 
